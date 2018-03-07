@@ -19,7 +19,7 @@ After logging in Magento backend, go to ``Mageplaza > Security``. We will provid
 
 ### I. Configuration
 #### 1.1. Brute Force Protection configuration.
-Follow ``Mageplaza > Security: Configuration > General > Brute Force Protection``
+Follow ``Mageplaza > Security > Configuration > General > Brute Force Protection``
 
 ![i2](https://i.imgur.com/bQfkFMl.png)
 
@@ -49,15 +49,24 @@ Here’s an example of a warning emails:
   *  All IP addresses filled in this section will be blocked whenever accessing the admin login page.
   * You are able to block one IP address, multiple IP addresses, an IP address range or multiple IP address ranges.  IP addresses are separated with commas ``,``.
   * You can also block IP addresses as wildcard masks as below:
-    * ``10.0.0. *``, ``10.0. *. *``, ``10.0.0. * - 123.0.0. *``, ``12.3. *. * - 222.0. *. *``
-    * The mark ``*`` is in the 0 - 255 range.
+    * ``10.0.0. *``
+    * ``10.0. *. *``
+    * ``10.0.0. * - 123.0.0. *``
+    * ``12.3. *. * - 222.0. *. *``
+ 
+ *The mark ``*`` is in the `0 - 255` range.*
+
 * In the **Whitelist(s)** field:
   * All IP addresses that are filled in this section will be allowed whenever accessing the admin login page.
   * You can allow one IP address, multiple IP addresses, an IP address range or multiple IP address ranges.  IP addresses are separated with commas ``,``.
   *  You can also allow IP addresses as wildcard masks as these follows:
-    * ``10.0.0. *``, ``10.0. *. *``, ``10.0.0. * - 123.0.0. *``, ``12.3. *. * - 222.0. *. *``
-    * The mark ``*`` is in the 0 - 255 range.
-
+    * ``10.0.0. *``
+    * ``10.0. *. *``
+    * ``10.0.0. * - 123.0.0. *``
+    * ``12.3. *. * - 222.0. *. *``
+ 
+ *The mark ``*`` is in the `0 - 255` range.*
+ 
 ### II. Login Log
 From the admin panel, make your way to ``Mageplaza > Security > Login Log``. All logins and login attempts will be recorded here.
 
@@ -71,11 +80,11 @@ Click ``View`` to see login details. Here’s an example:
 
 * If store admins mistakenly enter their IP addresses in the Blacklist, this following command lines can be run first: 
 ```
-bin/magento security:reset blacklist. 
+bin/magento security:reset blacklist 
 ```
 Next, run this command line:
 ```
-bin/magento cache:flush.
+bin/magento cache:flush
 ```
 *  After you have finished running those above command lines which reset the **Blacklist(s)** field, you will be able to access the admin page again. Note that the **Blacklist(s)** field is reset now so don’t forget to reenter the blacklist IPs.
 * Similarly, the **Whitelist(s)** can be reset using these command lines: 
