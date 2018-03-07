@@ -1,1 +1,1 @@
-# magento-2-security
+# Magento 2 Security Suite
