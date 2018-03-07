@@ -59,7 +59,7 @@ Here’s an example of a warning emails:
     * The mark ``*`` is in the 0 - 255 range.
 
 ### II. Login Log
-From the admin panel, make your way to ``Mageplaza > Security: Login Log``. All logins and login attempts will be recorded here.
+From the admin panel, make your way to ``Mageplaza > Security > Login Log``. All logins and login attempts will be recorded here.
 
 ![i4](https://i.imgur.com/AogyfB4.png)
 
@@ -71,16 +71,16 @@ Click ``View`` to see login details. Here’s an example:
 
 * If store admins mistakenly enter their IP addresses in the Blacklist, this following command lines can be run first: 
 ```
-bin / magento security: reset blacklist. 
+bin/magento security:reset blacklist. 
 ```
 Next, run this command line:
 ```
-bin / magento cache: flush.
+bin/magento cache:flush.
 ```
 *  After you have finished running those above command lines which reset the **Blacklist(s)** field, you will be able to access the admin page again. Note that the **Blacklist(s)** field is reset now so don’t forget to reenter the blacklist IPs.
 * Similarly, the **Whitelist(s)** can be reset using these command lines: 
 ```
-bin / magento security: reset whitelist
-bin / magento cache: flush
+bin/magento security:reset whitelist
+bin/magento cache:flush
 ```
-* If you run the command ``bin / magento security: reset``, both **Blacklist(s)** and **Whitelist(s)** will be reset.
+* If you run the command ``bin/magento security:reset``, both **Blacklist(s)** and **Whitelist(s)** will be reset.
