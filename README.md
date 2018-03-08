@@ -29,9 +29,11 @@ Follow ``Mageplaza > Security > Configuration > General > Brute Force Protection
   * You can fill multiple emails separated with commas ``,``
 * In the **Maximum number of failed login attempts** field:
   * Enter an allowable number of failed logins.
+  * Default number of maximum failed login attempts is ``5`` when you enable Security module.
   * If you leave it blank or enter 0, after a failed login happens, an email will be sent.
 * In the **Allowed Duration** field:
   * Enter the number of minute(s) which presents the length of a session. During this session, If the **Maximum number of failed login attempts** is reached, warning emails will be sent.
+  * Default number of allowed duration is ``10`` minutes when you enable Security module.
   * If you leave the field blank or enter 0, no warning emails will be sent even if the maximum number of acceptable logins is reached.
 * In the **Email Template** field: 
   * Choose the template for the warning email.
@@ -53,9 +55,7 @@ Here’s an example of a warning emails:
     * ``10.0. *. *``
     * ``10.0.0. * - 123.0.0. *``
     * ``12.3. *. * - 222.0. *. *``
- 
- *The mark ``*`` is in the `0 - 255` range.*
-
+ * The mark ``*`` is in the `0 - 255` range.*
 * In the **Whitelist(s)** field:
   * All IP addresses that are filled in this section will be allowed whenever accessing the admin login page.
   * You can allow one IP address, multiple IP addresses, an IP address range or multiple IP address ranges.  IP addresses are separated with commas ``,``.
@@ -64,9 +64,12 @@ Here’s an example of a warning emails:
     * ``10.0. *. *``
     * ``10.0.0. * - 123.0.0. *``
     * ``12.3. *. * - 222.0. *. *``
- 
- *The mark ``*`` is in the `0 - 255` range.*
- 
+ * The mark ``*`` is in the `0 - 255` range.*
+
+```
+Blacklist(s) has higher priority than Whitelist(s) which means if a IP address is in the Blacklist, it will be blocked even it's in the Whitelist as well. So please make sure that you've added your IP address in the Whitelist only. 
+```
+
 ### II. Login Log
 From the admin panel, make your way to ``Mageplaza > Security > Login Log``. All logins and login attempts will be recorded here.
 
