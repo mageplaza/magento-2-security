@@ -1,0 +1,43 @@
+"User Name","User Name"
+Status,Status
+Time,Time
+"Login Log","Login Log"
+"Login information","Login information"
+ID,ID
+IP,IP
+URL,URL
+"Referer URL","Referer URL"
+Success,Success
+Failed,Failed
+"Browser Information","Browser Information"
+Brower,Brower
+"Brower Version","Brower Version"
+Platform,Platform
+"Platform Version","Platform Version"
+"Login record details","Login record details"
+"This log no longer exists.","This log no longer exists."
+"You don't have permission to access this page","You don't have permission to access this page"
+"Your IP has been blocked.","Your IP has been blocked."
+"Exception printing is disabled by default for security reasons.","Exception printing is disabled by default for security reasons."
+"%store_url - Security Alert by Mageplaza","%store_url - Security Alert by Mageplaza"
+"Bad Login Notification","Bad Login Notification"
+"Mageplaza Security detected unusual activities in your store. You're getting this email to make sure it was you or your team.","Mageplaza Security detected unusual activities in your store. You're getting this email to make sure it was you or your team."
+User,User
+"Login failed more than %failed_count times in %failed_time minutes","Login failed more than %failed_count times in %failed_time minutes"
+"CHECK ACTIVITY","CHECK ACTIVITY"
+"You received this email to let you know about important security alerts to your stores.","You received this email to let you know about important security alerts to your stores."
+Security,Security
+General,General
+Enable,Enable
+"Brute Force Protection","Brute Force Protection"
+"Send warning emails to ","Send warning emails to "
+"When the maximum number of failed login attempts is reached, a warning letter will be sent to these emails. Separated with add (,)","When the maximum number of failed login attempts is reached, a warning letter will be sent to these emails. Separated with add (,)"
+"Maximum number of failed login attempts","Maximum number of failed login attempts"
+"Allowed duration","Allowed duration"
+"Email template","Email template"
+"Blacklist/Whitelist IPs","Blacklist/Whitelist IPs"
+Blacklist(s),Blacklist(s)
+Whitelist(s),Whitelist(s)
+"Browser Agent","Browser Agent"
+"Referer Url","Referer Url"
+View,View
