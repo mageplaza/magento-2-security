@@ -137,7 +137,7 @@ class SendMail
 
             $sendTo = explode(',', $this->helper->getConfigBruteForce('email'));
             $sendTo = array_map('trim', $sendTo);
-
+            $storeUrl = parse_url($this->backendUrl->getBaseUrl(), PHP_URL_HOST);
             try {
                 $store = $this->storeManager->getStore();
                 $templateVars = [
@@ -146,7 +146,8 @@ class SendMail
                     'failed_time' => $failedTime,
                     'viewLogUrl' => $this->backendUrl->getUrl('mpsecurity/loginlog/'),
                     'logo_url' => 'https://www.mageplaza.com/media/mageplaza-security-email.png',
-                    'logo_alt' => 'Mageplaza'
+                    'logo_alt' => 'Mageplaza',
+                    'store_url' => $storeUrl
                 ];
 
                 $this->transportBuilder
