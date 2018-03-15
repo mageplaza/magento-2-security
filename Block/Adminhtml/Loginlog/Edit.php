@@ -37,7 +37,6 @@ class Edit extends Container
         $this->_controller = 'adminhtml_loginlog';
         $this->_blockGroup = 'Mageplaza_Security';
         $this->_headerText = __('Login Log');
-        $this->_headerText = __('Login Log');
 
         parent::_construct();
 

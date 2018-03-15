@@ -132,6 +132,6 @@ class Grid extends \Magento\Backend\Block\Dashboard\Grid
      */
     public function getRowUrl($row)
     {
-        return $this->getUrl('mageplaza_security/loginlog/edit', ['id' => $row->getId()]);
+        return $this->getUrl('mpsecurity/loginlog/edit', ['id' => $row->getId()]);
     }
 }

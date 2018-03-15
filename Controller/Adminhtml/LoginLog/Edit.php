@@ -77,7 +77,7 @@ class Edit extends Action
         $log = $this->initLog();
         if (!$log) {
             $resultRedirect = $this->resultRedirectFactory->create();
-            $resultRedirect->setPath('mageplaza_security/loginlog/');
+            $resultRedirect->setPath('mpsecurity/loginlog/');
 
             return $resultRedirect;
         }
