@@ -26,6 +26,7 @@
             <resource id="Magento_Backend::admin">
                 <resource id="Mageplaza_Security::security" title="Mageplaza Security">
                     <resource id="Mageplaza_Security::grid" title="Login Log"/>
+                    <resource id="Mageplaza_Security::checklist" title="Checklist"/>
                 </resource>
                 <resource id="Magento_Backend::stores">
                     <resource id="Magento_Backend::stores_settings">

@@ -1,0 +1,70 @@
+<h2>Check admin username:</h2>
+<p>The follow username(s) is not secured: admin, root, test, magento. Hackers can guest username easily. Click on an
+    user to change username.</p>
+<?php
+$unSercureNames = $block->checkAdminUserName();
+
+if (!empty($unSercureNames)):
+    ?>
+    <?php foreach ($unSercureNames as $unSercureName): ?>
+    <span>User name:" <?php echo $unSercureName['username']; ?>" is not sercure   </span>
+    <a href="#">fix it</a>
+
+<?php endforeach; ?>
+<?php else: ?>
+    <p>There is no common user in your store.</p>
+<?php endif; ?>
+<br/>
+<br/>
+<br/>
+<h2>Check captcha:</h2>
+<?php if (!$block->checkFrontendCaptcha()): ?>
+    <span>Frontend captcha is not enabled.Hackers can brute force attack your customer accounts.</span>
+    <a class="fix-it" href="#">fix it</a>
+<?php else: ?>
+<p>Frontend captcha is enabled.</p>
+<?php endif; ?>
+<?php if (!$block->checkBackendCaptcha()): ?>
+    <br/>
+    <span>Backend captcha is not enabled.To protect brute force attack, you should enable it.</span>
+    <a class="fix-it" href="#">fix it</a>
+<?php else: ?>
+<p>Backend captcha is enabled.</p>
+<?php endif; ?>
+
+<br/>
+<br/>
+<br/>
+<h2>Check Magento Version:</h2>
+
+<?php $version = $block->checkLatestVersion(); ?>
+<p>Your version is: <?php echo $version['currentVersion']; ?></p>
+<?php foreach ($version['lastestVer'] as $key => $ver): ?>
+    <p>The latest version of <?php echo $key; ?> is: <?php echo $ver; ?>
+        <a class="fix-it" href="#">update</a>
+    </p>
+
+<?php endforeach; ?>
+<br/>
+<br/>
+<br/>
+<h2>Check database prefix:</h2>
+<?php $dbPrefix = $block->getDatabasePrefix() ?>
+<?php if ($dbPrefix): ?>
+    <p>Your store's database is good.</p>
+<?php else: ?>
+    <p>Your store's database hasn't table prefix. <a class="fix-it" href="#">fix it</a></p>
+<?php endif; ?>
+
+
+<script>
+    require([
+        'jquery'
+    ], function ($) {
+        $('.fix-it').each(function () {
+            $(this).click(function () {
+                alert('please update to Pro version to know more detail');
+            });
+        });
+    });
+</script>
