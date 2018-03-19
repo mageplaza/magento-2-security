@@ -1,7 +1,7 @@
 <?php
 $unSecureNames = $block->checkAdminUserName();
 ?>
-<div class="box box-<?php echo empty($unSercureNames) ? 'green' : 'red'; ?>">
+<div class="box box-<?php echo empty($unSecureNames) ? 'green' : 'red'; ?>">
     <div class="box-header with-border">
         <strong>Check admin username:</strong>
     </div>
@@ -10,21 +10,18 @@ $unSecureNames = $block->checkAdminUserName();
             on an user to change username.</p>
     </div>
     <div class="err-nof">
-        <?php
-        if (!empty($unSercureNames)):
-            ?>
+        <?php if (!empty($unSecureNames)): ?>
+            <?php foreach ($unSecureNames as $unSecureName): ?>
+                <div class="err-nof-line">
+                    <i class="fa fa-remove"></i>
+                    <span>User name:" <?php echo $unSecureName['username']; ?>" is not secure.   </span>
+                    <a class="fix-it">Fix it</a>
+                </div>
 
-            <?php foreach ($unSercureNames as $unSercureName): ?>
-            <div class="err-nof-line">
-                <i class="fa fa-remove"></i>
-                <span>User name:" <?php echo $unSercureName['username']; ?>" is not secure.   </span>
-                <a class="fix-it">Fix it</a>
-            </div>
-
-        <?php endforeach; ?>
+            <?php endforeach; ?>
         <?php else: ?>
             <i class="fa fa-check"></i>
-            <p>There is no common user in your store.</p>
+            <span>There is no common user in your store.</span>
         <?php endif; ?>
     </div>
 </div>
@@ -43,7 +40,6 @@ $unSecureNames = $block->checkAdminUserName();
         <?php if (!$block->checkBackendCaptcha()): ?>
             <br/>
             <div class="err-nof-line">
-
                 <i class="fa fa-remove"></i>
                 <span>Backend captcha is not enabled. To protect brute force attack, you should enable it.</span>
                 <a class="fix-it">Fix it</a>
@@ -55,36 +51,32 @@ $unSecureNames = $block->checkAdminUserName();
 </div>
 <?php
 $version = $block->checkLatestVersion();
-$isLatest = $version['lastestVer']==$version['currentVersion'];
+$isLatest = $version['lastestVer'] == $version['currentVersion'];
 ?>
 <div class="box box-<?php echo $isLatest ? 'green' : 'red'; ?>">
     <div class="box-header with-border">
         <strong>Check Magento Version:</strong>
     </div>
-
-
     <div class="err-nof">
-        <?php if(!$isLatest) : ?>
-
+        <?php if (!$isLatest) : ?>
             <div class="err-nof-line">
+                <i class="fa fa-remove"></i>
                 <span>Your Magento version is : <?php echo $version['currentVersion']; ?> ,</span>
                 <span>the latest version is : <?php echo $version['lastestVer']; ?>
                     <a class="fix-it">Upgrade</a>
                 </span>
             </div>
         <?php else: ?>
-        <p>Your store is running on latest version.</p>
+            <p>Your store is running on latest version.</p>
         <?php endif; ?>
     </div>
 </div>
-
 <?php $dbPrefix = $block->getDatabasePrefix() ?>
 <div class="box box-<?php echo $dbPrefix ? 'green' : 'red'; ?>">
     <div class="box-header with-border">
         <strong>Check database prefix:</strong>
     </div>
     <div class="err-nof">
-
         <?php if ($dbPrefix): ?>
             <i class="fa fa-check"></i>
             <span>Your store's database is good.</span>
@@ -103,12 +95,14 @@ $isLatest = $version['lastestVer']==$version['currentVersion'];
     ], function ($) {
         $('.fix-it').each(function () {
             $(this).click(function () {
-                $(this).parent().append('<div class="notification">Please update to Security Pro edition to resolve this issue automatically.</div>');
-                $('body').click(function (e) {
-                    if (!$(e.target).closest('.notification').length && !$(e.target).closest('.fix-it').length) {
-                        $('.notification').remove();
-                    }
-                });
+                if(!$(this).parent().find('.notification').length){
+                    $(this).parent().append('<div class="notification">Please update to Security Pro edition to resolve this issue automatically.</div>');
+                    $('body').click(function (e) {
+                        if (!$(e.target).closest('.notification').length && !$(e.target).closest('.fix-it').length) {
+                            $('.notification').remove();
+                        }
+                    });
+                }
             });
         });
     });
