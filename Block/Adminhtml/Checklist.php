@@ -45,16 +45,16 @@ class Checklist extends \Magento\Framework\View\Element\Template
     public function checkAdminUserName()
     {
         $userCollection = $this->_userFactory->create()->getCollection();
-        $unSercureNames = [];
+        $unSecureNames = [];
         foreach ($userCollection as $user) {
             if (in_array($user->getUserName(), $this->commonNames)) {
-                $unSercureNames[] = [
+                $unSecureNames[] = [
                     'username' => $user->getUserName(),
                     'user_id' => $user->getUserId()
                 ];
             }
         }
-        return $unSercureNames;
+        return $unSecureNames;
     }
 
     public function checkFrontendCaptcha()
@@ -75,12 +75,7 @@ class Checklist extends \Magento\Framework\View\Element\Template
     {
         $realeases = file_get_contents('https://raw.githubusercontent.com/mageplaza/magento-versions/master/releases/releases.json');
         $arr = json_decode($realeases);
-//        list($a,$b)= $arr;
-//        $lastestVerAll= array_slice($arr, 0, 1);
-        foreach ($arr as $key=>$value){
-            $lastestVerAll=$key;
-            break;
-        }
+
         $versionArr = [];
         foreach ($arr as $ver => $item) {
 
@@ -89,16 +84,19 @@ class Checklist extends \Magento\Framework\View\Element\Template
                 $versionArr[$major . '.' . $minor][] = $ver;
             }
         }
-        $lastestVer=[];
-        foreach ($versionArr as $ver=>$version){
-            $lastestVer[$ver]= $versionArr[$ver][0];
+        $currentVersion = $this->_metadata->getVersion();
+        list($currentMajor, $currentMinor, $currentPatch) = explode('.', $currentVersion);
+
+        $lastestVer = $currentVersion;
+        foreach ($versionArr[$currentMajor . '.' . $currentMinor] as $version) {
+            if (version_compare($lastestVer, $version, '<')) {
+                $lastestVer = $version;
+            }
         }
-        $currentVersion=$this->_metadata->getVersion();
-//        list($currentMajor,$currentMinor,$currentPatch)= explode('.', $currentVersion);
 
         return [
-            'lastestVer'=>$lastestVer,
-            'currentVersion'=>$currentVersion
+            'lastestVer' => $lastestVer,
+            'currentVersion' => $currentVersion
         ];
 
     }

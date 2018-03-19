@@ -1,5 +1,5 @@
 <?php
-$unSercureNames = $block->checkAdminUserName();
+$unSecureNames = $block->checkAdminUserName();
 ?>
 <div class="box box-<?php echo empty($unSercureNames) ? 'green' : 'red'; ?>">
     <div class="box-header with-border">
@@ -7,8 +7,7 @@ $unSercureNames = $block->checkAdminUserName();
     </div>
     <div class="notice">
         <p>The follow username(s) is not secured: admin, root, test, magento. Hackers can guest username easily. Click
-            on an
-            user to change username.</p>
+            on an user to change username.</p>
     </div>
     <div class="err-nof">
         <?php
@@ -18,8 +17,8 @@ $unSercureNames = $block->checkAdminUserName();
             <?php foreach ($unSercureNames as $unSercureName): ?>
             <div class="err-nof-line">
                 <i class="fa fa-remove"></i>
-                <span>User name:" <?php echo $unSercureName['username']; ?>" is not sercure   </span>
-                <a class="fix-it">fix it</a>
+                <span>User name:" <?php echo $unSercureName['username']; ?>" is not secure.   </span>
+                <a class="fix-it">Fix it</a>
             </div>
 
         <?php endforeach; ?>
@@ -36,8 +35,8 @@ $unSercureNames = $block->checkAdminUserName();
     <div class="err-nof">
         <?php if (!$block->checkFrontendCaptcha()): ?>
             <i class="fa fa-remove"></i>
-            <span>Frontend captcha is not enabled.Hackers can brute force attack your customer accounts.</span>
-            <a class="fix-it">fix it</a>
+            <span>Frontend captcha is not enabled. Hackers can brute force attack your customer accounts.</span>
+            <a class="fix-it">Fix it</a>
         <?php else: ?>
             <p>Frontend captcha is enabled.</p>
         <?php endif; ?>
@@ -46,30 +45,36 @@ $unSercureNames = $block->checkAdminUserName();
             <div class="err-nof-line">
 
                 <i class="fa fa-remove"></i>
-                <span>Backend captcha is not enabled.To protect brute force attack, you should enable it.</span>
-                <a class="fix-it">fix it</a>
+                <span>Backend captcha is not enabled. To protect brute force attack, you should enable it.</span>
+                <a class="fix-it">Fix it</a>
             </div>
         <?php else: ?>
             <p>Backend captcha is enabled.</p>
         <?php endif; ?>
     </div>
 </div>
-<div class="box box-<?php echo empty($unSercureNames) ? 'green' : 'red'; ?>">
+<?php
+$version = $block->checkLatestVersion();
+$isLatest = $version['lastestVer']==$version['currentVersion'];
+?>
+<div class="box box-<?php echo $isLatest ? 'green' : 'red'; ?>">
     <div class="box-header with-border">
         <strong>Check Magento Version:</strong>
     </div>
 
-    <?php $version = $block->checkLatestVersion(); ?>
-    <div class="err-nof">
-        <p>Your version is: <?php echo $version['currentVersion']; ?></p>
-        <?php foreach ($version['lastestVer'] as $key => $ver): ?>
-            <div class="err-nof-line">
 
-                <p>The latest version of <?php echo $key; ?> is: <?php echo $ver; ?>
-                    <a class="fix-it">update</a>
-                </p>
+    <div class="err-nof">
+        <?php if(!$isLatest) : ?>
+
+            <div class="err-nof-line">
+                <span>Your Magento version is : <?php echo $version['currentVersion']; ?> ,</span>
+                <span>the latest version is : <?php echo $version['lastestVer']; ?>
+                    <a class="fix-it">Upgrade</a>
+                </span>
             </div>
-        <?php endforeach; ?>
+        <?php else: ?>
+        <p>Your store is running on latest version.</p>
+        <?php endif; ?>
     </div>
 </div>
 
@@ -86,7 +91,7 @@ $unSercureNames = $block->checkAdminUserName();
         <?php else: ?>
             <div class="err-nof-line">
                 <i class="fa fa-remove"></i>
-                <span>Your store's database hasn't table prefix. <a class="fix-it">fix it</a></span>
+                <span>Your store's database hasn't table prefix. <a class="fix-it"> Fix it</a></span>
             </div>
         <?php endif; ?>
     </div>
@@ -98,8 +103,7 @@ $unSercureNames = $block->checkAdminUserName();
     ], function ($) {
         $('.fix-it').each(function () {
             $(this).click(function () {
-                // alert('please update to Pro version to know more detail');
-                $(this).parent().append('<div class="notification">Please update to Pro version to know more detail</div>');
+                $(this).parent().append('<div class="notification">Please update to Security Pro edition to resolve this issue automatically.</div>');
                 $('body').click(function (e) {
                     if (!$(e.target).closest('.notification').length && !$(e.target).closest('.fix-it').length) {
                         $('.notification').remove();
