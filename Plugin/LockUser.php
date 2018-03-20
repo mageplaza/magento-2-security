@@ -28,6 +28,7 @@ use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\Mail\Template\TransportBuilder;
 use Magento\User\Model\ResourceModel\User;
 use Magento\Framework\Exception\MailException;
+
 /**
  * Class LockUser
  * @package Mageplaza\Security\Plugin
@@ -55,6 +56,11 @@ class LockUser
     protected $_backendUrl;
 
     /**
+     * @var \Mageplaza\Security\Helper\Data
+     */
+    protected $_helper;
+
+    /**
      * LockUser constructor.
      * @param \Magento\Backend\Model\UrlInterface $backendUrl
      * @param \Psr\Log\LoggerInterface $logger
@@ -66,13 +72,15 @@ class LockUser
         UrlInterface $backendUrl,
         LoggerInterface $logger,
         StoreManagerInterface $storeManager,
-        TransportBuilder $transportBuilder
+        TransportBuilder $transportBuilder,
+        \Mageplaza\Security\Helper\Data $helper
     )
     {
         $this->_backendUrl = $backendUrl;
         $this->_logger = $logger;
         $this->_storeManager = $storeManager;
         $this->_transportBuilder = $transportBuilder;
+        $this->_helper = $helper;
     }
 
     /**
@@ -86,7 +94,8 @@ class LockUser
         if ($setLockExpires) {
             //send mail if user is locked
             $storeUrl = parse_url($this->_backendUrl->getBaseUrl(), PHP_URL_HOST);
-
+            $sendTo = explode(',', $this->_helper->getConfigBruteForce('email'));
+            $sendTo = array_map('trim', $sendTo);
             try {
                 $store = $this->_storeManager->getStore();
                 $templateVars = [
@@ -104,7 +113,7 @@ class LockUser
                     ])
                     ->setTemplateVars($templateVars)
                     ->setFrom('general')
-                    ->addTo('nghiabt@mageplaza.com');
+                    ->addTo($sendTo);
                 $transport = $this->_transportBuilder->getTransport();
                 $transport->sendMessage();
             } catch (MailException $e) {
