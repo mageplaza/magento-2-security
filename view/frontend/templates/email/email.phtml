@@ -19,16 +19,18 @@
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
 ?>
-<?php foreach ($block->getLogs() as $log) : ?>
-<tr>
-    <td style="border-collapse: collapse; border: 1px solid #ccc;">
-        <span style="margin: 10px"><?php echo $log['user_name']; ?></span>
-    </td>
-    <td style="border-collapse: collapse; border: 1px solid #ccc;">
-        <span style="margin: 10px"><?php echo $log['ip']; ?></span>
-    </td>
-    <td style="border-collapse: collapse; border: 1px solid #ccc;">
-        <span style="margin: 10px"><?php echo $log['time']; ?></span>
-    </td>
-</tr>
-<?php endforeach; ?>
+<?php if ($block->getLogs()): ?>
+    <?php foreach ($block->getLogs() as $log) : ?>
+        <tr>
+            <td style="border-collapse: collapse; border: 1px solid #ccc;">
+                <span style="margin: 10px"><?php echo $log['user_name']; ?></span>
+            </td>
+            <td style="border-collapse: collapse; border: 1px solid #ccc;">
+                <span style="margin: 10px"><?php echo $log['ip']; ?></span>
+            </td>
+            <td style="border-collapse: collapse; border: 1px solid #ccc;">
+                <span style="margin: 10px"><?php echo $log['time']; ?></span>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+<?php endif; ?>
