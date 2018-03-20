@@ -14,14 +14,14 @@ $unSecureNames = $block->checkAdminUserName();
             <?php foreach ($unSecureNames as $unSecureName): ?>
                 <div class="err-nof-line">
                     <i class="fa fa-remove"></i>
-                    <span>Username:" <?php echo $unSecureName['username']; ?>" is not secure.   </span>
+                    <span><?php echo __('Username:"').$unSecureName['username'].__('" is not secure.'); ?></span>
                     <a class="fix-it">Fix it</a>
                 </div>
 
             <?php endforeach; ?>
         <?php else: ?>
             <i class="fa fa-check"></i>
-            <span>There is no common user in your store.</span>
+            <span><?php echo __("There is no common user in your store."); ?></span>
         <?php endif; ?>
     </div>
 </div>
