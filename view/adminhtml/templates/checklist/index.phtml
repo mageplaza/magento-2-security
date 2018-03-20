@@ -36,7 +36,8 @@ $unSecureNames = $block->checkAdminUserName();
             Hackers may carry out brute-force attacks on your customers' accounts"); ?></span>
             <a class="fix-it">Fix it</a>
         <?php else: ?>
-            <p><?php echo __("Frontend captcha is enabled."); ?></p>
+            <i class="fa fa-check"></i>
+            <span><?php echo __("Frontend captcha is enabled."); ?></span>
         <?php endif; ?>
         <?php if (!$block->checkBackendCaptcha()): ?>
             <br/>
@@ -47,7 +48,8 @@ $unSecureNames = $block->checkAdminUserName();
                 <a class="fix-it">Fix it</a>
             </div>
         <?php else: ?>
-            <p><?php echo __("Backend captcha is enabled."); ?></p>
+            <i class="fa fa-check"></i>
+            <span><?php echo __("Backend captcha is enabled."); ?></span>
         <?php endif; ?>
     </div>
 </div>
@@ -71,7 +73,8 @@ $isLatest = $version['lastestVer'] == $version['currentVersion'];
                     </span>
             </div>
         <?php else: ?>
-            <p><?php echo __("Your store is running on the latest version."); ?></p>
+            <i class="fa fa-check"></i>
+            <span><?php echo __("Your store is running on the latest version."); ?></span>
         <?php endif; ?>
     </div>
 </div>

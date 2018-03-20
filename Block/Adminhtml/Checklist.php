@@ -9,11 +9,11 @@
 
 namespace Mageplaza\Security\Block\Adminhtml;
 
-use Magento\Framework\View\Element\Template\Context;
+use Magento\Backend\Block\Template\Context;
 use Magento\Framework\Config\ConfigOptionsListConstants;
 
 
-class Checklist extends \Magento\Framework\View\Element\Template
+class Checklist extends \Magento\Backend\Block\Template
 {
 
     protected $_template = 'Mageplaza_Security::checklist/index.phtml';
@@ -41,7 +41,6 @@ class Checklist extends \Magento\Framework\View\Element\Template
         $this->_deploymentConfig = $deploymentConfig;
         parent::__construct($context, $data);
     }
-
     public function checkAdminUserName()
     {
         $userCollection = $this->_userFactory->create()->getCollection();
