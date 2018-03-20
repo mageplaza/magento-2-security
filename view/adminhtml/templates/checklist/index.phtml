@@ -65,10 +65,7 @@ $isLatest = $version['lastestVer'] == $version['currentVersion'];
                 <i class="fa fa-remove"></i>
                 <span>
                     <?php
-                    echo __("Your Magento version is :");
-                    echo $version['currentVersion'];
-                    echo __("the latest version is :");
-                    echo $version['lastestVer'];
+                    echo __("Your Magento version is : ").$version['currentVersion'].__(", the latest version is : ").$version['lastestVer'];
                     ?>
                     <a class="fix-it">Upgrade</a>
                     </span>
@@ -103,7 +100,7 @@ $isLatest = $version['lastestVer'] == $version['currentVersion'];
         $('.fix-it').each(function () {
             $(this).click(function () {
                 if (!$(this).parent().find('.notification').length) {
-                    $(this).parent().append('<div class="notification">Please update to Security Pro edition to resolve this issue automatically.</div>');
+                    $(this).parent().append('<div class="notification"><?php echo __("Please update to Security Pro edition to resolve this issue automatically."); ?></div>');
                     $('body').click(function (e) {
                         if (!$(e.target).closest('.notification').length && !$(e.target).closest('.fix-it').length) {
                             $('.notification').remove();
