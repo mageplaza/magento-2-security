@@ -21,7 +21,6 @@ Security issues for Magento have left a big question mark in the community of on
 A: Read solution: https://github.com/mageplaza/module-core/issues/3
 
 
-
 ## 3. How to install Security Extension
 
 ### Install via composer (recommend)
@@ -115,7 +114,57 @@ Thanks [the contributors](https://github.com/mageplaza/magento-2-security/graphs
 ☞ Affiliate Report
 
 
-## 6. User Guide
+## 6. Introduction
+### Highlight features
+It’s a minor unnoticed fact that Magento 2 doesn’t limit any number of login attempts for vague reasons behind, why this potential danger has not been considered seriously? Displaying frontend, customer knowledge, sale figures and precious transaction database are recorded in the backend thoroughly. For that reason, it’s obvious logic that hackers will try their hard to impact brutal damages to your login in the backend. Consequently, your website can be bullied continuously by many computers at the same time, by any Badguy™ groups silently, in such vulnerable time you don’t notice.
+
+Mageplaza Security extension comes up with various choices to let you have any idea how to massive protect your store firmly. You will be right the second such nonsense endeavors is entering your internal backend.
+
+At the level of a free module, you can explore some fundamental yet indispensable configurations within this lightweight size that you should consider installing it to your store as soon as possible.
+ 
+#### Failed login attempt limitation
+An overwhelming number of failed logins is the first sign of unwanted attack. A tool a hacker uses will try over and over again until a correct credential is entered; therefore, that would be put in danger if you don’t limit a number of trying in a certain time, to both yourself and outer enemies.
+
+In the backend configuration, there is a field called `Maximum number of failed login attempts` that is able to restrict the above danger. According to many popular security restrictions, the ideal number of failed login attempts should be limited to be under 5 times, it’s a safe way to follow this reliable figure. Also, the other factor to determine if they’re suspicious logins or not is the amount of time those break-in attempts are taken. For example, 5 failed logins within 10 minutes are undoubtedly unusual actions that store owners have to be aware.
+
+When you enable the module, 5 is the default number of allowed unsuccessful attempts in a 10-minute session If you have no idea how you should set up for the guarding system, you can take advantage of this default settings quickly.
+
+#### Automatic warning emails
+In Magento 2, admins have no idea when the security wall was being reached. To remedy this passive situation, this module is well integrated with the email engine. The exact helpful point in this function is, all recorded failed logins will be sent over to your email address automatically. 
+
+In the warning email, you can check out details in the abusive IP address as well as his login time. 
+
+#### Blacklist/Whitelist IP
+Blacklist/Whitelist field is crafted and put in the configuration conveniently. 
+
+In the Blacklist field, in order to prevent strange IP addresses from abusing your backend login page, you can list those IPs in this field (multiple IPs or multiple IP ranges at a time). Now store admin can feel peace of mind, those blocked address cannot take further process to your store anymore.
+
+Holding the reserved meaning, Whitelist field is for entering allowed IP addresses detecting which are safety authentications from your team or colleagues.
+
+#### Login Logs
+In case you’re running a store which is managed by several administrators, this tab will be definitely an ideal interface to summary all taken place under logged details. For each of a particular login, you can figure out its ID, Time, User name, IP, Browser Agent, Url and Status (Failed or Successful).
+
+#### Checklist
+Another additional function sticked on this module is the security checklist in the backend. The checklist technique will scan your internal gears generally and give some outlines that can be deemed to be a possible security issue. From this trait you can have timely solution to remedy the problem thanks to this convenient suggestions.
+
+### Full feature list
+* Able to enable/disable Security module
+* Automatic warning email
+* Restrict the number of failed login attempts
+* Restrict the time session of failed login attempts
+* Default settings for failed login attempts and allowed duration
+* Blacklist(s) IP to block IP address(es)
+* Whitelist(s) IP to allow IP address(es)
+* Able to apply actions to an IP, multiple IPs or range of IP address.
+* Login logs with login detail (ID, Time, User name, IP, Browser Agent, Url and Status)
+* The most 5 recent logins at the Dashboard
+* Security checklist
+* The last time login of a particular admin.
+* Action log details
+* File changed reports
+
+
+## 7. User Guide
 
 
 ### How to use
