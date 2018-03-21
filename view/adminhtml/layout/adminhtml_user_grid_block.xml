@@ -25,11 +25,18 @@
         <referenceBlock name="adminhtml.user.grid.container">
             <referenceBlock name="adminhtml.user.grid">
                 <referenceBlock name="permission.user.grid.columnSet">
-                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="last.login">
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="last.login" after="email">
                         <arguments>
                             <argument name="header" xsi:type="string" translate="true">Last Login</argument>
                             <argument name="type" xsi:type="string">text</argument>
                             <argument name="renderer" xsi:type="string">Mageplaza\Security\Block\Widget\Grid\Column\Renderer\LastTimeLogin</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="ip.address" after="last.login">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">IP Address</argument>
+                            <argument name="type" xsi:type="string">text</argument>
+                            <argument name="renderer" xsi:type="string">Mageplaza\Security\Block\Widget\Grid\Column\Renderer\Ip</argument>
                         </arguments>
                     </block>
                 </referenceBlock>
