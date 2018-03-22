@@ -10,8 +10,8 @@ Security issues for Magento have left a big question mark in the community of on
 ## 1. Documentation
 
 - Installation guide: https://www.mageplaza.com/install-magento-2-extension/
-- User guide: https://www.mageplaza.com/magento-2-security/user-guide.html
-- Download from our Live site: https://www.mageplaza.com/magento-2-security/
+- User guide: https://docs.mageplaza.com/security/index.html
+- Introduction page: https://www.mageplaza.com/magento-2-security/
 - Contribute on Github: https://github.com/mageplaza/magento-2-security
 - Get Support: https://github.com/mageplaza/magento-2-security/issues
 
