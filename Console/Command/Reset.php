@@ -31,12 +31,17 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Class ListReset
  * @package Mageplaza\Security\Console\Command
  */
-class ListReset extends Command
+class Reset extends Command
 {
     /**
      * @var Writer
      */
     protected $_writer;
+
+    public $pathsReset=[
+        'blacklist'=>'security/black_white_list/black_list',
+        'whitelist'=>'security/black_white_list/white_list'
+    ];
 
     /**
      * ListReset constructor.
@@ -73,7 +78,7 @@ class ListReset extends Command
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    public function execute(InputInterface $input, OutputInterface $output)
     {
         if ($input->getArgument('value')) {
             $requestedTypes = $input->getArgument('value');
@@ -82,9 +87,16 @@ class ListReset extends Command
 
         if (empty($requestedTypes)) {
             try {
-                $this->reset('black_list');
-                $this->reset('white_list');
-                $output->writeln('<info>Blacklist And WhiteList Reset Successfully!</info>');
+                $list='';
+                foreach ($this->pathsReset as $key=>$path){
+                    $this->reset($path);
+                    if($list){
+                        $list=$list.', '.ucfirst($key);
+                    }else{
+                        $list=$list.ucfirst($key);
+                    }
+                }
+                $output->writeln('<info>'.$list.' Reset Successfully!</info>');
             } catch (\Exception $e) {
                 $output->writeln("<error>{$e->getMessage()}</error>");
             }
@@ -93,33 +105,26 @@ class ListReset extends Command
         }
 
         foreach ($requestedTypes as $item) {
-            if ($item == 'whitelist') {
+            if(isset($this->pathsReset[$item])){
                 try {
                     $this->reset('white_list');
-                    $output->writeln('<info>Whitelist Reset Successfully!</info>');
+                    $output->writeln('<info>'.ucfirst($item).' Reset Successfully!</info>');
                 } catch (\Exception $e) {
                     $output->writeln("<error>{$e->getMessage()}</error>");
                 }
-            } else if ($item == 'blacklist') {
-                try {
-                    $this->reset('black_list');
-                    $output->writeln('<info>Blacklist Reset Successfully!</info>');
-                } catch (\Exception $e) {
-                    $output->writeln("<error>{$e->getMessage()}</error>");
-                }
-            } else {
+            }else {
                 $output->writeln("<error>Wrong value '" . $item . "'</error>");
             }
         }
     }
 
     /**
-     * @param $list
+     * @param $path
      */
-    private function reset($list)
+    private function reset($path)
     {
         $this->_writer->save(
-            'security/black_white_list/' . $list,
+            $path,
             '',
             \Magento\Framework\App\Config\ScopeConfigInterface::SCOPE_TYPE_DEFAULT,
             \Magento\Store\Model\Store::DEFAULT_STORE_ID

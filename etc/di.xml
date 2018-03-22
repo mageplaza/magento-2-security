@@ -24,7 +24,7 @@
     <type name="Magento\Framework\Console\CommandList">
         <arguments>
             <argument name="commands" xsi:type="array">
-                <item name="mageplaza_security_blackwhitelist_reset" xsi:type="object">Mageplaza\Security\Console\Command\ListReset</item>
+                <item name="mageplaza_security_reset" xsi:type="object">Mageplaza\Security\Console\Command\Reset</item>
             </argument>
         </arguments>
     </type>
