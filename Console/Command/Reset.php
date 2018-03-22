@@ -28,7 +28,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class ListReset
+ * Class Reset
  * @package Mageplaza\Security\Console\Command
  */
 class Reset extends Command
@@ -38,13 +38,16 @@ class Reset extends Command
      */
     protected $_writer;
 
+    /**
+     * @var array
+     */
     public $pathsReset=[
         'blacklist'=>'security/black_white_list/black_list',
         'whitelist'=>'security/black_white_list/white_list'
     ];
 
     /**
-     * ListReset constructor.
+     * Reset constructor.
      * @param Writer $writer
      * @param null $name
      */
@@ -119,6 +122,8 @@ class Reset extends Command
     }
 
     /**
+     * Reset config value
+     *
      * @param $path
      */
     private function reset($path)

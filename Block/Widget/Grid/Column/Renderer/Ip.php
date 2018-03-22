@@ -23,8 +23,9 @@ namespace Mageplaza\Security\Block\Widget\Grid\Column\Renderer;
 
 use Magento\Backend\Block\Context;
 use Mageplaza\Security\Model\LoginLogFactory;
+
 /**
- * Class Status
+ * Class Ip
  * @package Mageplaza\Security\Block\Widget\Grid\Column\Renderer
  */
 class Ip extends \Magento\Backend\Block\Widget\Grid\Column\Renderer\AbstractRenderer
