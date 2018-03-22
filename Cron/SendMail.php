@@ -135,7 +135,7 @@ class SendMail
                 }
             }
 
-            $sendTo = explode(',', $this->helper->getConfigBruteForce('email'));
+            $sendTo = explode(',', $this->helper->getConfigGeneral('email'));
             $sendTo = array_map('trim', $sendTo);
             $storeUrl = parse_url($this->backendUrl->getBaseUrl(), PHP_URL_HOST);
             try {

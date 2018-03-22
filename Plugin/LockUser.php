@@ -94,7 +94,7 @@ class LockUser
         if ($setLockExpires) {
             //send mail if user is locked
             $storeUrl = parse_url($this->_backendUrl->getBaseUrl(), PHP_URL_HOST);
-            $sendTo = explode(',', $this->_helper->getConfigBruteForce('email'));
+            $sendTo = explode(',', $this->_helper->getConfigGeneral('email'));
             $sendTo = array_map('trim', $sendTo);
             try {
                 $store = $this->_storeManager->getStore();
