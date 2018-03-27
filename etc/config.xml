@@ -27,6 +27,7 @@
                 <enabled>1</enabled>
             </general>
             <brute_force>
+                <enabled>1</enabled>
                 <failed_count>5</failed_count>
                 <failed_time>10</failed_time>
                 <lock_user>1</lock_user>
