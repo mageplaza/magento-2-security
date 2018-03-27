@@ -135,44 +135,46 @@ class SendMail
                 }
             }
 
-            $sendTo = explode(',', $this->helper->getConfigGeneral('email'));
-            $sendTo = array_map('trim', $sendTo);
-            $storeUrl = parse_url($this->backendUrl->getBaseUrl(), PHP_URL_HOST);
-            try {
-                $store = $this->storeManager->getStore();
-                $templateVars = [
-                    'logs' => $logArr,
-                    'failed_count' => $failedCount,
-                    'failed_time' => $failedTime,
-                    'viewLogUrl' => $this->backendUrl->getUrl('mpsecurity/loginlog/'),
-                    'logo_url' => 'https://www.mageplaza.com/media/mageplaza-security-email.png',
-                    'logo_alt' => 'Mageplaza',
-                    'store_url' => $storeUrl
-                ];
+            if ($this->helper->getConfigGeneral('email')) {
+                $sendTo = explode(',', $this->helper->getConfigGeneral('email'));
+                $sendTo = array_map('trim', $sendTo);
+                $storeUrl = parse_url($this->backendUrl->getBaseUrl(), PHP_URL_HOST);
+                try {
+                    $store = $this->storeManager->getStore();
+                    $templateVars = [
+                        'logs' => $logArr,
+                        'failed_count' => $failedCount,
+                        'failed_time' => $failedTime,
+                        'viewLogUrl' => $this->backendUrl->getUrl('mpsecurity/loginlog/'),
+                        'logo_url' => 'https://www.mageplaza.com/media/mageplaza-security-email.png',
+                        'logo_alt' => 'Mageplaza',
+                        'store_url' => $storeUrl
+                    ];
 
-                $this->transportBuilder
-                    ->setTemplateIdentifier($this->helper->getConfigBruteForce('email_template'))
-                    ->setTemplateOptions([
-                        'area' => Area::AREA_FRONTEND,
-                        'store' => $store->getId()
-                    ])
-                    ->setTemplateVars($templateVars)
-                    ->setFrom('general')
-                    ->addTo($sendTo);
-                $transport = $this->transportBuilder->getTransport();
-                $transport->sendMessage();
-                $logFactory = $this->logFactory->create();
-                foreach ($logMailCollection as $item) {
-                    if ($item->getIsSentMail()) {
-                        break;
+                    $this->transportBuilder
+                        ->setTemplateIdentifier($this->helper->getConfigBruteForce('email_template'))
+                        ->setTemplateOptions([
+                            'area' => Area::AREA_FRONTEND,
+                            'store' => $store->getId()
+                        ])
+                        ->setTemplateVars($templateVars)
+                        ->setFrom('general')
+                        ->addTo($sendTo);
+                    $transport = $this->transportBuilder->getTransport();
+                    $transport->sendMessage();
+                    $logFactory = $this->logFactory->create();
+                    foreach ($logMailCollection as $item) {
+                        if ($item->getIsSentMail()) {
+                            break;
+                        }
+                        $logFactory->load($item->getId())
+                            ->setIsSentMail(1)
+                            ->setIsWarning(0)
+                            ->save();;
                     }
-                    $logFactory->load($item->getId())
-                        ->setIsSentMail(1)
-                        ->setIsWarning(0)
-                        ->save();;
+                } catch (\Magento\Framework\Exception\MailException $e) {
+                    $this->logger->critical($e->getLogMessage());
                 }
-            } catch (\Magento\Framework\Exception\MailException $e) {
-                $this->logger->critical($e->getLogMessage());
             }
         }
     }
