@@ -148,7 +148,7 @@ class Checklist extends \Magento\Backend\Block\Template
         }
 
         return [
-            'lastestVer' => $latestVer,
+            'latestVer' => $latestVer,
             'currentVersion' => $currentVersion
         ];
 

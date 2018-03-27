@@ -77,7 +77,7 @@ $unSecureNames = $block->checkAdminUserName();
 </div>
 <?php
 $version = $block->checkLatestVersion();
-$isLatest = $version['lastestVer'] == $version['currentVersion'];
+$isLatest = $version['latestVer'] == $version['currentVersion'];
 ?>
 <div class="box box-<?php echo $isLatest ? 'green' : 'red'; ?>">
     <div class="box-header with-border">
@@ -89,7 +89,7 @@ $isLatest = $version['lastestVer'] == $version['currentVersion'];
                 <i class="fa fa-remove"></i>
                 <span>
                     <?php
-                    echo __("Your Magento version is : ").$version['currentVersion'].__(", the latest version is : ").$version['lastestVer'];
+                    echo __("Your Magento version is : ").$version['currentVersion'].__(", the latest version is : ").$version['latestVer'];
                     ?>
                     <a class="fix-it">Upgrade</a>
                     </span>
