@@ -125,7 +125,7 @@ $isLatest = $version['latestVer'] == $version['currentVersion'];
         $('.fix-it').each(function () {
             $(this).click(function () {
                 if (!$(this).parent().find('.notification').length) {
-                    $(this).parent().append('<div class="notification"><?php echo __("Please update to "); ?>'+'<a href="http://www.mageplaza.com/magento-2-security/">SecurityPro</>'+'<?php __(" edition to resolve this issue automatically."); ?></div>');
+                    $(this).parent().append('<div class="notification"><?php echo __("Please update to "); ?>'+'<a href="http://www.mageplaza.com/magento-2-security/">SecurityPro</a>'+'<?php echo __(" edition to resolve this issue automatically."); ?></div>');
                     $('body').click(function (e) {
                         if (!$(e.target).closest('.notification').length && !$(e.target).closest('.fix-it').length) {
                             $('.notification').remove();
