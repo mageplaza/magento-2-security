@@ -15,8 +15,8 @@
  * version in the future.
  *
  * @category    Mageplaza
- * @package     Mageplaza_SecurityLib
- * @copyright   Copyright (c) 2016 Mageplaza (http://www.mageplaza.com/)
+ * @package     Mageplaza_Security
+ * @copyright   Copyright (c) 2018 Mageplaza (http://www.mageplaza.com/)
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
 class BrowserDetector_Autoload
