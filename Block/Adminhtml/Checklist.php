@@ -168,4 +168,61 @@ class Checklist extends Template
     {
         return (string)$this->_deploymentConfig->get(ConfigOptionsListConstants::CONFIG_PATH_DB_PREFIX);
     }
+
+    /**
+     * @return bool
+     */
+    public function hasProPackage()
+    {
+        return false;
+    }
+
+    /**
+     * @param $unSecureName
+     * @return string
+     */
+    public function getUserNameFixitUrl($unSecureName)
+    {
+        return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getFrontendCaptchaFixitUrl()
+    {
+        return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getBackendCaptchaFixitUrl()
+    {
+        return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getVersionFixitUrl()
+    {
+        return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getDbFixitAdditionData()
+    {
+        return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getAdditionalJavascript()
+    {
+        return '';
+    }
 }

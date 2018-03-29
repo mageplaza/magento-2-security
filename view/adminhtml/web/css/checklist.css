@@ -60,15 +60,11 @@
     position: relative;
 }
 
-.notice {
-    margin-left: 20px;
-}
-
 .err-nof {
     margin: 20px;
 }
 
-.checklist-notification {
+.checklist-notification, .db-notice, .username-notice {
     background-color: #fefbbb;
     margin: 20px;
     padding: 10px;
@@ -76,4 +72,23 @@
 
 .fix-it{
     cursor: pointer;
+}
+
+#prefix-form {
+    display: none;
+    padding-left: 20px;
+}
+
+.db-notice:before,
+.username-notice:before{
+    color: #eb5202;
+    content: '\e61a';
+    font-family: 'Admin Icons';
+    position: absolute;
+    margin-top: 10px;
+}
+
+.db-notice p,
+.username-notice p{
+    margin: 0 0 0 20px;
 }

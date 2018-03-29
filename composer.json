@@ -1,6 +1,6 @@
 {
   "name": "mageplaza/module-security",
-  "description": "Security M2",
+  "description": "Mageplaza Security M2",
   "require": {
     "mageplaza/module-core": "^1.3.11",
     "sinergi/browser-detector": "*"
