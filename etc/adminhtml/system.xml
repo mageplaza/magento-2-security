@@ -87,7 +87,7 @@
                 </field>
                 <field id="white_list" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Whitelist(s)</label>
-                    <comment>Enter IP(s) which is allowed to access website. Only login attempts from these IPs are granted. Separated with add (,). eg : 123.123.0.*, 10.22.*.*. Make sure you added your IP address first.</comment>
+                    <comment>Enter IP(s) which is allowed to access website. Only login attempts from these IPs are granted. Separated with add (,). eg : 123.123.0.*, 10.22.*.*. Make sure you add your IP address first.</comment>
                 </field>
             </group>
         </section>
