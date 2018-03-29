@@ -68,8 +68,12 @@
     margin: 20px;
 }
 
-.notification {
+.checklist-notification {
     background-color: #fefbbb;
     margin: 20px;
     padding: 10px;
+}
+
+.fix-it{
+    cursor: pointer;
 }

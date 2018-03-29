@@ -123,15 +123,15 @@ $isLatest = $version['latestVer'] == $version['currentVersion'];
     require([
         'jquery'
     ], function ($) {
-        var notice = "<?php echo __('Please update to %1 edition to have these issues solved automatically.', '<a href="http://www.mageplaza.com/magento-2-security/">SecurityPro</a>'); ?>";
+        var notice = "<?php echo __('Please update to %1 edition to have these issues solved automatically.', '<a href=\'http://www.mageplaza.com/magento-2-security/\' target=\'_blank\'>SecurityPro</a>'); ?>";
 
         $('.fix-it').each(function () {
             $(this).click(function () {
-                if (!$(this).parent().find('.notification').length) {
-                    $(this).parent().append('<div class="notification">' + notice + '</div>');
+                if (!$(this).parent().find('.checklist-notification').length) {
+                    $(this).parent().append('<div class="checklist-notification">' + notice + '</div>');
                     $('body').click(function (e) {
-                        if (!$(e.target).closest('.notification').length && !$(e.target).closest('.fix-it').length) {
-                            $('.notification').remove();
+                        if (!$(e.target).closest('.checklist-notification').length && !$(e.target).closest('.fix-it').length) {
+                            $('.checklist-notification').remove();
                         }
                     });
                 }
