@@ -91,33 +91,35 @@ class LockUser
      */
     public function beforeUpdateFailure(User $userModel, $user, $setLockExpires, $setFirstFailure)
     {
-        if ($setLockExpires) {
-            //send mail if user is locked
-            $storeUrl = parse_url($this->_backendUrl->getBaseUrl(), PHP_URL_HOST);
-            $sendTo = explode(',', $this->_helper->getConfigGeneral('email'));
-            $sendTo = array_map('trim', $sendTo);
-            try {
-                $store = $this->_storeManager->getStore();
-                $templateVars = [
-                    'logo_url' => 'https://www.mageplaza.com/media/mageplaza-security-email.png',
-                    'logo_alt' => 'Mageplaza',
-                    'store_url' => $storeUrl,
-                    'user_name' => $user->getUserName()
-                ];
+        if ($this->_helper->isEnabled() && $this->_helper->getConfigBruteForce('lock_user')) {
+            if ($setLockExpires) {
+                //send mail if user is locked
+                $storeUrl = parse_url($this->_backendUrl->getBaseUrl(), PHP_URL_HOST);
+                $sendTo = explode(',', $this->_helper->getConfigGeneral('email'));
+                $sendTo = array_map('trim', $sendTo);
+                try {
+                    $store = $this->_storeManager->getStore();
+                    $templateVars = [
+                        'logo_url' => 'https://www.mageplaza.com/media/mageplaza-security-email.png',
+                        'logo_alt' => 'Mageplaza',
+                        'store_url' => $storeUrl,
+                        'user_name' => $user->getUserName()
+                    ];
 
-                $this->_transportBuilder
-                    ->setTemplateIdentifier('mp_lock_user_email_template')
-                    ->setTemplateOptions([
-                        'area' => Area::AREA_FRONTEND,
-                        'store' => $store->getId()
-                    ])
-                    ->setTemplateVars($templateVars)
-                    ->setFrom('general')
-                    ->addTo($sendTo);
-                $transport = $this->_transportBuilder->getTransport();
-                $transport->sendMessage();
-            } catch (MailException $e) {
-                $this->_logger->critical($e->getLogMessage());
+                    $this->_transportBuilder
+                        ->setTemplateIdentifier('mp_lock_user_email_template')
+                        ->setTemplateOptions([
+                            'area' => Area::AREA_FRONTEND,
+                            'store' => $store->getId()
+                        ])
+                        ->setTemplateVars($templateVars)
+                        ->setFrom('general')
+                        ->addTo($sendTo);
+                    $transport = $this->_transportBuilder->getTransport();
+                    $transport->sendMessage();
+                } catch (MailException $e) {
+                    $this->_logger->critical($e->getLogMessage());
+                }
             }
         }
     }
