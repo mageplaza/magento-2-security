@@ -36,7 +36,7 @@ $unSecureNames = $block->checkAdminUserName();
             <?php foreach ($unSecureNames as $unSecureName): ?>
                 <div class="err-nof-line">
                     <i class="fa fa-remove"></i>
-                    <span><?php echo __('Username:"').$unSecureName['username'].__('" is not secure.'); ?></span>
+                    <span><?php echo __('Username:"') . $unSecureName['username'] . __('" is not secure.'); ?></span>
                     <a class="fix-it">Fix it</a>
                 </div>
 
@@ -53,25 +53,32 @@ $unSecureNames = $block->checkAdminUserName();
     </div>
     <div class="err-nof">
         <?php if (!$block->checkFrontendCaptcha()): ?>
-            <i class="fa fa-remove"></i>
-            <span><?php echo __("Frontend captcha is not enabled. 
+            <p>
+                <i class="fa fa-remove"></i>
+                <span><?php echo __("Frontend captcha is not enabled. 
             Hackers may carry out brute-force attacks on your customers' accounts"); ?></span>
-            <a class="fix-it">Fix it</a>
+                <a class="fix-it">Fix it</a>
+            </p>
         <?php else: ?>
-            <i class="fa fa-check"></i>
-            <span><?php echo __("Frontend captcha is enabled."); ?></span>
+            <p>
+                <i class="fa fa-check"></i>
+                <span><?php echo __("Frontend captcha is enabled."); ?></span>
+            </p>
         <?php endif; ?>
         <?php if (!$block->checkBackendCaptcha()): ?>
-            <br/>
             <div class="err-nof-line">
-                <i class="fa fa-remove"></i>
-                <span><?php echo __("Backend captcha is not enabled. 
+                <p>
+                    <i class="fa fa-remove"></i>
+                    <span><?php echo __("Backend captcha is not enabled. 
                 To protect your backend from brute-force attacks, you should enable it."); ?></span>
-                <a class="fix-it">Fix it</a>
+                    <a class="fix-it">Fix it</a>
+                </p>
             </div>
         <?php else: ?>
-            <i class="fa fa-check"></i>
-            <span><?php echo __("Backend captcha is enabled."); ?></span>
+            <p>
+                <i class="fa fa-check"></i>
+                <span><?php echo __("Backend captcha is enabled."); ?></span>
+            </p>
         <?php endif; ?>
     </div>
 </div>
@@ -89,7 +96,7 @@ $isLatest = $version['latestVer'] == $version['currentVersion'];
                 <i class="fa fa-remove"></i>
                 <span>
                     <?php
-                    echo __("Your Magento version is : ").$version['currentVersion'].__(", the latest version is : ").$version['latestVer'];
+                    echo __("Your Magento version is : ") . $version['currentVersion'] . __(", the latest version is : ") . $version['latestVer'];
                     ?>
                     <a class="fix-it">Upgrade</a>
                     </span>
@@ -112,7 +119,8 @@ $isLatest = $version['latestVer'] == $version['currentVersion'];
         <?php else: ?>
             <div class="err-nof-line">
                 <i class="fa fa-remove"></i>
-                <span><?php echo __("Your store's database hasn't table prefix."); ?><a class="fix-it"> Fix it</a></span>
+                <span><?php echo __("Your store's database hasn't table prefix."); ?><a
+                            class="fix-it"> Fix it</a></span>
             </div>
         <?php endif; ?>
     </div>
@@ -126,8 +134,8 @@ $isLatest = $version['latestVer'] == $version['currentVersion'];
             $(this).click(function () {
                 if (!$(this).parent().find('.notification').length) {
                     $(this).parent().append('<div class="notification"><?php echo __("Please update to "); ?>'
-                        +'<a href="http://www.mageplaza.com/magento-2-security/">SecurityPro</a>'
-                        +'<?php echo __(" edition to have these issues solved automatically."); ?></div>');
+                        + '<a href="http://www.mageplaza.com/magento-2-security/">SecurityPro</a>'
+                        + '<?php echo __(" edition to have these issues solved automatically."); ?></div>');
                     $('body').click(function (e) {
                         if (!$(e.target).closest('.notification').length && !$(e.target).closest('.fix-it').length) {
                             $('.notification').remove();
