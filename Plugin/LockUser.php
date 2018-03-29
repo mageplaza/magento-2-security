@@ -91,7 +91,10 @@ class LockUser
      */
     public function beforeUpdateFailure(User $userModel, $user, $setLockExpires, $setFirstFailure)
     {
-        if ($this->_helper->isEnabled() && $this->_helper->getConfigBruteForce('lock_user')) {
+        if ($this->_helper->isEnabled()
+            && $this->_helper->getConfigBruteForce('lock_user')
+            && $this->_helper->getConfigBruteForce('enabled')
+        ) {
             if ($setLockExpires) {
                 //send mail if user is locked
                 $storeUrl = parse_url($this->_backendUrl->getBaseUrl(), PHP_URL_HOST);
