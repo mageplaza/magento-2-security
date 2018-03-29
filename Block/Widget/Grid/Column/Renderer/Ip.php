@@ -22,13 +22,14 @@
 namespace Mageplaza\Security\Block\Widget\Grid\Column\Renderer;
 
 use Magento\Backend\Block\Context;
+use Magento\Backend\Block\Widget\Grid\Column\Renderer\AbstractRenderer;
 use Mageplaza\Security\Model\LoginLogFactory;
 
 /**
  * Class Ip
  * @package Mageplaza\Security\Block\Widget\Grid\Column\Renderer
  */
-class Ip extends \Magento\Backend\Block\Widget\Grid\Column\Renderer\AbstractRenderer
+class Ip extends AbstractRenderer
 {
     /**
      * @var LoginLogFactory
@@ -49,6 +50,7 @@ class Ip extends \Magento\Backend\Block\Widget\Grid\Column\Renderer\AbstractRend
     )
     {
         $this->_logFactory = $logFactory;
+
         parent::__construct($context, $data);
     }
 
@@ -61,11 +63,11 @@ class Ip extends \Magento\Backend\Block\Widget\Grid\Column\Renderer\AbstractRend
     public function render(\Magento\Framework\DataObject $row)
     {
         $userName = $row->getData('username');
-        $lastLog = $this->_logFactory->create()->getCollection()
+        $lastLog  = $this->_logFactory->create()->getCollection()
             ->addFieldToFilter('user_name', $userName)
             ->addFieldToFilter('status', 1)
             ->getLastItem();
 
-        return '<a href="http://www.traceip.net/?query='.$lastLog->getIp().'" target="_blank">'.$lastLog->getIp().'</a>';
+        return '<a href="http://www.traceip.net/?query=' . $lastLog->getIp() . '" target="_blank">' . $lastLog->getIp() . '</a>';
     }
 }

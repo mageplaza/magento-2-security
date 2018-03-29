@@ -22,13 +22,14 @@
 namespace Mageplaza\Security\Block\Widget\Grid\Column\Renderer;
 
 use Magento\Backend\Block\Context;
+use Magento\Backend\Block\Widget\Grid\Column\Renderer\AbstractRenderer;
 use Mageplaza\Security\Model\LoginLogFactory;
 
 /**
  * Class LastTimeLogin
  * @package Mageplaza\Security\Block\Widget\Grid\Column\Renderer
  */
-class LastTimeLogin extends \Magento\Backend\Block\Widget\Grid\Column\Renderer\AbstractRenderer
+class LastTimeLogin extends AbstractRenderer
 {
     /**
      * @var LoginLogFactory
@@ -49,6 +50,7 @@ class LastTimeLogin extends \Magento\Backend\Block\Widget\Grid\Column\Renderer\A
     )
     {
         $this->_logFactory = $logFactory;
+        
         parent::__construct($context, $data);
     }
 
@@ -61,7 +63,7 @@ class LastTimeLogin extends \Magento\Backend\Block\Widget\Grid\Column\Renderer\A
     public function render(\Magento\Framework\DataObject $row)
     {
         $userName = $row->getData('username');
-        $lastLog = $this->_logFactory->create()->getCollection()
+        $lastLog  = $this->_logFactory->create()->getCollection()
             ->addFieldToFilter('user_name', $userName)
             ->addFieldToFilter('status', 1)
             ->getLastItem();

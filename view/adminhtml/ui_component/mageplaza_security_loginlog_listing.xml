@@ -51,10 +51,10 @@
         </argument>
     </dataSource>
     <listingToolbar name="listing_top">
-        <bookmark name="bookmarks" />
-        <columnsControls name="columns_controls" />
-        <exportButton name="export_button" />
-        <filters name="listing_filters" />
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <exportButton name="export_button"/>
+        <filters name="listing_filters"/>
         <paging name="listing_paging"/>
     </listingToolbar>
     <columns name="mageplaza_security_loginlog_columns">

@@ -41,9 +41,9 @@ class Reset extends Command
     /**
      * @var array
      */
-    public $pathsReset=[
-        'blacklist'=>'security/black_white_list/black_list',
-        'whitelist'=>'security/black_white_list/white_list'
+    public $pathsReset = [
+        'blacklist' => 'security/black_white_list/black_list',
+        'whitelist' => 'security/black_white_list/white_list'
     ];
 
     /**
@@ -90,16 +90,13 @@ class Reset extends Command
 
         if (empty($requestedTypes)) {
             try {
-                $list='';
-                foreach ($this->pathsReset as $key=>$path){
+                $list = '';
+                foreach ($this->pathsReset as $key => $path) {
                     $this->reset($path);
-                    if($list){
-                        $list=$list.', '.ucfirst($key);
-                    }else{
-                        $list=$list.ucfirst($key);
-                    }
+
+                    $list .= ($list ? ', ' : '') . ucfirst($key);
                 }
-                $output->writeln('<info>'.$list.' Reset Successfully!</info>');
+                $output->writeln('<info>' . $list . ' Reset Successfully!</info>');
             } catch (\Exception $e) {
                 $output->writeln("<error>{$e->getMessage()}</error>");
             }
@@ -108,14 +105,14 @@ class Reset extends Command
         }
 
         foreach ($requestedTypes as $item) {
-            if(isset($this->pathsReset[$item])){
+            if (isset($this->pathsReset[$item])) {
                 try {
                     $this->reset('white_list');
-                    $output->writeln('<info>'.ucfirst($item).' Reset Successfully!</info>');
+                    $output->writeln('<info>' . ucfirst($item) . ' Reset Successfully!</info>');
                 } catch (\Exception $e) {
                     $output->writeln("<error>{$e->getMessage()}</error>");
                 }
-            }else {
+            } else {
                 $output->writeln("<error>Wrong value '" . $item . "'</error>");
             }
         }

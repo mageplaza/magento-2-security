@@ -23,5 +23,4 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
     <template id="security_brute_force_email_template" label="Default Warning Template" file="email_template.html" type="html" module="Mageplaza_Security" area="frontend"/>
     <template id="mp_lock_user_email_template" label="Default Lock User Warning Template" file="lock_user.html" type="html" module="Mageplaza_Security" area="frontend"/>
-
 </config>

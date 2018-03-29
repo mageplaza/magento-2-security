@@ -21,13 +21,14 @@
 
 namespace Mageplaza\Security\Plugin;
 
-use Magento\Framework\App\Area;
 use Magento\Backend\Model\UrlInterface;
-use Psr\Log\LoggerInterface;
-use Magento\Store\Model\StoreManagerInterface;
-use Magento\Framework\Mail\Template\TransportBuilder;
-use Magento\User\Model\ResourceModel\User;
+use Magento\Framework\App\Area;
 use Magento\Framework\Exception\MailException;
+use Magento\Framework\Mail\Template\TransportBuilder;
+use Magento\Store\Model\StoreManagerInterface;
+use Magento\User\Model\ResourceModel\User;
+use Mageplaza\Security\Helper\Data;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class LockUser
@@ -56,16 +57,17 @@ class LockUser
     protected $_backendUrl;
 
     /**
-     * @var \Mageplaza\Security\Helper\Data
+     * @var Data
      */
     protected $_helper;
 
     /**
      * LockUser constructor.
-     * @param \Magento\Backend\Model\UrlInterface $backendUrl
-     * @param \Psr\Log\LoggerInterface $logger
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param \Magento\Framework\Mail\Template\TransportBuilder $transportBuilder
+     * @param UrlInterface $backendUrl
+     * @param LoggerInterface $logger
+     * @param StoreManagerInterface $storeManager
+     * @param TransportBuilder $transportBuilder
+     * @param Data $helper
      */
     public function __construct
     (
@@ -73,14 +75,14 @@ class LockUser
         LoggerInterface $logger,
         StoreManagerInterface $storeManager,
         TransportBuilder $transportBuilder,
-        \Mageplaza\Security\Helper\Data $helper
+        Data $helper
     )
     {
-        $this->_backendUrl = $backendUrl;
-        $this->_logger = $logger;
-        $this->_storeManager = $storeManager;
+        $this->_backendUrl       = $backendUrl;
+        $this->_logger           = $logger;
+        $this->_storeManager     = $storeManager;
         $this->_transportBuilder = $transportBuilder;
-        $this->_helper = $helper;
+        $this->_helper           = $helper;
     }
 
     /**
@@ -98,13 +100,13 @@ class LockUser
             if ($setLockExpires) {
                 //send mail if user is locked
                 $storeUrl = parse_url($this->_backendUrl->getBaseUrl(), PHP_URL_HOST);
-                $sendTo = explode(',', $this->_helper->getConfigGeneral('email'));
-                $sendTo = array_map('trim', $sendTo);
+                $sendTo   = explode(',', $this->_helper->getConfigGeneral('email'));
+                $sendTo   = array_map('trim', $sendTo);
                 try {
-                    $store = $this->_storeManager->getStore();
+                    $store        = $this->_storeManager->getStore();
                     $templateVars = [
-                        'logo_url' => 'https://www.mageplaza.com/media/mageplaza-security-email.png',
-                        'logo_alt' => 'Mageplaza',
+                        'logo_url'  => 'https://www.mageplaza.com/media/mageplaza-security-email.png',
+                        'logo_alt'  => 'Mageplaza',
                         'store_url' => $storeUrl,
                         'user_name' => $user->getUserName()
                     ];
@@ -112,7 +114,7 @@ class LockUser
                     $this->_transportBuilder
                         ->setTemplateIdentifier('mp_lock_user_email_template')
                         ->setTemplateOptions([
-                            'area' => Area::AREA_FRONTEND,
+                            'area'  => Area::AREA_FRONTEND,
                             'store' => $store->getId()
                         ])
                         ->setTemplateVars($templateVars)

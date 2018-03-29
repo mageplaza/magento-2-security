@@ -54,27 +54,26 @@ class Form extends Generic
         array $data = [])
     {
         $this->_helper = $helper;
+
         parent::__construct($context, $registry, $formFactory, $data);
     }
 
     /**
-     * @return $this
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @inheritdoc
      */
     protected function _prepareForm()
     {
         /** @var \Magento\Framework\Data\Form $form */
-        $form = $this->_formFactory->create(
-            [
+        $form = $this->_formFactory->create([
                 'data' => [
-                    'id' => 'edit_form',
-                    'action' => $this->getData('action'),
-                    'method' => 'post',
+                    'id'      => 'edit_form',
+                    'action'  => $this->getData('action'),
+                    'method'  => 'post',
                     'enctype' => 'multipart/form-data'
                 ]
             ]
         );
-        $log = $this->_coreRegistry->registry('mageplaza_security_loginlog');
+        $log  = $this->_coreRegistry->registry('mageplaza_security_loginlog');
 
         /** @var \Magento\Framework\Data\Form $form */
         $form->setHtmlIdPrefix('log_');
@@ -82,39 +81,39 @@ class Form extends Generic
 
         $fieldset = $form->addFieldset('base_fieldset', [
                 'legend' => __('Login information'),
-                'class' => 'fieldset-wide'
+                'class'  => 'fieldset-wide'
             ]
         );
         $fieldset->addField('id', 'label', [
-            'name' => 'id',
+            'name'  => 'id',
             'label' => __('ID'),
         ]);
         $fieldset->addField('time', 'label', [
-                'name' => 'time',
+                'name'  => 'time',
                 'label' => __('Time'),
                 'title' => __('Time'),
             ]
         );
         $fieldset->addField('user_name', 'label', [
-                'name' => 'user_name',
+                'name'  => 'user_name',
                 'label' => __('User Name'),
                 'title' => __('User Name'),
             ]
         );
         $fieldset->addField('ip', 'label', [
-                'name' => 'ip',
+                'name'  => 'ip',
                 'label' => __('IP'),
                 'title' => __('IP'),
             ]
         );
         $fieldset->addField('url', 'label', [
-                'name' => 'url',
+                'name'  => 'url',
                 'label' => __('URL'),
                 'title' => __('URL'),
             ]
         );
         $fieldset->addField('referer', 'label', [
-                'name' => 'referer',
+                'name'  => 'referer',
                 'label' => __('Referer URL'),
                 'title' => __('Referer URL'),
             ]
@@ -128,13 +127,13 @@ class Form extends Generic
 
         $browserFieldset = $form->addFieldset('browser_fieldset', [
                 'legend' => __('Browser Information'),
-                'class' => 'fieldset-wide'
+                'class'  => 'fieldset-wide'
             ]
         );
-        $userAgent = $log->getBrowserAgent();
-        $userAgent = explode('--', $userAgent);
-        $userAgent = $userAgent[1];
-        $browser = $this->_helper->getBrowser($userAgent, 1);
+        $userAgent       = $log->getBrowserAgent();
+        $userAgent       = explode('--', $userAgent);
+        $userAgent       = $userAgent[1];
+        $browser         = $this->_helper->getBrowser($userAgent, 1);
 
         $browserFieldset->addField('browser', 'label', [
             'label' => __('Brower'),

@@ -21,28 +21,33 @@
 
 namespace Mageplaza\Security\Controller\Adminhtml\Checklist;
 
+use Magento\Backend\App\Action;
+use Magento\Backend\App\Action\Context;
+use Magento\Framework\View\Result\PageFactory;
+
 /**
  * Class Index
  * @package Mageplaza\Security\Controller\Adminhtml\Checklist
  */
-class Index extends \Magento\Backend\App\Action
+class Index extends Action
 {
     /**
-     * @var bool|\Magento\Framework\View\Result\PageFactory
+     * @var bool|PageFactory
      */
     protected $resultPageFactory = false;
 
     /**
      * Index constructor.
-     * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
+     * @param Context $context
+     * @param PageFactory $resultPageFactory
      */
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\View\Result\PageFactory $resultPageFactory
+        Context $context,
+        PageFactory $resultPageFactory
     )
     {
         parent::__construct($context);
+
         $this->resultPageFactory = $resultPageFactory;
     }
 

@@ -32,8 +32,8 @@ use Sinergi\BrowserDetector\UserAgent;
  */
 class Data extends AbstractData
 {
-    const CONFIG_MODULE_PATH = 'security';
-    const XML_PATH_BRUTE_FORCE = 'brute_force';
+    const CONFIG_MODULE_PATH        = 'security';
+    const XML_PATH_BRUTE_FORCE      = 'brute_force';
     const XML_PATH_BLACK_WHITE_LIST = 'black_white_list';
 
     /**
@@ -88,12 +88,13 @@ class Data extends AbstractData
             if (strpos($range, '-') !== false) {
                 list($low, $high) = explode('-', $range, 2);
             }
-            $low = str_replace('*', '0', $low);
-            $high = str_replace('*', '255', $high);
+            $low   = str_replace('*', '0', $low);
+            $high  = str_replace('*', '255', $high);
             $range = $low . '-' . $high;
         }
         if (strpos($range, '-') !== false) {
             list($low, $high) = explode('-', $range, 2);
+
             return $this->ipCompare($ip, $low, 1) && $this->ipcompare($ip, $high, -1);
         }
 
@@ -131,14 +132,14 @@ class Data extends AbstractData
     public function getBrowser($userAgent, $full = null)
     {
         $userAgent = new UserAgent($userAgent);
-        $os = new Os($userAgent);
-        $browser = new Browser($userAgent);
+        $os        = new Os($userAgent);
+        $browser   = new Browser($userAgent);
 
         if ($full) {
             return [
-                'browser' => $browser->getName(),
-                'browser_version' => $browser->getVersion(),
-                'plat_form' => $os->getName(),
+                'browser'           => $browser->getName(),
+                'browser_version'   => $browser->getVersion(),
+                'plat_form'         => $os->getName(),
                 'plat_form_version' => $os->getVersion()
             ];
         }

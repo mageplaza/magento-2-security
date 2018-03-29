@@ -29,7 +29,7 @@ use Magento\Framework\Option\ArrayInterface;
  */
 class Status implements ArrayInterface
 {
-    const STATUS_FAIL = 0;
+    const STATUS_FAIL    = 0;
     const STATUS_SUCCESS = 1;
 
     /**
@@ -56,7 +56,7 @@ class Status implements ArrayInterface
     public function toArray()
     {
         return [
-            self::STATUS_FAIL => __('Failed'),
+            self::STATUS_FAIL    => __('Failed'),
             self::STATUS_SUCCESS => __('Success'),
         ];
     }

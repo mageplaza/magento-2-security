@@ -68,10 +68,10 @@ class LoginSuccess implements ObserverInterface
         Data $helperData
     )
     {
-        $this->_address = $address;
-        $this->_backendSession = $session;
+        $this->_address         = $address;
+        $this->_backendSession  = $session;
         $this->_loginLogFactory = $loginLogFactory;
-        $this->_helperData = $helperData;
+        $this->_helperData      = $helperData;
     }
 
     /**
@@ -81,13 +81,13 @@ class LoginSuccess implements ObserverInterface
     {
         if ($this->_helperData->isEnabled()) {
             $loginLog = [
-                'time' => time(),
-                'user_name' => $observer->getUser()->getUserName(),
-                'ip' => $this->_address->getRemoteAddress(),
+                'time'          => time(),
+                'user_name'     => $observer->getUser()->getUserName(),
+                'ip'            => $this->_address->getRemoteAddress(),
                 'browser_agent' => $this->_backendSession->getBrowserAgent(),
-                'url' => $this->_backendSession->getUrl(),
-                'referer' => $this->_backendSession->getRefererUrl(),
-                'status' => Status::STATUS_SUCCESS
+                'url'           => $this->_backendSession->getUrl(),
+                'referer'       => $this->_backendSession->getRefererUrl(),
+                'status'        => Status::STATUS_SUCCESS
             ];
             $this->_loginLogFactory->create()->addData($loginLog)->save();
         }

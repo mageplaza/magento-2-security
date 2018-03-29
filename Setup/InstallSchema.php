@@ -47,7 +47,7 @@ class InstallSchema implements InstallSchemaInterface
                     'identity' => true,
                     'unsigned' => true,
                     'nullable' => false,
-                    'primary' => true
+                    'primary'  => true
                 ], 'Login Log')
                 ->addColumn('time', Table::TYPE_TIMESTAMP, null, [], 'Time')
                 ->addColumn('user_name', Table::TYPE_TEXT, '64k', [], 'User Name')

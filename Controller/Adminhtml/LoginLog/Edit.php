@@ -63,8 +63,9 @@ class Edit extends Action
     )
     {
         $this->resultPageFactory = $resultPageFactory;
-        $this->registry = $registry;
-        $this->_logFactory = $logFactory;
+        $this->registry          = $registry;
+        $this->_logFactory       = $logFactory;
+
         parent::__construct($context);
     }
 
@@ -99,12 +100,13 @@ class Edit extends Action
     protected function initLog($register = false)
     {
         $logId = (int)$this->getRequest()->getParam('id');
-        $log = $this->_logFactory->create();
+        $log   = $this->_logFactory->create();
 
         if ($logId) {
             $log = $log->load($logId);
             if (!$log->getId()) {
                 $this->messageManager->addErrorMessage(__('This log no longer exists.'));
+
                 return false;
             }
         }

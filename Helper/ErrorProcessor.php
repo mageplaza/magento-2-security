@@ -69,12 +69,12 @@ class ErrorProcessor extends Processor
      */
     public function processSecurityReport($errorCode = '', $reportData = '', $title = '')
     {
-        $this->pageTitle = $title ?: __('You don\'t have permission to access this page');
+        $this->pageTitle  = $title ?: __('You don\'t have permission to access this page');
         $this->reportData = $reportData;
-        $this->errorCode = $errorCode;
+        $this->errorCode  = $errorCode;
 
-        $html = '';
-        $baseTemplate = $this->_getTemplatePath('page.phtml');
+        $html            = '';
+        $baseTemplate    = $this->_getTemplatePath('page.phtml');
         $contentTemplate = $this->_resolver->getTemplateFileName('report.phtml', ['module' => 'Mageplaza_Security', 'area' => FrontNameResolver::AREA_CODE]);
         if ($baseTemplate && $contentTemplate) {
             ob_start();

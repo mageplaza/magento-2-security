@@ -34,7 +34,7 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="email" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Send warning emails to </label>
+                    <label>Send warning emails to</label>
                     <comment>All warning letters will be sent to these emails. Separated with add (,)</comment>
                     <depends>
                         <field id="enabled">1</field>

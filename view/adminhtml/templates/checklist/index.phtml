@@ -28,18 +28,16 @@ $unSecureNames = $block->checkAdminUserName();
         <strong><?php echo __("Check admin's username:"); ?></strong>
     </div>
     <div class="notice">
-        <p><?php echo __("The following usernames are not secured: "); ?> admin, root, test, magento.
-            <?php echo __(" Hackers can guest username easily. Click on an user to change username."); ?></p>
+        <p><?php echo __("The following usernames are not secured: %1. Hackers can guest username easily. Click on an user to change username.", 'admin, root, test, magento'); ?>
     </div>
     <div class="err-nof">
         <?php if (!empty($unSecureNames)): ?>
             <?php foreach ($unSecureNames as $unSecureName): ?>
                 <div class="err-nof-line">
                     <i class="fa fa-remove"></i>
-                    <span><?php echo __('Username:"') . $unSecureName['username'] . __('" is not secure.'); ?></span>
-                    <a class="fix-it">Fix it</a>
+                    <span><?php echo __('Username: "%1" is not secure.', $unSecureName['username']); ?></span>
+                    <a class="fix-it"><?php echo __('Fix it') ?></a>
                 </div>
-
             <?php endforeach; ?>
         <?php else: ?>
             <i class="fa fa-check"></i>
@@ -52,26 +50,22 @@ $unSecureNames = $block->checkAdminUserName();
         <strong><?php echo __("Check captcha:"); ?></strong>
     </div>
     <div class="err-nof">
-        <?php if (!$block->checkFrontendCaptcha()): ?>
-            <p>
+        <p>
+            <?php if (!$block->checkFrontendCaptcha()): ?>
                 <i class="fa fa-remove"></i>
-                <span><?php echo __("Frontend captcha is not enabled. 
-            Hackers may carry out brute-force attacks on your customers' accounts"); ?></span>
-                <a class="fix-it">Fix it</a>
-            </p>
-        <?php else: ?>
-            <p>
+                <span><?php echo __("Frontend captcha is not enabled. Hackers may carry out brute-force attacks on your customers' accounts"); ?></span>
+                <a class="fix-it"><?php echo __('Fix it') ?></a>
+            <?php else: ?>
                 <i class="fa fa-check"></i>
                 <span><?php echo __("Frontend captcha is enabled."); ?></span>
-            </p>
-        <?php endif; ?>
+            <?php endif; ?>
+        </p>
         <?php if (!$block->checkBackendCaptcha()): ?>
             <div class="err-nof-line">
                 <p>
                     <i class="fa fa-remove"></i>
-                    <span><?php echo __("Backend captcha is not enabled. 
-                To protect your backend from brute-force attacks, you should enable it."); ?></span>
-                    <a class="fix-it">Fix it</a>
+                    <span><?php echo __("Backend captcha is not enabled. To protect your backend from brute-force attacks, you should enable it."); ?></span>
+                    <a class="fix-it"><?php echo __('Fix it') ?></a>
                 </p>
             </div>
         <?php else: ?>
@@ -83,7 +77,7 @@ $unSecureNames = $block->checkAdminUserName();
     </div>
 </div>
 <?php
-$version = $block->checkLatestVersion();
+$version  = $block->checkLatestVersion();
 $isLatest = $version['latestVer'] == $version['currentVersion'];
 ?>
 <div class="box box-<?php echo $isLatest ? 'green' : 'red'; ?>">
@@ -95,11 +89,9 @@ $isLatest = $version['latestVer'] == $version['currentVersion'];
             <div class="err-nof-line">
                 <i class="fa fa-remove"></i>
                 <span>
-                    <?php
-                    echo __("Your Magento version is : ") . $version['currentVersion'] . __(", the latest version is : ") . $version['latestVer'];
-                    ?>
-                    <a class="fix-it">Upgrade</a>
-                    </span>
+                    <?php echo __("Your Magento version is: %1, the latest version is: %2", $version['currentVersion'], $version['latestVer']); ?>
+                    <a class="fix-it"><?php echo __('Upgrade') ?></a>
+                </span>
             </div>
         <?php else: ?>
             <i class="fa fa-check"></i>
@@ -119,23 +111,24 @@ $isLatest = $version['latestVer'] == $version['currentVersion'];
         <?php else: ?>
             <div class="err-nof-line">
                 <i class="fa fa-remove"></i>
-                <span><?php echo __("Your store's database hasn't table prefix."); ?><a
-                            class="fix-it"> Fix it</a></span>
+                <span>
+                    <?php echo __("Your store's database hasn't table prefix."); ?>
+                    <a class="fix-it"><?php echo __('Fix it') ?></a>
+                </span>
             </div>
         <?php endif; ?>
     </div>
 </div>
-
 <script>
     require([
         'jquery'
     ], function ($) {
+        var notice = "<?php echo __('Please update to %1 edition to have these issues solved automatically.', '<a href="http://www.mageplaza.com/magento-2-security/">SecurityPro</a>'); ?>";
+
         $('.fix-it').each(function () {
             $(this).click(function () {
                 if (!$(this).parent().find('.notification').length) {
-                    $(this).parent().append('<div class="notification"><?php echo __("Please update to "); ?>'
-                        + '<a href="http://www.mageplaza.com/magento-2-security/">SecurityPro</a>'
-                        + '<?php echo __(" edition to have these issues solved automatically."); ?></div>');
+                    $(this).parent().append('<div class="notification">' + notice + '</div>');
                     $('body').click(function (e) {
                         if (!$(e.target).closest('.notification').length && !$(e.target).closest('.fix-it').length) {
                             $('.notification').remove();
@@ -146,60 +139,3 @@ $isLatest = $version['latestVer'] == $version['currentVersion'];
         });
     });
 </script>
-<style>
-    .box {
-        position: relative;
-        border-radius: 3px;
-        background: #ffffff;
-        border: 1px solid #ddd;
-        border-top: 3px solid #d2d6de;
-        margin-bottom: 20px;
-        width: 70%;
-        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-    }
-
-    .box.box-green {
-        border-top-color: #00a65a;
-    }
-
-    .box.box-yellow {
-        border-top-color: yellow;
-    }
-
-    .box.box-red {
-        border-top-color: red;
-    }
-
-    .fa-remove {
-        color: red;
-    }
-
-    .fa-check {
-        color: green;
-    }
-
-    .box-header.with-border {
-        border-bottom: 1px solid #f4f4f4;
-    }
-
-    .box-header {
-        color: #444;
-        display: block;
-        padding: 10px;
-        position: relative;
-    }
-
-    .notice {
-        margin-left: 20px;
-    }
-
-    .err-nof {
-        margin: 20px;
-    }
-
-    .notification {
-        background-color: #fefbbb;
-        margin: 20px;
-        padding: 10px;
-    }
-</style>

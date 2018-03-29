@@ -76,10 +76,10 @@ class LoginFailed implements ObserverInterface
         Data $helperData
     )
     {
-        $this->_address = $address;
-        $this->_backendSession = $session;
-        $this->_loginLogFactory = $loginLogFactory;
-        $this->_helperData = $helperData;
+        $this->_address                   = $address;
+        $this->_backendSession            = $session;
+        $this->_loginLogFactory           = $loginLogFactory;
+        $this->_helperData                = $helperData;
         $this->_loginLogCollectionFactory = $loginLogCollectionFactory;
     }
 
@@ -92,19 +92,19 @@ class LoginFailed implements ObserverInterface
             $clientIp = $this->_address->getRemoteAddress();
             $userName = $observer->getUserName();
             $loginLog = [
-                'time' => time(),
-                'user_name' => $userName,
-                'ip' => $clientIp,
+                'time'          => time(),
+                'user_name'     => $userName,
+                'ip'            => $clientIp,
                 'browser_agent' => $this->_backendSession->getBrowserAgent(),
-                'url' => $this->_backendSession->getUrl(),
-                'referer' => $this->_backendSession->getRefererUrl(),
-                'status' => Status::STATUS_FAIL
+                'url'           => $this->_backendSession->getUrl(),
+                'referer'       => $this->_backendSession->getRefererUrl(),
+                'status'        => Status::STATUS_FAIL
             ];
 
             if ($this->_helperData->getConfigBruteForce('enabled')) {
-                $failedCount = (float)$this->_helperData->getConfigBruteForce('failed_count');
-                $failedTime = (float)$this->_helperData->getConfigBruteForce('failed_time');
-                $availableTime = date('Y-m-d H:i:s', strtotime(
+                $failedCount        = (float)$this->_helperData->getConfigBruteForce('failed_count');
+                $failedTime         = (float)$this->_helperData->getConfigBruteForce('failed_time');
+                $availableTime      = date('Y-m-d H:i:s', strtotime(
                         "-" . $failedTime . " minutes")
                 );
                 $loginLogCollection = $this->_loginLogCollectionFactory->create()

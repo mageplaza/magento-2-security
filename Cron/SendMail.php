@@ -21,8 +21,16 @@
 
 namespace Mageplaza\Security\Cron;
 
+use Magento\Backend\Model\UrlInterface;
 use Magento\Framework\App\Area;
+use Magento\Framework\Mail\Template\TransportBuilder;
+use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
+use Magento\Store\Model\StoreManagerInterface;
+use Mageplaza\Security\Helper\Data;
 use Mageplaza\Security\Model\Config\Source\LoginLog\Status;
+use Mageplaza\Security\Model\LoginLogFactory;
+use Mageplaza\Security\Model\ResourceModel\LoginLog\CollectionFactory;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class SendMail
@@ -31,75 +39,75 @@ use Mageplaza\Security\Model\Config\Source\LoginLog\Status;
 class SendMail
 {
     /**
-     * @var \Mageplaza\Security\Model\LoginLogFactory
+     * @var LoginLogFactory
      */
     protected $logFactory;
 
     /**
-     * @var \Mageplaza\Security\Helper\Data
+     * @var Data
      */
     protected $helper;
 
     /**
-     * @var \Psr\Log\LoggerInterface
+     * @var LoggerInterface
      */
     protected $logger;
 
     /**
-     * @var \Mageplaza\Security\Model\ResourceModel\LoginLog\CollectionFactory
+     * @var CollectionFactory
      */
     protected $logCollectionFactory;
 
     /**
-     * @var \Magento\Store\Model\StoreManagerInterface
+     * @var StoreManagerInterface
      */
     protected $storeManager;
 
     /**
-     * @var \Magento\Framework\Mail\Template\TransportBuilder
+     * @var TransportBuilder
      */
     protected $transportBuilder;
 
     /**
-     * @var \Magento\Framework\Stdlib\DateTime\TimezoneInterface
+     * @var TimezoneInterface
      */
     protected $timezone;
 
     /**
-     * @var \Magento\Backend\Model\UrlInterface
+     * @var UrlInterface
      */
     protected $backendUrl;
 
     /**
      * SendMail constructor.
-     * @param \Magento\Backend\Model\UrlInterface $backendUrl
-     * @param \Magento\Framework\Stdlib\DateTime\TimezoneInterface $timezone
-     * @param \Magento\Framework\Mail\Template\TransportBuilder $transportBuilder
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param \Psr\Log\LoggerInterface $logger
-     * @param \Mageplaza\Security\Model\LoginLogFactory $logFactory
-     * @param \Mageplaza\Security\Model\ResourceModel\LoginLog\CollectionFactory $logCollectionFactory
-     * @param \Mageplaza\Security\Helper\Data $helper
+     * @param UrlInterface $backendUrl
+     * @param TimezoneInterface $timezone
+     * @param TransportBuilder $transportBuilder
+     * @param StoreManagerInterface $storeManager
+     * @param LoggerInterface $logger
+     * @param LoginLogFactory $logFactory
+     * @param CollectionFactory $logCollectionFactory
+     * @param Data $helper
      */
     public function __construct(
-        \Magento\Backend\Model\UrlInterface $backendUrl,
-        \Magento\Framework\Stdlib\DateTime\TimezoneInterface $timezone,
-        \Magento\Framework\Mail\Template\TransportBuilder $transportBuilder,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Psr\Log\LoggerInterface $logger,
-        \Mageplaza\Security\Model\LoginLogFactory $logFactory,
-        \Mageplaza\Security\Model\ResourceModel\LoginLog\CollectionFactory $logCollectionFactory,
-        \Mageplaza\Security\Helper\Data $helper
+        UrlInterface $backendUrl,
+        TimezoneInterface $timezone,
+        TransportBuilder $transportBuilder,
+        StoreManagerInterface $storeManager,
+        LoggerInterface $logger,
+        LoginLogFactory $logFactory,
+        CollectionFactory $logCollectionFactory,
+        Data $helper
     )
     {
-        $this->transportBuilder = $transportBuilder;
-        $this->storeManager = $storeManager;
-        $this->logger = $logger;
-        $this->logFactory = $logFactory;
-        $this->helper = $helper;
+        $this->transportBuilder     = $transportBuilder;
+        $this->storeManager         = $storeManager;
+        $this->logger               = $logger;
+        $this->logFactory           = $logFactory;
+        $this->helper               = $helper;
         $this->logCollectionFactory = $logCollectionFactory;
-        $this->timezone = $timezone;
-        $this->backendUrl = $backendUrl;
+        $this->timezone             = $timezone;
+        $this->backendUrl           = $backendUrl;
     }
 
     /**
@@ -112,16 +120,16 @@ class SendMail
         $logCollection = $this->logCollectionFactory->create()
             ->addFieldToFilter('is_warning', 1);
         if ($logCollection->getSize()) {
-            $failedCount = (float)$this->helper->getConfigBruteForce('failed_count');
-            $failedTime = (float)$this->helper->getConfigBruteForce('failed_time');
-            $warningLog = $logCollection->getFirstItem();
-            $warningTime = $warningLog->getTime();
-            $availableTime = $this->getAvailableTime($warningTime, $failedTime);
+            $failedCount       = (float)$this->helper->getConfigBruteForce('failed_count');
+            $failedTime        = (float)$this->helper->getConfigBruteForce('failed_time');
+            $warningLog        = $logCollection->getFirstItem();
+            $warningTime       = $warningLog->getTime();
+            $availableTime     = $this->getAvailableTime($warningTime, $failedTime);
             $logMailCollection = $this->logCollectionFactory->create()
                 ->addFieldToFilter('status', Status::STATUS_FAIL)
                 ->addFieldToFilter('time', ['gteq' => $availableTime])
                 ->setOrder('time', 'DESC');
-            $logArr = [];
+            $logArr            = [];
             if ($logMailCollection->getSize()) {
                 foreach ($logMailCollection as $item) {
                     if ($item->getIsSentMail()) {
@@ -129,32 +137,32 @@ class SendMail
                     }
                     $logArr[] = [
                         'user_name' => $item->getUserName(),
-                        'ip' => $item->getIp(),
-                        'time' => $this->timezone->date($item->getTime())->format('M d Y H:i:s')
+                        'ip'        => $item->getIp(),
+                        'time'      => $this->timezone->date($item->getTime())->format('M d Y H:i:s')
                     ];
                 }
             }
 
             if ($this->helper->getConfigGeneral('email')) {
-                $sendTo = explode(',', $this->helper->getConfigGeneral('email'));
-                $sendTo = array_map('trim', $sendTo);
+                $sendTo   = explode(',', $this->helper->getConfigGeneral('email'));
+                $sendTo   = array_map('trim', $sendTo);
                 $storeUrl = parse_url($this->backendUrl->getBaseUrl(), PHP_URL_HOST);
                 try {
-                    $store = $this->storeManager->getStore();
+                    $store        = $this->storeManager->getStore();
                     $templateVars = [
-                        'logs' => $logArr,
+                        'logs'         => $logArr,
                         'failed_count' => $failedCount,
-                        'failed_time' => $failedTime,
-                        'viewLogUrl' => $this->backendUrl->getUrl('mpsecurity/loginlog/'),
-                        'logo_url' => 'https://www.mageplaza.com/media/mageplaza-security-email.png',
-                        'logo_alt' => 'Mageplaza',
-                        'store_url' => $storeUrl
+                        'failed_time'  => $failedTime,
+                        'viewLogUrl'   => $this->backendUrl->getUrl('mpsecurity/loginlog/'),
+                        'logo_url'     => 'https://www.mageplaza.com/media/mageplaza-security-email.png',
+                        'logo_alt'     => 'Mageplaza',
+                        'store_url'    => $storeUrl
                     ];
 
                     $this->transportBuilder
                         ->setTemplateIdentifier($this->helper->getConfigBruteForce('email_template'))
                         ->setTemplateOptions([
-                            'area' => Area::AREA_FRONTEND,
+                            'area'  => Area::AREA_FRONTEND,
                             'store' => $store->getId()
                         ])
                         ->setTemplateVars($templateVars)

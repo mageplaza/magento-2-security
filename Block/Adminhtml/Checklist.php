@@ -22,14 +22,19 @@
 
 namespace Mageplaza\Security\Block\Adminhtml;
 
+use Magento\Backend\Block\Template;
 use Magento\Backend\Block\Template\Context;
-use Magento\Framework\Config\ConfigOptionsListConstants;
+use Magento\Framework\App\DeploymentConfig;
 use Magento\Framework\App\ProductMetadataInterface;
+use Magento\Framework\Config\ConfigOptionsListConstants;
 use Magento\User\Model\UserFactory;
 use Mageplaza\Security\Helper\Data;
-use Magento\Framework\App\DeploymentConfig;
 
-class Checklist extends \Magento\Backend\Block\Template
+/**
+ * Class Checklist
+ * @package Mageplaza\Security\Block\Adminhtml
+ */
+class Checklist extends Template
 {
     /**
      * @var string
@@ -78,10 +83,11 @@ class Checklist extends \Magento\Backend\Block\Template
         Context $context,
         array $data = [])
     {
-        $this->_metadata = $metadata;
-        $this->_helper = $helper;
-        $this->_userFactory = $userFactory;
+        $this->_metadata         = $metadata;
+        $this->_helper           = $helper;
+        $this->_userFactory      = $userFactory;
         $this->_deploymentConfig = $deploymentConfig;
+
         parent::__construct($context, $data);
     }
 
@@ -91,15 +97,16 @@ class Checklist extends \Magento\Backend\Block\Template
     public function checkAdminUserName()
     {
         $userCollection = $this->_userFactory->create()->getCollection();
-        $unSecureNames = [];
+        $unSecureNames  = [];
         foreach ($userCollection as $user) {
             if (in_array($user->getUserName(), $this->commonNames)) {
                 $unSecureNames[] = [
                     'username' => $user->getUserName(),
-                    'user_id' => $user->getUserId()
+                    'user_id'  => $user->getUserId()
                 ];
             }
         }
+
         return $unSecureNames;
     }
 
@@ -109,8 +116,8 @@ class Checklist extends \Magento\Backend\Block\Template
     public function checkFrontendCaptcha()
     {
         $customerCaptcha = $this->_helper->getConfigValue('customer/captcha/enable');
-        return $customerCaptcha;
 
+        return $customerCaptcha;
     }
 
     /**
@@ -120,6 +127,7 @@ class Checklist extends \Magento\Backend\Block\Template
     {
 
         $adminCaptcha = $this->_helper->getConfigValue('admin/captcha/enable');
+
         return $adminCaptcha;
     }
 
@@ -128,8 +136,8 @@ class Checklist extends \Magento\Backend\Block\Template
      */
     public function checkLatestVersion()
     {
-        $releases = file_get_contents('https://raw.githubusercontent.com/mageplaza/magento-versions/master/releases/releases.json');
-        $arr = json_decode($releases);
+        $releases   = file_get_contents('https://raw.githubusercontent.com/mageplaza/magento-versions/master/releases/releases.json');
+        $arr        = json_decode($releases);
         $versionArr = [];
         foreach ($arr as $ver => $item) {
             list($major, $minor, $patch) = explode('.', $ver);
@@ -148,10 +156,9 @@ class Checklist extends \Magento\Backend\Block\Template
         }
 
         return [
-            'latestVer' => $latestVer,
+            'latestVer'      => $latestVer,
             'currentVersion' => $currentVersion
         ];
-
     }
 
     /**

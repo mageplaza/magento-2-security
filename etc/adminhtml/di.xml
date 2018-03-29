@@ -22,9 +22,9 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <type name="\Magento\Backend\Controller\Adminhtml\Auth\Login">
-        <plugin name="mp_security_login" type="Mageplaza\Security\Plugin\Login" />
+        <plugin name="mp_security_login" type="Mageplaza\Security\Plugin\Login"/>
     </type>
     <type name="\Magento\User\Model\ResourceModel\User">
-        <plugin name="mp_security_lock_user" type="Mageplaza\Security\Plugin\LockUser" />
+        <plugin name="mp_security_lock_user" type="Mageplaza\Security\Plugin\LockUser"/>
     </type>
 </config>

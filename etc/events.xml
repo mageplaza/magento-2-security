@@ -22,9 +22,9 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
     <event name="backend_auth_user_login_success">
-        <observer name="mp_login_success" instance="Mageplaza\Security\Observer\LoginSuccess" />
+        <observer name="mp_login_success" instance="Mageplaza\Security\Observer\LoginSuccess"/>
     </event>
     <event name="backend_auth_user_login_failed">
-        <observer name="mp_login_failed" instance="Mageplaza\Security\Observer\LoginFailed" />
+        <observer name="mp_login_failed" instance="Mageplaza\Security\Observer\LoginFailed"/>
     </event>
 </config>
