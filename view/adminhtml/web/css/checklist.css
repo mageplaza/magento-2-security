@@ -64,13 +64,19 @@
     margin: 20px;
 }
 
-.checklist-notification, .db-notice, .username-notice {
+.checklist-notification, .username-notice {
     background-color: #fefbbb;
     margin: 20px;
     padding: 10px;
 }
 
-.fix-it{
+.db-notice {
+    background-color: #fefbbb;
+    margin: 20px 0 20px -20px;
+    padding: 10px;
+}
+
+.fix-it {
     cursor: pointer;
 }
 
@@ -80,7 +86,7 @@
 }
 
 .db-notice:before,
-.username-notice:before{
+.username-notice:before {
     color: #eb5202;
     content: '\e61a';
     font-family: 'Admin Icons';
@@ -89,6 +95,6 @@
 }
 
 .db-notice p,
-.username-notice p{
+.username-notice p {
     margin: 0 0 0 20px;
 }

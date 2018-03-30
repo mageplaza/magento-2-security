@@ -28,7 +28,8 @@ $unSecureNames = $block->checkAdminUserName();
         <strong><?php echo __("Check admin's username:"); ?></strong>
     </div>
     <div class="username-notice">
-        <p><?php echo __("The following usernames are not secured: %1. Hackers can guest username easily. Click on an user to change username.", 'admin, root, test, magento'); ?>
+        <p><?php echo __("The following usernames are not secured: %1.", 'admin, root, test, magento'); ?></p>
+        <p><?php echo __("Hackers can guest username easily. Click on an user to change username."); ?></p>
     </div>
     <div class="err-nof">
         <?php if (!empty($unSecureNames)): ?>
