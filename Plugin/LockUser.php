@@ -29,6 +29,7 @@ use Magento\Store\Model\StoreManagerInterface;
 use Magento\User\Model\ResourceModel\User;
 use Mageplaza\Security\Helper\Data;
 use Psr\Log\LoggerInterface;
+use Magento\Backend\App\ConfigInterface;
 
 /**
  * Class LockUser
@@ -61,8 +62,11 @@ class LockUser
      */
     protected $_helper;
 
+    protected $_backendConfig;
+
     /**
      * LockUser constructor.
+     * @param ConfigInterface $backendConfig
      * @param UrlInterface $backendUrl
      * @param LoggerInterface $logger
      * @param StoreManagerInterface $storeManager
@@ -71,6 +75,7 @@ class LockUser
      */
     public function __construct
     (
+        ConfigInterface $backendConfig,
         UrlInterface $backendUrl,
         LoggerInterface $logger,
         StoreManagerInterface $storeManager,
@@ -78,6 +83,7 @@ class LockUser
         Data $helper
     )
     {
+        $this->_backendConfig    = $backendConfig;
         $this->_backendUrl       = $backendUrl;
         $this->_logger           = $logger;
         $this->_storeManager     = $storeManager;
@@ -97,7 +103,8 @@ class LockUser
             && $this->_helper->getConfigBruteForce('lock_user')
             && $this->_helper->getConfigBruteForce('enabled')
         ) {
-            if ($setLockExpires) {
+            $maxFailures = $this->_backendConfig->getValue('admin/security/lockout_failures');
+            if ($setLockExpires && (((int)$user->getFailuresNum() + 1) == $maxFailures)) {
                 //send mail if user is locked
                 $storeUrl = parse_url($this->_backendUrl->getBaseUrl(), PHP_URL_HOST);
                 $sendTo   = explode(',', $this->_helper->getConfigGeneral('email'));
