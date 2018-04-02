@@ -76,7 +76,7 @@ class LoginFailed implements ObserverInterface
         Data $helperData
     )
     {
-        $this->_address                   = $address;
+        $this->_request                   = $request;
         $this->_backendSession            = $session;
         $this->_loginLogFactory           = $loginLogFactory;
         $this->_helperData                = $helperData;
@@ -88,6 +88,7 @@ class LoginFailed implements ObserverInterface
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
+
         if ($this->_helperData->isEnabled()) {
             $clientIp = $this->_request->getClientIp();
             $userName = $observer->getUserName();
