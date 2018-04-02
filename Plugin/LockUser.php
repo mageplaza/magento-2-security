@@ -62,6 +62,9 @@ class LockUser
      */
     protected $_helper;
 
+    /**
+     * @var ConfigInterface
+     */
     protected $_backendConfig;
 
     /**
