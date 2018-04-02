@@ -37,8 +37,7 @@ $unSecureNames = $block->checkAdminUserName();
                 <div class="err-nof-line">
                     <i class="fa fa-remove"></i>
                     <span><?php echo __('Username: "%1" is not secure.', $unSecureName['username']); ?></span>
-                    <a href="<?php echo $block->getUserNameFixitUrl($unSecureName) ?>" target="_blank"
-                       class="fix-it"><?php echo __('Fix it') ?></a>
+                    <a href="<?php echo $block->getUserNameFixitUrl($unSecureName) ?>" target="_blank" class="fix-it"><?php echo __('Fix it') ?></a>
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
@@ -56,8 +55,7 @@ $unSecureNames = $block->checkAdminUserName();
             <?php if (!$block->checkFrontendCaptcha()): ?>
                 <i class="fa fa-remove"></i>
                 <span><?php echo __("Frontend captcha is not enabled. Hackers may carry out brute-force attacks on your customers' accounts"); ?></span>
-                <a href="<?php echo $block->getFrontendCaptchaFixitUrl() ?>" target="_blank"
-                   class="fix-it"><?php echo __('Fix it') ?></a>
+                <a href="<?php echo $block->getFrontendCaptchaFixitUrl() ?>" class="fix-it"><?php echo __('Fix it') ?></a>
             <?php else: ?>
                 <i class="fa fa-check"></i>
                 <span><?php echo __("Frontend captcha is enabled."); ?></span>
@@ -68,8 +66,7 @@ $unSecureNames = $block->checkAdminUserName();
                 <p>
                     <i class="fa fa-remove"></i>
                     <span><?php echo __("Backend captcha is not enabled. To protect your backend from brute-force attacks, you should enable it."); ?></span>
-                    <a href="<?php echo $block->getBackendCaptchaFixitUrl() ?>" target="_blank"
-                       class="fix-it"><?php echo __('Fix it') ?></a>
+                    <a href="<?php echo $block->getBackendCaptchaFixitUrl() ?>" class="fix-it"><?php echo __('Fix it') ?></a>
                 </p>
             </div>
         <?php else: ?>
@@ -94,8 +91,7 @@ $isLatest = $version['latestVer'] == $version['currentVersion'];
                 <i class="fa fa-remove"></i>
                 <span>
                     <?php echo __("Your Magento version is: %1, the latest version is: %2", $version['currentVersion'], $version['latestVer']); ?>
-                    <a href="<?php echo $block->getVersionFixitUrl() ?>" target="_blank"
-                       class="fix-it"><?php echo __('Upgrade') ?></a>
+                    <a href="<?php echo $block->getVersionFixitUrl() ?>" target="_blank" class="fix-it"><?php echo __('Upgrade') ?></a>
                 </span>
             </div>
         <?php else: ?>
