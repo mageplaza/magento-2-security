@@ -24,10 +24,10 @@ namespace Mageplaza\Security\Plugin;
 use Magento\Backend\Model\Session;
 use Magento\Framework\App\Response\RedirectInterface;
 use Magento\Framework\HTTP\Header;
-use Magento\Framework\HTTP\PhpEnvironment\RemoteAddress;
 use Magento\Framework\UrlInterface;
 use Mageplaza\Security\Helper\Data;
 use Mageplaza\Security\Helper\ErrorProcessor;
+use Magento\Framework\HTTP\PhpEnvironment\Request;
 
 /**
  * Class Login
@@ -63,9 +63,9 @@ class Login
     protected $_urlInterface;
 
     /**
-     * @var RemoteAddress
+     * @var Request
      */
-    protected $_remoteAddress;
+    protected $_request;
 
     /**
      * @var ErrorProcessor
@@ -79,7 +79,7 @@ class Login
      * @param Session $session
      * @param Header $header
      * @param UrlInterface $urlInterface
-     * @param RemoteAddress $remoteAddress
+     * @param Request $request
      * @param ErrorProcessor $errorHelper
      */
     public function __construct(
@@ -88,7 +88,7 @@ class Login
         Session $session,
         Header $header,
         UrlInterface $urlInterface,
-        RemoteAddress $remoteAddress,
+        Request $request,
         ErrorProcessor $errorHelper
     )
     {
@@ -97,7 +97,7 @@ class Login
         $this->_backendSession = $session;
         $this->_header         = $header;
         $this->_urlInterface   = $urlInterface;
-        $this->_remoteAddress  = $remoteAddress;
+        $this->_request        = $request;
         $this->errorHelper     = $errorHelper;
     }
 
@@ -113,7 +113,7 @@ class Login
             $this->_backendSession->setBrowserAgent($this->_helper->getBrowser($this->_header->getHttpUserAgent()) . '--' . $this->_header->getHttpUserAgent());
             $this->_backendSession->setUrl($this->_urlInterface->getCurrentUrl());
 
-            $clientIp = $this->_remoteAddress->getRemoteAddress();
+            $clientIp = $this->_request->getClientIp();
 
             //check Black List
             $isBlackList = false;

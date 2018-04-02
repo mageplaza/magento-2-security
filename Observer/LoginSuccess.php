@@ -23,7 +23,7 @@ namespace Mageplaza\Security\Observer;
 
 use Magento\Backend\Model\Session;
 use Magento\Framework\Event\ObserverInterface;
-use Magento\Framework\HTTP\PhpEnvironment\RemoteAddress;
+use Magento\Framework\HTTP\PhpEnvironment\Request;
 use Mageplaza\Security\Helper\Data;
 use Mageplaza\Security\Model\Config\Source\LoginLog\Status;
 use Mageplaza\Security\Model\LoginLogFactory;
@@ -35,9 +35,9 @@ use Mageplaza\Security\Model\LoginLogFactory;
 class LoginSuccess implements ObserverInterface
 {
     /**
-     * @var RemoteAddress
+     * @var Request
      */
-    protected $_address;
+    protected $_request;
 
     /**
      * @var Session
@@ -56,19 +56,19 @@ class LoginSuccess implements ObserverInterface
 
     /**
      * LoginSuccess constructor.
-     * @param RemoteAddress $address
+     * @param Request $request
      * @param Session $session
      * @param LoginLogFactory $loginLogFactory
      * @param Data $helperData
      */
     public function __construct(
-        RemoteAddress $address,
+        Request $request,
         Session $session,
         LoginLogFactory $loginLogFactory,
         Data $helperData
     )
     {
-        $this->_address         = $address;
+        $this->_request        = $request;
         $this->_backendSession  = $session;
         $this->_loginLogFactory = $loginLogFactory;
         $this->_helperData      = $helperData;
@@ -83,7 +83,7 @@ class LoginSuccess implements ObserverInterface
             $loginLog = [
                 'time'          => time(),
                 'user_name'     => $observer->getUser()->getUserName(),
-                'ip'            => $this->_address->getRemoteAddress(),
+                'ip'            => $this->_request->getClientIp(),
                 'browser_agent' => $this->_backendSession->getBrowserAgent(),
                 'url'           => $this->_backendSession->getUrl(),
                 'referer'       => $this->_backendSession->getRefererUrl(),

@@ -23,7 +23,7 @@ namespace Mageplaza\Security\Observer;
 
 use Magento\Backend\Model\Session;
 use Magento\Framework\Event\ObserverInterface;
-use Magento\Framework\HTTP\PhpEnvironment\RemoteAddress;
+use Magento\Framework\HTTP\PhpEnvironment\Request;
 use Mageplaza\Security\Helper\Data;
 use Mageplaza\Security\Model\Config\Source\LoginLog\Status;
 use Mageplaza\Security\Model\LoginLogFactory;
@@ -36,9 +36,9 @@ use Mageplaza\Security\Model\ResourceModel\LoginLog\CollectionFactory;
 class LoginFailed implements ObserverInterface
 {
     /**
-     * @var RemoteAddress
+     * @var Request
      */
-    protected $_address;
+    protected $_request;
 
     /**
      * @var Session
@@ -62,14 +62,14 @@ class LoginFailed implements ObserverInterface
 
     /**
      * LoginFailed constructor.
-     * @param RemoteAddress $address
+     * @param Request $request
      * @param Session $session
      * @param LoginLogFactory $loginLogFactory
      * @param CollectionFactory $loginLogCollectionFactory
      * @param Data $helperData
      */
     public function __construct(
-        RemoteAddress $address,
+        Request $request,
         Session $session,
         LoginLogFactory $loginLogFactory,
         CollectionFactory $loginLogCollectionFactory,
@@ -89,7 +89,7 @@ class LoginFailed implements ObserverInterface
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
         if ($this->_helperData->isEnabled()) {
-            $clientIp = $this->_address->getRemoteAddress();
+            $clientIp = $this->_request->getClientIp();
             $userName = $observer->getUserName();
             $loginLog = [
                 'time'          => time(),
