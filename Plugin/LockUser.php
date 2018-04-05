@@ -118,7 +118,8 @@ class LockUser
                         'logo_url'  => 'https://www.mageplaza.com/media/mageplaza-security-email.png',
                         'logo_alt'  => 'Mageplaza',
                         'store_url' => $storeUrl,
-                        'user_name' => $user->getUserName()
+                        'user_name' => $user->getUserName(),
+                        'viewLogUrl'   => $this->_backendUrl->getUrl('mpsecurity/loginlog/'),
                     ];
 
                     $this->_transportBuilder
