@@ -46,17 +46,17 @@ class ErrorProcessor extends Processor
 
     /**
      * ErrorProcessor constructor.
+     *
      * @param Http $response
      * @param Resolver $resolver
      */
     public function __construct(
         Http $response,
         Resolver $resolver
-    )
-    {
-        parent::__construct($response);
-
+    ) {
         $this->_resolver = $resolver;
+
+        parent::__construct($response);
     }
 
     /**
@@ -65,16 +65,17 @@ class ErrorProcessor extends Processor
      * @param string $errorCode
      * @param string $reportData
      * @param string $title
+     *
      * @return null
      */
     public function processSecurityReport($errorCode = '', $reportData = '', $title = '')
     {
-        $this->pageTitle  = $title ?: __('You don\'t have permission to access this page');
+        $this->pageTitle = $title ?: __('You don\'t have permission to access this page');
         $this->reportData = $reportData;
-        $this->errorCode  = $errorCode;
+        $this->errorCode = $errorCode;
 
-        $html            = '';
-        $baseTemplate    = $this->_getTemplatePath('page.phtml');
+        $html = '';
+        $baseTemplate = $this->_getTemplatePath('page.phtml');
         $contentTemplate = $this->_resolver->getTemplateFileName('report.phtml', ['module' => 'Mageplaza_Security', 'area' => FrontNameResolver::AREA_CODE]);
         if ($baseTemplate && $contentTemplate) {
             ob_start();

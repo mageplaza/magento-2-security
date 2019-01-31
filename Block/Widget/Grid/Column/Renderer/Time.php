@@ -32,8 +32,10 @@ class Time extends AbstractRenderer
     /**
      * Renders grid column
      *
-     * @param   \Magento\Framework\DataObject $row
-     * @return  string
+     * @param \Magento\Framework\DataObject $row
+     *
+     * @return string
+     * @throws \Exception
      */
     public function render(\Magento\Framework\DataObject $row)
     {
@@ -45,12 +47,14 @@ class Time extends AbstractRenderer
      *
      * @param $datetime
      * @param bool $full
+     *
      * @return string
+     * @throws \Exception
      */
     function time_elapsed_string($datetime, $full = false)
     {
-        $now  = new \DateTime();
-        $ago  = new \DateTime($datetime);
+        $now = new \DateTime();
+        $ago = new \DateTime($datetime);
         $diff = $now->diff($ago);
 
         $diff->w = floor($diff->d / 7);

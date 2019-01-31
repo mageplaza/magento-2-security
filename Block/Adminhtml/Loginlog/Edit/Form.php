@@ -40,6 +40,7 @@ class Form extends Generic
 
     /**
      * Form constructor.
+     *
      * @param Context $context
      * @param Registry $registry
      * @param FormFactory $formFactory
@@ -51,8 +52,8 @@ class Form extends Generic
         Registry $registry,
         FormFactory $formFactory,
         Data $helper,
-        array $data = [])
-    {
+        array $data = []
+    ) {
         $this->_helper = $helper;
 
         parent::__construct($context, $registry, $formFactory, $data);
@@ -65,75 +66,66 @@ class Form extends Generic
     {
         /** @var \Magento\Framework\Data\Form $form */
         $form = $this->_formFactory->create([
-                'data' => [
-                    'id'      => 'edit_form',
-                    'action'  => $this->getData('action'),
-                    'method'  => 'post',
-                    'enctype' => 'multipart/form-data'
-                ]
+            'data' => [
+                'id'      => 'edit_form',
+                'action'  => $this->getData('action'),
+                'method'  => 'post',
+                'enctype' => 'multipart/form-data'
             ]
-        );
-        $log  = $this->_coreRegistry->registry('mageplaza_security_loginlog');
+        ]);
+        $log = $this->_coreRegistry->registry('mageplaza_security_loginlog');
 
         /** @var \Magento\Framework\Data\Form $form */
         $form->setHtmlIdPrefix('log_');
         $form->setFieldNameSuffix('log');
 
         $fieldset = $form->addFieldset('base_fieldset', [
-                'legend' => __('Login information'),
-                'class'  => 'fieldset-wide'
-            ]
-        );
+            'legend' => __('Login information'),
+            'class'  => 'fieldset-wide'
+        ]);
         $fieldset->addField('id', 'label', [
             'name'  => 'id',
             'label' => __('ID'),
         ]);
         $fieldset->addField('time', 'label', [
-                'name'  => 'time',
-                'label' => __('Time'),
-                'title' => __('Time'),
-            ]
-        );
+            'name'  => 'time',
+            'label' => __('Time'),
+            'title' => __('Time'),
+        ]);
         $fieldset->addField('user_name', 'label', [
-                'name'  => 'user_name',
-                'label' => __('User Name'),
-                'title' => __('User Name'),
-            ]
-        );
+            'name'  => 'user_name',
+            'label' => __('User Name'),
+            'title' => __('User Name'),
+        ]);
         $fieldset->addField('ip', 'label', [
-                'name'  => 'ip',
-                'label' => __('IP'),
-                'title' => __('IP'),
-            ]
-        );
+            'name'  => 'ip',
+            'label' => __('IP'),
+            'title' => __('IP'),
+        ]);
         $fieldset->addField('url', 'label', [
-                'name'  => 'url',
-                'label' => __('URL'),
-                'title' => __('URL'),
-            ]
-        );
+            'name'  => 'url',
+            'label' => __('URL'),
+            'title' => __('URL'),
+        ]);
         $fieldset->addField('referer', 'label', [
-                'name'  => 'referer',
-                'label' => __('Referer URL'),
-                'title' => __('Referer URL'),
-            ]
-        );
+            'name'  => 'referer',
+            'label' => __('Referer URL'),
+            'title' => __('Referer URL'),
+        ]);
         $fieldset->addField('stt', 'label', [
-                'label' => __('Status'),
-                'title' => __('Status'),
-                'value' => $log->getStatus() ? __('Success') : __('Failed')
-            ]
-        );
+            'label' => __('Status'),
+            'title' => __('Status'),
+            'value' => $log->getStatus() ? __('Success') : __('Failed')
+        ]);
 
         $browserFieldset = $form->addFieldset('browser_fieldset', [
-                'legend' => __('Browser Information'),
-                'class'  => 'fieldset-wide'
-            ]
-        );
-        $userAgent       = $log->getBrowserAgent();
-        $userAgent       = explode('--', $userAgent);
-        $userAgent       = $userAgent[1];
-        $browser         = $this->_helper->getBrowser($userAgent, 1);
+            'legend' => __('Browser Information'),
+            'class'  => 'fieldset-wide'
+        ]);
+        $userAgent = $log->getBrowserAgent();
+        $userAgent = explode('--', $userAgent);
+        $userAgent = $userAgent[1];
+        $browser = $this->_helper->getBrowser($userAgent, 1);
 
         $browserFieldset->addField('browser', 'label', [
             'label' => __('Brower'),

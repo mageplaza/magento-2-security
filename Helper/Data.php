@@ -51,6 +51,7 @@ class Data extends AbstractData
      *
      * @param string $code
      * @param null $storeId
+     *
      * @return mixed
      */
     public function getConfigBruteForce($code = '', $storeId = null)
@@ -65,6 +66,7 @@ class Data extends AbstractData
      *
      * @param string $code
      * @param null $storeId
+     *
      * @return mixed
      */
     public function getConfigBlackWhiteList($code = '', $storeId = null)
@@ -79,6 +81,7 @@ class Data extends AbstractData
      *
      * @param $ip
      * @param $range
+     *
      * @return bool
      */
     public function checkIp($ip, $range)
@@ -88,8 +91,8 @@ class Data extends AbstractData
             if (strpos($range, '-') !== false) {
                 list($low, $high) = explode('-', $range, 2);
             }
-            $low   = str_replace('*', '0', $low);
-            $high  = str_replace('*', '255', $high);
+            $low = str_replace('*', '0', $low);
+            $high = str_replace('*', '255', $high);
             $range = $low . '-' . $high;
         }
         if (strpos($range, '-') !== false) {
@@ -105,6 +108,7 @@ class Data extends AbstractData
      * @param $ip1
      * @param $ip2
      * @param int $op
+     *
      * @return bool
      */
     private function ipCompare($ip1, $ip2, $op = 0)
@@ -127,13 +131,14 @@ class Data extends AbstractData
     /***
      * @param $userAgent
      * @param null $full
+     *
      * @return array|string
      */
     public function getBrowser($userAgent, $full = null)
     {
         $userAgent = new UserAgent($userAgent);
-        $os        = new Os($userAgent);
-        $browser   = new Browser($userAgent);
+        $os = new Os($userAgent);
+        $browser = new Browser($userAgent);
 
         if ($full) {
             return [

@@ -33,6 +33,7 @@ class Status extends AbstractRenderer
      * Renders grid column
      *
      * @param   \Magento\Framework\DataObject $row
+     *
      * @return  string
      */
     public function render(\Magento\Framework\DataObject $row)

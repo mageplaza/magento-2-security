@@ -48,15 +48,16 @@ class Reset extends Command
 
     /**
      * Reset constructor.
+     *
      * @param Writer $writer
      * @param null $name
      */
     public function __construct(
         Writer $writer,
         $name = null
-    )
-    {
+    ) {
         $this->_writer = $writer;
+
         parent::__construct($name);
     }
 

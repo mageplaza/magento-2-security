@@ -56,6 +56,7 @@ class LoginSuccess implements ObserverInterface
 
     /**
      * LoginSuccess constructor.
+     *
      * @param Request $request
      * @param Session $session
      * @param LoginLogFactory $loginLogFactory
@@ -66,12 +67,11 @@ class LoginSuccess implements ObserverInterface
         Session $session,
         LoginLogFactory $loginLogFactory,
         Data $helperData
-    )
-    {
-        $this->_request        = $request;
-        $this->_backendSession  = $session;
+    ) {
+        $this->_request = $request;
+        $this->_backendSession = $session;
         $this->_loginLogFactory = $loginLogFactory;
-        $this->_helperData      = $helperData;
+        $this->_helperData = $helperData;
     }
 
     /**

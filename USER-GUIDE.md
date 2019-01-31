@@ -4,8 +4,8 @@
 - User Guide: https://docs.mageplaza.com/security/index.html
 - Product page: https://www.mageplaza.com/magento-2-security-extension/
 - FAQs: https://www.mageplaza.com/faqs/
-- Get Support: https://mageplaza.freshdesk.com/ or support@mageplaza.com
-- Changelog: https://www.mageplaza.com/changelog/m2-security.txt
+- Get Support: https://www.mageplaza.com/contact.html or support@mageplaza.com
+- Changelog: https://www.mageplaza.com/releases/security
 - License agreement: https://www.mageplaza.com/LICENSE.txt
 
 ## How to install

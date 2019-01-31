@@ -24,10 +24,10 @@ namespace Mageplaza\Security\Plugin;
 use Magento\Backend\Model\Session;
 use Magento\Framework\App\Response\RedirectInterface;
 use Magento\Framework\HTTP\Header;
+use Magento\Framework\HTTP\PhpEnvironment\Request;
 use Magento\Framework\UrlInterface;
 use Mageplaza\Security\Helper\Data;
 use Mageplaza\Security\Helper\ErrorProcessor;
-use Magento\Framework\HTTP\PhpEnvironment\Request;
 
 /**
  * Class Login
@@ -74,6 +74,7 @@ class Login
 
     /**
      * Login constructor.
+     *
      * @param Data $helper
      * @param RedirectInterface $redirect
      * @param Session $session
@@ -90,20 +91,20 @@ class Login
         UrlInterface $urlInterface,
         Request $request,
         ErrorProcessor $errorHelper
-    )
-    {
-        $this->_helper         = $helper;
-        $this->_redirect       = $redirect;
+    ) {
+        $this->_helper = $helper;
+        $this->_redirect = $redirect;
         $this->_backendSession = $session;
-        $this->_header         = $header;
-        $this->_urlInterface   = $urlInterface;
-        $this->_request        = $request;
-        $this->errorHelper     = $errorHelper;
+        $this->_header = $header;
+        $this->_urlInterface = $urlInterface;
+        $this->_request = $request;
+        $this->errorHelper = $errorHelper;
     }
 
     /**
      * @param \Magento\Backend\Controller\Adminhtml\Auth\Login $login
      * @param $page
+     *
      * @return null
      */
     public function afterExecute(\Magento\Backend\Controller\Adminhtml\Auth\Login $login, $page)
@@ -117,7 +118,7 @@ class Login
 
             //check Black List
             $isBlackList = false;
-            $blackList   = $this->_helper->getConfigBlackWhiteList('black_list');
+            $blackList = $this->_helper->getConfigBlackWhiteList('black_list');
             if ($blackList) {
                 $blackList = explode(',', $blackList);
                 foreach ($blackList as $item) {
@@ -133,7 +134,7 @@ class Login
 
             //check White List
             $isWhiteList = false;
-            $whiteList   = $this->_helper->getConfigBlackWhiteList('white_list');
+            $whiteList = $this->_helper->getConfigBlackWhiteList('white_list');
             if ($whiteList) {
                 $whiteList = explode(',', $whiteList);
                 foreach ($whiteList as $item) {

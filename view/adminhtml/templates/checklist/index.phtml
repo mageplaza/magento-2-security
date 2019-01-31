@@ -18,9 +18,7 @@
  * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
-?>
 
-<?php
 $unSecureNames = $block->checkAdminUserName();
 ?>
 <div class="box box-<?php echo empty($unSecureNames) ? 'green' : 'red'; ?>">
@@ -32,15 +30,16 @@ $unSecureNames = $block->checkAdminUserName();
         <p><?php echo __("Hackers can guest username easily. Click on an user to change username."); ?></p>
     </div>
     <div class="err-nof">
-        <?php if (!empty($unSecureNames)): ?>
-            <?php foreach ($unSecureNames as $unSecureName): ?>
+        <?php if (!empty($unSecureNames)) : ?>
+            <?php foreach ($unSecureNames as $unSecureName) : ?>
                 <div class="err-nof-line">
                     <i class="fa fa-remove"></i>
                     <span><?php echo __('Username: "%1" is not secure.', $unSecureName['username']); ?></span>
-                    <a href="<?php echo $block->getUserNameFixitUrl($unSecureName) ?>" target="_blank" class="fix-it"><?php echo __('Fix it') ?></a>
+                    <a href="<?php echo $block->getUserNameFixitUrl($unSecureName) ?>" target="_blank"
+                       class="fix-it"><?php echo __('Fix it') ?></a>
                 </div>
             <?php endforeach; ?>
-        <?php else: ?>
+        <?php else : ?>
             <i class="fa fa-check"></i>
             <span><?php echo __("All users are adequate for security purposes"); ?></span>
         <?php endif; ?>
@@ -52,24 +51,26 @@ $unSecureNames = $block->checkAdminUserName();
     </div>
     <div class="err-nof">
         <p>
-            <?php if (!$block->checkFrontendCaptcha()): ?>
+            <?php if (!$block->checkFrontendCaptcha()) : ?>
                 <i class="fa fa-remove"></i>
                 <span><?php echo __("Frontend captcha is not enabled. Hackers may carry out brute-force attacks on your customers' accounts"); ?></span>
-                <a href="<?php echo $block->getFrontendCaptchaFixitUrl() ?>" class="fix-it"><?php echo __('Fix it') ?></a>
-            <?php else: ?>
+                <a href="<?php echo $block->getFrontendCaptchaFixitUrl() ?>"
+                   class="fix-it"><?php echo __('Fix it') ?></a>
+            <?php else : ?>
                 <i class="fa fa-check"></i>
                 <span><?php echo __("Frontend captcha is enabled."); ?></span>
             <?php endif; ?>
         </p>
-        <?php if (!$block->checkBackendCaptcha()): ?>
+        <?php if (!$block->checkBackendCaptcha()) : ?>
             <div class="err-nof-line">
                 <p>
                     <i class="fa fa-remove"></i>
                     <span><?php echo __("Backend captcha is not enabled. To protect your backend from brute-force attacks, you should enable it."); ?></span>
-                    <a href="<?php echo $block->getBackendCaptchaFixitUrl() ?>" class="fix-it"><?php echo __('Fix it') ?></a>
+                    <a href="<?php echo $block->getBackendCaptchaFixitUrl() ?>"
+                       class="fix-it"><?php echo __('Fix it') ?></a>
                 </p>
             </div>
-        <?php else: ?>
+        <?php else : ?>
             <p>
                 <i class="fa fa-check"></i>
                 <span><?php echo __("Backend captcha is enabled."); ?></span>
@@ -78,7 +79,7 @@ $unSecureNames = $block->checkAdminUserName();
     </div>
 </div>
 <?php
-$version  = $block->checkLatestVersion();
+$version = $block->checkLatestVersion();
 $isLatest = $version['latestVer'] == $version['currentVersion'];
 ?>
 <div class="box box-<?php echo $isLatest ? 'green' : 'red'; ?>">
@@ -91,10 +92,11 @@ $isLatest = $version['latestVer'] == $version['currentVersion'];
                 <i class="fa fa-remove"></i>
                 <span>
                     <?php echo __("Your Magento version is: %1, the latest version is: %2", $version['currentVersion'], $version['latestVer']); ?>
-                    <a href="<?php echo $block->getVersionFixitUrl() ?>" target="_blank" class="fix-it"><?php echo __('Upgrade') ?></a>
+                    <a href="<?php echo $block->getVersionFixitUrl() ?>" target="_blank"
+                       class="fix-it"><?php echo __('Upgrade') ?></a>
                 </span>
             </div>
-        <?php else: ?>
+        <?php else : ?>
             <i class="fa fa-check"></i>
             <span><?php echo __("Your store is running on the latest version."); ?></span>
         <?php endif; ?>
@@ -106,10 +108,10 @@ $isLatest = $version['latestVer'] == $version['currentVersion'];
         <strong><?php echo __("Check database prefix:"); ?></strong>
     </div>
     <div class="err-nof">
-        <?php if ($dbPrefix): ?>
+        <?php if ($dbPrefix) : ?>
             <i class="fa fa-check"></i>
             <span><?php echo __("Your store's database is good."); ?></span>
-        <?php else: ?>
+        <?php else : ?>
             <div class="err-nof-line">
                 <i class="fa fa-remove"></i>
                 <span>
@@ -121,9 +123,8 @@ $isLatest = $version['latestVer'] == $version['currentVersion'];
         <?php endif; ?>
     </div>
 </div>
-
 <script>
-    <?php if(!$block->hasProPackage()): ?>
+    <?php if (!$block->hasProPackage()) : ?>
     require([
         'jquery'
     ], function ($) {
@@ -146,6 +147,5 @@ $isLatest = $version['latestVer'] == $version['currentVersion'];
         });
     });
     <?php endif; ?>
-
     <?php echo $block->getAdditionalJavascript() ?>
 </script>

@@ -53,16 +53,14 @@
                         <field id="enabled">1</field>
                     </depends>
                 </field>
-                <field id="failed_time" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="failed_time" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Allowed duration</label>
-                    <comment>
-                        Within this period of time (minutes), the number of failed login attempts is not allowed to exceed
-                    </comment>
+                    <comment>Within this period of time (minutes), the number of failed login attempts is not allowed to exceed</comment>
                     <depends>
                         <field id="enabled">1</field>
                     </depends>
                 </field>
-                <field id="lock_user" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="lock_user" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Locked User Alert</label>
                     <comment>Send alert mail when backend user is locked</comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -70,7 +68,7 @@
                         <field id="enabled">1</field>
                     </depends>
                 </field>
-                <field id="email_template" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="email_template" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Email template</label>
                     <comment>Choose an email template to send alerts</comment>
                     <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
@@ -81,11 +79,11 @@
             </group>
             <group id="black_white_list" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Blacklist/Whitelist IPs</label>
-                <field id="black_list" translate="label" type="textarea" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="black_list" translate="label comment" type="textarea" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Blacklist(s)</label>
                     <comment>Enter forbidden IP(s). Login attempts from these IPs will be prevented. Separated with add (,). eg : 123.123.0.*, 10.22.*.*</comment>
                 </field>
-                <field id="white_list" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="white_list" translate="label comment" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Whitelist(s)</label>
                     <comment>Enter IP(s) which is allowed to access website. Only login attempts from these IPs are granted. Separated with add (,). eg : 123.123.0.*, 10.22.*.*. Make sure you add your IP address first.</comment>
                 </field>

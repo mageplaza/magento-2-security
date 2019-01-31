@@ -62,6 +62,7 @@ class LoginFailed implements ObserverInterface
 
     /**
      * LoginFailed constructor.
+     *
      * @param Request $request
      * @param Session $session
      * @param LoginLogFactory $loginLogFactory
@@ -74,12 +75,11 @@ class LoginFailed implements ObserverInterface
         LoginLogFactory $loginLogFactory,
         CollectionFactory $loginLogCollectionFactory,
         Data $helperData
-    )
-    {
-        $this->_request                   = $request;
-        $this->_backendSession            = $session;
-        $this->_loginLogFactory           = $loginLogFactory;
-        $this->_helperData                = $helperData;
+    ) {
+        $this->_request = $request;
+        $this->_backendSession = $session;
+        $this->_loginLogFactory = $loginLogFactory;
+        $this->_helperData = $helperData;
         $this->_loginLogCollectionFactory = $loginLogCollectionFactory;
     }
 
@@ -88,7 +88,6 @@ class LoginFailed implements ObserverInterface
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
-
         if ($this->_helperData->isEnabled()) {
             $clientIp = $this->_request->getClientIp();
             $userName = $observer->getUserName();
@@ -103,11 +102,11 @@ class LoginFailed implements ObserverInterface
             ];
 
             if ($this->_helperData->getConfigBruteForce('enabled')) {
-                $failedCount        = (float)$this->_helperData->getConfigBruteForce('failed_count');
-                $failedTime         = (float)$this->_helperData->getConfigBruteForce('failed_time');
-                $availableTime      = date('Y-m-d H:i:s', strtotime(
-                        "-" . $failedTime . " minutes")
-                );
+                $failedCount = (float)$this->_helperData->getConfigBruteForce('failed_count');
+                $failedTime = (float)$this->_helperData->getConfigBruteForce('failed_time');
+                $availableTime = date('Y-m-d H:i:s', strtotime(
+                    "-" . $failedTime . " minutes"
+                ));
                 $loginLogCollection = $this->_loginLogCollectionFactory->create()
                     ->addFieldToFilter('status', Status::STATUS_FAIL)
                     ->addFieldToFilter('time', ['gteq' => $availableTime])

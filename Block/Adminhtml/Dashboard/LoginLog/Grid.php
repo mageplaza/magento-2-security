@@ -43,6 +43,7 @@ class Grid extends \Magento\Backend\Block\Dashboard\Grid
 
     /**
      * Grid constructor.
+     *
      * @param Context $context
      * @param Data $backendHelper
      * @param CollectionFactory $collectionFactory
@@ -53,8 +54,7 @@ class Grid extends \Magento\Backend\Block\Dashboard\Grid
         Data $backendHelper,
         CollectionFactory $collectionFactory,
         array $data = []
-    )
-    {
+    ) {
         $this->_collectionFactory = $collectionFactory;
 
         parent::__construct($context, $backendHelper, $data);
@@ -97,30 +97,27 @@ class Grid extends \Magento\Backend\Block\Dashboard\Grid
     protected function _prepareColumns()
     {
         $this->addColumn('search-query', [
-                'header'   => __('User Name'),
-                'sortable' => false,
-                'index'    => 'user_name',
-                'default'  => __('User Name')
-            ]
-        );
+            'header'   => __('User Name'),
+            'sortable' => false,
+            'index'    => 'user_name',
+            'default'  => __('User Name')
+        ]);
 
         $this->addColumn('num-result', [
-                'header'   => __('Status'),
-                'type'     => 'bool',
-                'renderer' => \Mageplaza\Security\Block\Widget\Grid\Column\Renderer\Status::class,
-                'sortable' => false,
-                'index'    => 'status'
-            ]
-        );
+            'header'   => __('Status'),
+            'type'     => 'bool',
+            'renderer' => \Mageplaza\Security\Block\Widget\Grid\Column\Renderer\Status::class,
+            'sortable' => false,
+            'index'    => 'status'
+        ]);
 
         $this->addColumn('popularity', [
-                'header'   => __('Time'),
-                'sortable' => false,
-                'renderer' => \Mageplaza\Security\Block\Widget\Grid\Column\Renderer\Time::class,
-                'type'     => 'datetime',
-                'index'    => 'time'
-            ]
-        );
+            'header'   => __('Time'),
+            'sortable' => false,
+            'renderer' => \Mageplaza\Security\Block\Widget\Grid\Column\Renderer\Time::class,
+            'type'     => 'datetime',
+            'index'    => 'time'
+        ]);
 
         $this->setFilterVisibility(false);
         $this->setPagerVisibility(false);

@@ -21,6 +21,7 @@
 
 namespace Mageplaza\Security\Plugin;
 
+use Magento\Backend\App\ConfigInterface;
 use Magento\Backend\Model\UrlInterface;
 use Magento\Framework\App\Area;
 use Magento\Framework\Exception\MailException;
@@ -29,7 +30,6 @@ use Magento\Store\Model\StoreManagerInterface;
 use Magento\User\Model\ResourceModel\User;
 use Mageplaza\Security\Helper\Data;
 use Psr\Log\LoggerInterface;
-use Magento\Backend\App\ConfigInterface;
 
 /**
  * Class LockUser
@@ -69,6 +69,7 @@ class LockUser
 
     /**
      * LockUser constructor.
+     *
      * @param ConfigInterface $backendConfig
      * @param UrlInterface $backendUrl
      * @param LoggerInterface $logger
@@ -76,22 +77,20 @@ class LockUser
      * @param TransportBuilder $transportBuilder
      * @param Data $helper
      */
-    public function __construct
-    (
+    public function __construct(
         ConfigInterface $backendConfig,
         UrlInterface $backendUrl,
         LoggerInterface $logger,
         StoreManagerInterface $storeManager,
         TransportBuilder $transportBuilder,
         Data $helper
-    )
-    {
-        $this->_backendConfig    = $backendConfig;
-        $this->_backendUrl       = $backendUrl;
-        $this->_logger           = $logger;
-        $this->_storeManager     = $storeManager;
+    ) {
+        $this->_backendConfig = $backendConfig;
+        $this->_backendUrl = $backendUrl;
+        $this->_logger = $logger;
+        $this->_storeManager = $storeManager;
         $this->_transportBuilder = $transportBuilder;
-        $this->_helper           = $helper;
+        $this->_helper = $helper;
     }
 
     /**
@@ -99,6 +98,8 @@ class LockUser
      * @param $user
      * @param $setLockExpires
      * @param $setFirstFailure
+     *
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function beforeUpdateFailure(User $userModel, $user, $setLockExpires, $setFirstFailure)
     {
@@ -110,16 +111,16 @@ class LockUser
             if ($setLockExpires && (((int)$user->getFailuresNum() + 1) == $maxFailures)) {
                 //send mail if user is locked
                 $storeUrl = parse_url($this->_backendUrl->getBaseUrl(), PHP_URL_HOST);
-                $sendTo   = explode(',', $this->_helper->getConfigGeneral('email'));
-                $sendTo   = array_map('trim', $sendTo);
+                $sendTo = explode(',', $this->_helper->getConfigGeneral('email'));
+                $sendTo = array_map('trim', $sendTo);
                 try {
-                    $store        = $this->_storeManager->getStore();
+                    $store = $this->_storeManager->getStore();
                     $templateVars = [
-                        'logo_url'  => 'https://www.mageplaza.com/media/mageplaza-security-email.png',
-                        'logo_alt'  => 'Mageplaza',
-                        'store_url' => $storeUrl,
-                        'user_name' => $user->getUserName(),
-                        'viewLogUrl'   => $this->_backendUrl->getUrl('mpsecurity/loginlog/'),
+                        'logo_url'   => 'https://www.mageplaza.com/media/mageplaza-security-email.png',
+                        'logo_alt'   => 'Mageplaza',
+                        'store_url'  => $storeUrl,
+                        'user_name'  => $user->getUserName(),
+                        'viewLogUrl' => $this->_backendUrl->getUrl('mpsecurity/loginlog/'),
                     ];
 
                     $this->_transportBuilder
@@ -140,4 +141,3 @@ class LockUser
         }
     }
 }
-

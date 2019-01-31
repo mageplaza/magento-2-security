@@ -38,19 +38,18 @@ class LastTimeLogin extends AbstractRenderer
 
     /**
      * LastTimeLogin constructor.
+     *
      * @param \Mageplaza\Security\Model\LoginLogFactory $logFactory
      * @param Context $context
      * @param array $data
      */
-    public function __construct
-    (
+    public function __construct(
         LoginLogFactory $logFactory,
         Context $context,
         array $data = []
-    )
-    {
+    ) {
         $this->_logFactory = $logFactory;
-        
+
         parent::__construct($context, $data);
     }
 
@@ -58,12 +57,13 @@ class LastTimeLogin extends AbstractRenderer
      * Renders grid column
      *
      * @param   \Magento\Framework\DataObject $row
+     *
      * @return  string
      */
     public function render(\Magento\Framework\DataObject $row)
     {
         $userName = $row->getData('username');
-        $lastLog  = $this->_logFactory->create()->getCollection()
+        $lastLog = $this->_logFactory->create()->getCollection()
             ->addFieldToFilter('user_name', $userName)
             ->addFieldToFilter('status', 1)
             ->getLastItem();
