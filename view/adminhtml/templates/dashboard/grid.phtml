@@ -23,6 +23,16 @@
 $numColumns = sizeof($block->getColumns());
 ?>
 <?php if ($block->getCollection()) : ?>
+    <?php if($block->isReports()): ?>
+        <style>
+            #container>#mp-login-log{
+                display: none;
+            }
+            #mp-login-log>.dashboard-item-title{
+                display: none;
+            }
+        </style>
+    <?php endif; ?>
     <div class="dashboard-item" id="mp-login-log">
         <div class="dashboard-item-title"><?php /* @escapeNotVerified */ echo __('Login Log') ?></div>
         <div class="dashboard-item-content">

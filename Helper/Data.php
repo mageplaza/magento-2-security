@@ -32,8 +32,8 @@ use Sinergi\BrowserDetector\UserAgent;
  */
 class Data extends AbstractData
 {
-    const CONFIG_MODULE_PATH        = 'security';
-    const XML_PATH_BRUTE_FORCE      = 'brute_force';
+    const CONFIG_MODULE_PATH = 'security';
+    const XML_PATH_BRUTE_FORCE = 'brute_force';
     const XML_PATH_BLACK_WHITE_LIST = 'black_white_list';
 
     /**
@@ -142,13 +142,22 @@ class Data extends AbstractData
 
         if ($full) {
             return [
-                'browser'           => $browser->getName(),
-                'browser_version'   => $browser->getVersion(),
-                'plat_form'         => $os->getName(),
+                'browser' => $browser->getName(),
+                'browser_version' => $browser->getVersion(),
+                'plat_form' => $os->getName(),
                 'plat_form_version' => $os->getVersion()
             ];
         }
 
         return $browser->getName();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isReports()
+    {
+        $reportsHelper = $this->objectManager->create('\Mageplaza\Reports\Helper\Data');
+        return $reportsHelper->isEnabled() ? true : false;
     }
 }
