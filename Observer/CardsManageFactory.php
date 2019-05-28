@@ -24,6 +24,7 @@ namespace Mageplaza\Security\Observer;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Mageplaza\Security\Helper\Data;
+use Mageplaza\Security\Block\Adminhtml\Dashboard\LoginLog\Grid;
 
 /**
  * Class CardsManageFactory
@@ -38,26 +39,25 @@ class CardsManageFactory implements ObserverInterface
 
     /**
      * CardsManageFactory constructor.
+     *
      * @param Data $data
      */
-    public function __construct
-    (
+    public function __construct(
         Data $data
-    )
-    {
+    ) {
         $this->_helperData = $data;
     }
 
     /**
      * @param Observer $observer
+     *
      * @return Observer|void
      */
     public function execute(Observer $observer)
     {
-        if ($this->_helperData->isReports()){
-            $security = [ 'security' => 'Mageplaza\Security\Block\Adminhtml\Dashboard\LoginLog\Grid'];
-            $observer['cards']->addData($security);
-        }
+        $security = ['security' => Grid::class];
+        $observer['cards']->addData($security);
+
         return $observer;
     }
 }

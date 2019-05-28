@@ -23,12 +23,13 @@
 $numColumns = sizeof($block->getColumns());
 ?>
 <?php if ($block->getCollection()) : ?>
-    <?php if($block->isReports()): ?>
+    <?php if ($block->isReports()) : ?>
         <style>
-            #container>#mp-login-log{
+            #container > #mp-login-log {
                 display: none;
             }
-            #mp-login-log>.dashboard-item-title{
+
+            #mp-login-log > .dashboard-item-title {
                 display: none;
             }
         </style>

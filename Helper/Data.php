@@ -157,7 +157,6 @@ class Data extends AbstractData
      */
     public function isReports()
     {
-        $reportsHelper = $this->objectManager->create('\Mageplaza\Reports\Helper\Data');
-        return $reportsHelper->isEnabled() ? true : false;
+        return $this->getConfigValue('mageplaza_reports/general/enabled');
     }
 }
