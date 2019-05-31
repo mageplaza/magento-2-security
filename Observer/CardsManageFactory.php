@@ -25,6 +25,7 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Mageplaza\Security\Helper\Data;
 use Mageplaza\Security\Block\Adminhtml\Dashboard\LoginLog\Grid;
+use Magento\Framework\AuthorizationInterface;
 
 /**
  * Class CardsManageFactory
@@ -38,14 +39,22 @@ class CardsManageFactory implements ObserverInterface
     public $_helperData;
 
     /**
+     * @var AuthorizationInterface
+     */
+    protected $_authorization;
+
+    /**
      * CardsManageFactory constructor.
      *
      * @param Data $data
+     * @param AuthorizationInterface $authorization
      */
     public function __construct(
-        Data $data
+        Data $data,
+        AuthorizationInterface $authorization
     ) {
         $this->_helperData = $data;
+        $this->_authorization = $authorization;
     }
 
     /**
@@ -55,8 +64,10 @@ class CardsManageFactory implements ObserverInterface
      */
     public function execute(Observer $observer)
     {
-        $security = ['security' => Grid::class];
-        $observer['cards']->addData($security);
+        if ($this->_helperData->isEnabled() && $this->_authorization->isAllowed('Mageplaza_Security::grid')) {
+            $security = ['security' => Grid::class];
+            $observer['cards']->addData($security);
+        }
 
         return $observer;
     }
