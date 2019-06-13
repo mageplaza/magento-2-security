@@ -109,6 +109,7 @@ class LockUser
         if ($this->_helper->isEnabled()
             && $this->_helper->getConfigBruteForce('lock_user')
             && $this->_helper->getConfigBruteForce('enabled')
+            && !empty($this->_helper->getConfigGeneral('email'))
         ) {
             $maxFailures = $this->_backendConfig->getValue('admin/security/lockout_failures');
             if ($setLockExpires && (((int) $user->getFailuresNum() + 1) == $maxFailures)) {
