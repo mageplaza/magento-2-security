@@ -29,8 +29,8 @@ use Magento\Framework\Option\ArrayInterface;
  */
 class Status implements ArrayInterface
 {
-    const STATUS_FAIL    = 0;
-    const STATUS_SUCCESS = 1;
+    const STATUS_FAIL    = '0';
+    const STATUS_SUCCESS = '1';
 
     /**
      * @return array
