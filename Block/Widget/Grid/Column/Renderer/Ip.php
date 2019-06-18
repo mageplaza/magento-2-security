@@ -23,6 +23,7 @@ namespace Mageplaza\Security\Block\Widget\Grid\Column\Renderer;
 
 use Magento\Backend\Block\Context;
 use Magento\Backend\Block\Widget\Grid\Column\Renderer\AbstractRenderer;
+use Magento\Framework\DataObject;
 use Mageplaza\Security\Model\LoginLogFactory;
 
 /**
@@ -38,17 +39,16 @@ class Ip extends AbstractRenderer
 
     /**
      * LastTimeLogin constructor.
-     * @param \Mageplaza\Security\Model\LoginLogFactory $logFactory
+     *
+     * @param LoginLogFactory $logFactory
      * @param Context $context
      * @param array $data
      */
-    public function __construct
-    (
+    public function __construct(
         LoginLogFactory $logFactory,
         Context $context,
         array $data = []
-    )
-    {
+    ) {
         $this->_logFactory = $logFactory;
 
         parent::__construct($context, $data);
@@ -57,13 +57,14 @@ class Ip extends AbstractRenderer
     /**
      * Renders grid column
      *
-     * @param   \Magento\Framework\DataObject $row
+     * @param DataObject $row
+     *
      * @return  string
      */
-    public function render(\Magento\Framework\DataObject $row)
+    public function render(DataObject $row)
     {
         $userName = $row->getData('username');
-        $lastLog  = $this->_logFactory->create()->getCollection()
+        $lastLog = $this->_logFactory->create()->getCollection()
             ->addFieldToFilter('user_name', $userName)
             ->addFieldToFilter('status', 1)
             ->getLastItem();

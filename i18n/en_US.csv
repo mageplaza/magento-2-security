@@ -1,6 +1,7 @@
 "User Name","User Name"
 Status,Status
 Time,Time
+Security,Security
 "Login Log","Login Log"
 "Login information","Login information"
 ID,ID
@@ -14,16 +15,19 @@ Brower,Brower
 "Brower Version","Brower Version"
 Platform,Platform
 "Platform Version","Platform Version"
+"%1 ago","%1 ago"
+"just now","just now"
 "Security Checklist","Security Checklist"
 "Login record details","Login record details"
 "This log no longer exists.","This log no longer exists."
 "You don't have permission to access this page","You don't have permission to access this page"
 "Your IP has been blocked.","Your IP has been blocked."
 "Check admin's username:","Check admin's username:"
-"The following usernames are not secured: %1. Hackers can guest username easily. Click on an user to change username.","The following usernames are not secured: %1. Hackers can guest username easily. Click on an user to change username."
+"The following usernames are not secured: %1.","The following usernames are not secured: %1."
+"Hackers can guest username easily. Click on an user to change username.","Hackers can guest username easily. Click on an user to change username."
 "Username: ""%1"" is not secure.","Username: ""%1"" is not secure."
 "Fix it","Fix it"
-"There is no common user in your store.","There is no common user in your store."
+"All users are adequate for security purposes","All users are adequate for security purposes"
 "Check captcha:","Check captcha:"
 "Frontend captcha is not enabled. Hackers may carry out brute-force attacks on your customers' accounts","Frontend captcha is not enabled. Hackers may carry out brute-force attacks on your customers' accounts"
 "Frontend captcha is enabled.","Frontend captcha is enabled."
@@ -35,7 +39,7 @@ Upgrade,Upgrade
 "Your store is running on the latest version.","Your store is running on the latest version."
 "Check database prefix:","Check database prefix:"
 "Your store's database is good.","Your store's database is good."
-"Your store's database hasn't table prefix.","Your store's database hasn't table prefix."
+"Your store’s database hasn’t got table prefixes.","Your store’s database hasn’t got table prefixes."
 "Please update to %1 edition to have these issues solved automatically.","Please update to %1 edition to have these issues solved automatically."
 "Exception printing is disabled by default for security reasons.","Exception printing is disabled by default for security reasons."
 "%store_url - Security Alert by Mageplaza","%store_url - Security Alert by Mageplaza"
@@ -46,8 +50,11 @@ User,User
 "You received this email as the security alerts are considered to be important to your store(s).","You received this email as the security alerts are considered to be important to your store(s)."
 "%store_url - Lock User Alert by Mageplaza","%store_url - Lock User Alert by Mageplaza"
 "Lock User Notification","Lock User Notification"
-"User '%user_name' is locked","User '%user_name' is locked"
-Security,Security
+"User '%user_name' is locked due to many failed login attempts.","User '%user_name' is locked due to many failed login attempts."
+"Mageplaza Security locked the above user(s) intermediately.","Mageplaza Security locked the above user(s) intermediately."
+"If there is something wrong, you can reset locked","If there is something wrong, you can reset locked"
+here,here
+"Review login logs","Review login logs"
 General,General
 Enable,Enable
 "Send warning emails to","Send warning emails to"
@@ -55,11 +62,16 @@ Enable,Enable
 "Brute Force Protection","Brute Force Protection"
 "Maximum number of failed login attempts","Maximum number of failed login attempts"
 "Allowed duration","Allowed duration"
+"Within this period of time (minutes), the number of failed login attempts is not allowed to exceed","Within this period of time (minutes), the number of failed login attempts is not allowed to exceed"
 "Locked User Alert","Locked User Alert"
+"Send alert mail when backend user is locked","Send alert mail when backend user is locked"
 "Email template","Email template"
+"Choose an email template to send alerts","Choose an email template to send alerts"
 "Blacklist/Whitelist IPs","Blacklist/Whitelist IPs"
 Blacklist(s),Blacklist(s)
+"Enter forbidden IP(s). Login attempts from these IPs will be prevented. Separated with add (,). eg : 123.123.0.*, 10.22.*.*","Enter forbidden IP(s). Login attempts from these IPs will be prevented. Separated with add (,). eg : 123.123.0.*, 10.22.*.*"
 Whitelist(s),Whitelist(s)
+"Enter IP(s) which is allowed to access website. Only login attempts from these IPs are granted. Separated with add (,). eg : 123.123.0.*, 10.22.*.*. Make sure you add your IP address first.","Enter IP(s) which is allowed to access website. Only login attempts from these IPs are granted. Separated with add (,). eg : 123.123.0.*, 10.22.*.*. Make sure you add your IP address first."
 "Last Login","Last Login"
 "IP Address","IP Address"
 "Browser Agent","Browser Agent"

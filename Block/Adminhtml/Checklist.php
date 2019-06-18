@@ -68,6 +68,7 @@ class Checklist extends Template
 
     /**
      * Checklist constructor.
+     *
      * @param ProductMetadataInterface $metadata
      * @param UserFactory $userFactory
      * @param Data $helper
@@ -81,11 +82,11 @@ class Checklist extends Template
         Data $helper,
         DeploymentConfig $deploymentConfig,
         Context $context,
-        array $data = [])
-    {
-        $this->_metadata         = $metadata;
-        $this->_helper           = $helper;
-        $this->_userFactory      = $userFactory;
+        array $data = []
+    ) {
+        $this->_metadata = $metadata;
+        $this->_helper = $helper;
+        $this->_userFactory = $userFactory;
         $this->_deploymentConfig = $deploymentConfig;
 
         parent::__construct($context, $data);
@@ -97,7 +98,7 @@ class Checklist extends Template
     public function checkAdminUserName()
     {
         $userCollection = $this->_userFactory->create()->getCollection();
-        $unSecureNames  = [];
+        $unSecureNames = [];
         foreach ($userCollection as $user) {
             if (in_array($user->getUserName(), $this->commonNames)) {
                 $unSecureNames[] = [
@@ -115,9 +116,7 @@ class Checklist extends Template
      */
     public function checkFrontendCaptcha()
     {
-        $customerCaptcha = $this->_helper->getConfigValue('customer/captcha/enable');
-
-        return $customerCaptcha;
+        return $this->_helper->getConfigValue('customer/captcha/enable');
     }
 
     /**
@@ -125,10 +124,7 @@ class Checklist extends Template
      */
     public function checkBackendCaptcha()
     {
-
-        $adminCaptcha = $this->_helper->getConfigValue('admin/captcha/enable');
-
-        return $adminCaptcha;
+        return $this->_helper->getConfigValue('admin/captcha/enable');
     }
 
     /**
@@ -136,8 +132,8 @@ class Checklist extends Template
      */
     public function checkLatestVersion()
     {
-        $releases   = file_get_contents('https://raw.githubusercontent.com/mageplaza/magento-versions/master/releases/releases.json');
-        $arr        = json_decode($releases);
+        $releases = file_get_contents('https://raw.githubusercontent.com/mageplaza/magento-versions/master/releases/releases.json');
+        $arr = json_decode($releases);
         $versionArr = [];
         foreach ($arr as $ver => $item) {
             list($major, $minor, $patch) = explode('.', $ver);
@@ -166,7 +162,7 @@ class Checklist extends Template
      */
     public function getDatabasePrefix()
     {
-        return (string)$this->_deploymentConfig->get(ConfigOptionsListConstants::CONFIG_PATH_DB_PREFIX);
+        return (string) $this->_deploymentConfig->get(ConfigOptionsListConstants::CONFIG_PATH_DB_PREFIX);
     }
 
     /**
@@ -179,6 +175,7 @@ class Checklist extends Template
 
     /**
      * @param $unSecureName
+     *
      * @return string
      */
     public function getUserNameFixitUrl($unSecureName)

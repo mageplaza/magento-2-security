@@ -22,7 +22,12 @@
 namespace Mageplaza\Security\Block\Adminhtml\Dashboard\LoginLog;
 
 use Magento\Backend\Block\Template\Context;
-use Magento\Backend\Helper\Data;
+use Magento\Backend\Helper\Data as BackendData;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Phrase;
+use Mageplaza\Security\Block\Widget\Grid\Column\Renderer\Status;
+use Mageplaza\Security\Block\Widget\Grid\Column\Renderer\Time;
+use Mageplaza\Security\Helper\Data;
 use Mageplaza\Security\Model\ResourceModel\LoginLog\CollectionFactory;
 
 /**
@@ -37,25 +42,33 @@ class Grid extends \Magento\Backend\Block\Dashboard\Grid
     protected $_collectionFactory;
 
     /**
+     * @var Data
+     */
+    protected $_helperData;
+
+    /**
      * @var string
      */
     protected $_template = 'Mageplaza_Security::dashboard/grid.phtml';
 
     /**
      * Grid constructor.
+     *
      * @param Context $context
-     * @param Data $backendHelper
+     * @param BackendData $backendHelper
      * @param CollectionFactory $collectionFactory
+     * @param Data $helperData
      * @param array $data
      */
     public function __construct(
         Context $context,
-        Data $backendHelper,
+        BackendData $backendHelper,
         CollectionFactory $collectionFactory,
+        Data $helperData,
         array $data = []
-    )
-    {
+    ) {
         $this->_collectionFactory = $collectionFactory;
+        $this->_helperData = $helperData;
 
         parent::__construct($context, $backendHelper, $data);
     }
@@ -97,30 +110,27 @@ class Grid extends \Magento\Backend\Block\Dashboard\Grid
     protected function _prepareColumns()
     {
         $this->addColumn('search-query', [
-                'header'   => __('User Name'),
-                'sortable' => false,
-                'index'    => 'user_name',
-                'default'  => __('User Name')
-            ]
-        );
+            'header'   => __('User Name'),
+            'sortable' => false,
+            'index'    => 'user_name',
+            'default'  => __('User Name')
+        ]);
 
         $this->addColumn('num-result', [
-                'header'   => __('Status'),
-                'type'     => 'bool',
-                'renderer' => \Mageplaza\Security\Block\Widget\Grid\Column\Renderer\Status::class,
-                'sortable' => false,
-                'index'    => 'status'
-            ]
-        );
+            'header'   => __('Status'),
+            'type'     => 'bool',
+            'renderer' => Status::class,
+            'sortable' => false,
+            'index'    => 'status'
+        ]);
 
         $this->addColumn('popularity', [
-                'header'   => __('Time'),
-                'sortable' => false,
-                'renderer' => \Mageplaza\Security\Block\Widget\Grid\Column\Renderer\Time::class,
-                'type'     => 'datetime',
-                'index'    => 'time'
-            ]
-        );
+            'header'   => __('Time'),
+            'sortable' => false,
+            'renderer' => Time::class,
+            'type'     => 'datetime',
+            'index'    => 'time'
+        ]);
 
         $this->setFilterVisibility(false);
         $this->setPagerVisibility(false);
@@ -134,5 +144,47 @@ class Grid extends \Magento\Backend\Block\Dashboard\Grid
     public function getRowUrl($row)
     {
         return $this->getUrl('mpsecurity/loginlog/edit', ['id' => $row->getId()]);
+    }
+
+    /**
+     * @return bool
+     */
+    public function canShowDetail()
+    {
+        return false;
+    }
+
+    /**
+     * @return Phrase
+     */
+    public function getTitle()
+    {
+        return __('Security');
+    }
+
+    /**
+     * @return string
+     */
+    public function getRate()
+    {
+        return '';
+    }
+
+    /**
+     * @return mixed
+     * @throws LocalizedException
+     */
+    public function getContentHtml()
+    {
+        return $this->getLayout()->createBlock(self::class)->setArea('adminhtml')
+            ->toHtml();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isReports()
+    {
+        return $this->_helperData->isReports();
     }
 }

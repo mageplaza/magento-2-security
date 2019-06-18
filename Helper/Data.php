@@ -37,12 +37,12 @@ class Data extends AbstractData
     const XML_PATH_BLACK_WHITE_LIST = 'black_white_list';
 
     /**
-     * @var \Sinergi\BrowserDetector\Browser
+     * @var Browser
      */
     protected $browserLib;
 
     /**
-     * @var \Sinergi\BrowserDetector\Os
+     * @var Os
      */
     protected $osLib;
 
@@ -51,13 +51,14 @@ class Data extends AbstractData
      *
      * @param string $code
      * @param null $storeId
+     *
      * @return mixed
      */
     public function getConfigBruteForce($code = '', $storeId = null)
     {
         $code = ($code !== '') ? '/' . $code : '';
 
-        return $this->getConfigValue(self::CONFIG_MODULE_PATH . '/' . self::XML_PATH_BRUTE_FORCE . $code, $storeId);
+        return $this->getModuleConfig(self::XML_PATH_BRUTE_FORCE . $code, $storeId);
     }
 
     /**
@@ -65,13 +66,14 @@ class Data extends AbstractData
      *
      * @param string $code
      * @param null $storeId
+     *
      * @return mixed
      */
     public function getConfigBlackWhiteList($code = '', $storeId = null)
     {
         $code = ($code !== '') ? '/' . $code : '';
 
-        return $this->getConfigValue(self::CONFIG_MODULE_PATH . '/' . self::XML_PATH_BLACK_WHITE_LIST . $code, $storeId);
+        return $this->getModuleConfig(self::XML_PATH_BLACK_WHITE_LIST . $code, $storeId);
     }
 
     /**
@@ -79,6 +81,7 @@ class Data extends AbstractData
      *
      * @param $ip
      * @param $range
+     *
      * @return bool
      */
     public function checkIp($ip, $range)
@@ -88,8 +91,8 @@ class Data extends AbstractData
             if (strpos($range, '-') !== false) {
                 list($low, $high) = explode('-', $range, 2);
             }
-            $low   = str_replace('*', '0', $low);
-            $high  = str_replace('*', '255', $high);
+            $low = str_replace('*', '0', $low);
+            $high = str_replace('*', '255', $high);
             $range = $low . '-' . $high;
         }
         if (strpos($range, '-') !== false) {
@@ -105,6 +108,7 @@ class Data extends AbstractData
      * @param $ip1
      * @param $ip2
      * @param int $op
+     *
      * @return bool
      */
     private function ipCompare($ip1, $ip2, $op = 0)
@@ -114,26 +118,27 @@ class Data extends AbstractData
 
         for ($i = 0; $i < 4; $i++) {
             if ($ip1Arr[$i] < $ip2Arr[$i]) {
-                return ($op == -1);
+                return ($op === -1);
             }
             if ($ip1Arr[$i] > $ip2Arr[$i]) {
-                return ($op == 1);
+                return ($op === 1);
             }
         }
 
-        return ($op == 0);
+        return ($op === 0);
     }
 
     /***
      * @param $userAgent
      * @param null $full
+     *
      * @return array|string
      */
     public function getBrowser($userAgent, $full = null)
     {
         $userAgent = new UserAgent($userAgent);
-        $os        = new Os($userAgent);
-        $browser   = new Browser($userAgent);
+        $os = new Os($userAgent);
+        $browser = new Browser($userAgent);
 
         if ($full) {
             return [
@@ -145,5 +150,13 @@ class Data extends AbstractData
         }
 
         return $browser->getName();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isReports()
+    {
+        return $this->getConfigValue('mageplaza_reports/general/enabled');
     }
 }

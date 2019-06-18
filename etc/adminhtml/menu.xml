@@ -25,5 +25,6 @@
         <add id="Mageplaza_Security::security" title="Security" module="Mageplaza_Security" sortOrder="70" resource="Mageplaza_Security::security" parent="Magento_Backend::system"/>
         <add id="Mageplaza_Security::grid" title="Login Log" module="Mageplaza_Security" sortOrder="10" action="mpsecurity/loginlog" resource="Mageplaza_Security::grid" parent="Mageplaza_Security::security"/>
         <add id="Mageplaza_Security::checklist" title="Checklist" module="Mageplaza_Security" sortOrder="15" action="mpsecurity/checklist" resource="Mageplaza_Security::checklist" parent="Mageplaza_Security::security"/>
+        <add id="Mageplaza_Security::configuration" title="Configuration" module="Mageplaza_Security" sortOrder="999" action="adminhtml/system_config/edit/section/security" resource="Mageplaza_Security::configuration" parent="Mageplaza_Security::security"/>
     </menu>
 </config>

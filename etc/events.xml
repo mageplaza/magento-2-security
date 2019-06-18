@@ -27,4 +27,7 @@
     <event name="backend_auth_user_login_failed">
         <observer name="mp_login_failed" instance="Mageplaza\Security\Observer\LoginFailed"/>
     </event>
+    <event name="mageplaza_report_init_cards">
+        <observer name="mp_security_reports" instance="Mageplaza\Security\Observer\CardsManageFactory" />
+    </event>
 </config>

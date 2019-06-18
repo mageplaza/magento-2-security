@@ -24,10 +24,10 @@ namespace Mageplaza\Security\Plugin;
 use Magento\Backend\Model\Session;
 use Magento\Framework\App\Response\RedirectInterface;
 use Magento\Framework\HTTP\Header;
+use Magento\Framework\HTTP\PhpEnvironment\Request;
 use Magento\Framework\UrlInterface;
 use Mageplaza\Security\Helper\Data;
 use Mageplaza\Security\Helper\ErrorProcessor;
-use Magento\Framework\HTTP\PhpEnvironment\Request;
 
 /**
  * Class Login
@@ -74,6 +74,7 @@ class Login
 
     /**
      * Login constructor.
+     *
      * @param Data $helper
      * @param RedirectInterface $redirect
      * @param Session $session
@@ -90,39 +91,48 @@ class Login
         UrlInterface $urlInterface,
         Request $request,
         ErrorProcessor $errorHelper
-    )
-    {
-        $this->_helper         = $helper;
-        $this->_redirect       = $redirect;
+    ) {
+        $this->_helper = $helper;
+        $this->_redirect = $redirect;
         $this->_backendSession = $session;
-        $this->_header         = $header;
-        $this->_urlInterface   = $urlInterface;
-        $this->_request        = $request;
-        $this->errorHelper     = $errorHelper;
+        $this->_header = $header;
+        $this->_urlInterface = $urlInterface;
+        $this->_request = $request;
+        $this->errorHelper = $errorHelper;
     }
 
     /**
      * @param \Magento\Backend\Controller\Adminhtml\Auth\Login $login
      * @param $page
+     *
      * @return null
      */
     public function afterExecute(\Magento\Backend\Controller\Adminhtml\Auth\Login $login, $page)
     {
-        if ($this->_helper->isEnabled() && ($login->getRequest()->getModuleName() != 'mpsecurity')) {
+        if ($this->_helper->isEnabled() && ($login->getRequest()->getModuleName() !== 'mpsecurity')) {
             $this->_backendSession->setRefererUrl($this->_redirect->getRefererUrl());
-            $this->_backendSession->setBrowserAgent($this->_helper->getBrowser($this->_header->getHttpUserAgent()) . '--' . $this->_header->getHttpUserAgent());
+            $this->_backendSession->setBrowserAgent(
+                $this->_helper->getBrowser(
+                    $this->_header->getHttpUserAgent()
+                ) . '--' . $this->_header->getHttpUserAgent()
+            );
             $this->_backendSession->setUrl($this->_urlInterface->getCurrentUrl());
 
-            $clientIp = $this->_request->getClientIp();
+            $clientIps = array_filter(array_map('trim', explode(',', $this->_request->getClientIp())));
 
             //check Black List
             $isBlackList = false;
-            $blackList   = $this->_helper->getConfigBlackWhiteList('black_list');
+            $blackList = $this->_helper->getConfigBlackWhiteList('black_list');
             if ($blackList) {
                 $blackList = explode(',', $blackList);
                 foreach ($blackList as $item) {
-                    if ($this->_helper->checkIp($clientIp, $item)) {
-                        $isBlackList = true;
+                    foreach ($clientIps as $clientIp) {
+                        if ($this->_helper->checkIp($clientIp, $item)) {
+                            $isBlackList = true;
+                            break;
+                        }
+                    }
+                    if ($isBlackList === true) {
                         break;
                     }
                 }
@@ -133,12 +143,17 @@ class Login
 
             //check White List
             $isWhiteList = false;
-            $whiteList   = $this->_helper->getConfigBlackWhiteList('white_list');
+            $whiteList = $this->_helper->getConfigBlackWhiteList('white_list');
             if ($whiteList) {
                 $whiteList = explode(',', $whiteList);
                 foreach ($whiteList as $item) {
-                    if ($this->_helper->checkIp($clientIp, $item)) {
-                        $isWhiteList = true;
+                    foreach ($clientIps as $clientIp) {
+                        if ($this->_helper->checkIp($clientIp, $item)) {
+                            $isWhiteList = true;
+                            break;
+                        }
+                    }
+                    if ($isWhiteList === true) {
                         break;
                     }
                 }

@@ -23,6 +23,9 @@ namespace Mageplaza\Security\Cron;
 
 use Magento\Backend\Model\UrlInterface;
 use Magento\Framework\App\Area;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\MailException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Mail\Template\TransportBuilder;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\Store\Model\StoreManagerInterface;
@@ -80,6 +83,7 @@ class SendMail
 
     /**
      * SendMail constructor.
+     *
      * @param UrlInterface $backendUrl
      * @param TimezoneInterface $timezone
      * @param TransportBuilder $transportBuilder
@@ -98,38 +102,38 @@ class SendMail
         LoginLogFactory $logFactory,
         CollectionFactory $logCollectionFactory,
         Data $helper
-    )
-    {
-        $this->transportBuilder     = $transportBuilder;
-        $this->storeManager         = $storeManager;
-        $this->logger               = $logger;
-        $this->logFactory           = $logFactory;
-        $this->helper               = $helper;
+    ) {
+        $this->transportBuilder = $transportBuilder;
+        $this->storeManager = $storeManager;
+        $this->logger = $logger;
+        $this->logFactory = $logFactory;
+        $this->helper = $helper;
         $this->logCollectionFactory = $logCollectionFactory;
-        $this->timezone             = $timezone;
-        $this->backendUrl           = $backendUrl;
+        $this->timezone = $timezone;
+        $this->backendUrl = $backendUrl;
     }
 
     /**
      * Send Mail
      *
-     * @return void
+     * @throws NoSuchEntityException
+     * @throws LocalizedException
      */
     public function execute()
     {
         $logCollection = $this->logCollectionFactory->create()
             ->addFieldToFilter('is_warning', 1);
         if ($logCollection->getSize()) {
-            $failedCount       = (float)$this->helper->getConfigBruteForce('failed_count');
-            $failedTime        = (float)$this->helper->getConfigBruteForce('failed_time');
-            $warningLog        = $logCollection->getFirstItem();
-            $warningTime       = $warningLog->getTime();
-            $availableTime     = $this->getAvailableTime($warningTime, $failedTime);
+            $failedCount = (float) $this->helper->getConfigBruteForce('failed_count');
+            $failedTime = (float) $this->helper->getConfigBruteForce('failed_time');
+            $warningLog = $logCollection->getFirstItem();
+            $warningTime = $warningLog->getTime();
+            $availableTime = $this->getAvailableTime($warningTime, $failedTime);
             $logMailCollection = $this->logCollectionFactory->create()
                 ->addFieldToFilter('status', Status::STATUS_FAIL)
                 ->addFieldToFilter('time', ['gteq' => $availableTime])
                 ->setOrder('time', 'DESC');
-            $logArr            = [];
+            $logArr = [];
             if ($logMailCollection->getSize()) {
                 foreach ($logMailCollection as $item) {
                     if ($item->getIsSentMail()) {
@@ -144,11 +148,11 @@ class SendMail
             }
 
             if ($this->helper->getConfigGeneral('email')) {
-                $sendTo   = explode(',', $this->helper->getConfigGeneral('email'));
-                $sendTo   = array_map('trim', $sendTo);
+                $sendTo = explode(',', $this->helper->getConfigGeneral('email'));
+                $sendTo = array_map('trim', $sendTo);
                 $storeUrl = parse_url($this->backendUrl->getBaseUrl(), PHP_URL_HOST);
                 try {
-                    $store        = $this->storeManager->getStore();
+                    $store = $this->storeManager->getStore();
                     $templateVars = [
                         'logs'         => $logArr,
                         'failed_count' => $failedCount,
@@ -178,9 +182,9 @@ class SendMail
                         $logFactory->load($item->getId())
                             ->setIsSentMail(1)
                             ->setIsWarning(0)
-                            ->save();;
+                            ->save();
                     }
-                } catch (\Magento\Framework\Exception\MailException $e) {
+                } catch (MailException $e) {
                     $this->logger->critical($e->getLogMessage());
                 }
             }
@@ -190,12 +194,13 @@ class SendMail
     /**
      * @param $warningTime
      * @param $failedTime
+     *
      * @return false|string
      */
     private function getAvailableTime($warningTime, $failedTime)
     {
         $date = date_create($warningTime);
-        date_sub($date, date_interval_create_from_date_string($failedTime . " minutes"));
+        date_sub($date, date_interval_create_from_date_string($failedTime . ' minutes'));
 
         return date_format($date, 'Y-m-d H:i:s');
     }

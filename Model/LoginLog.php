@@ -36,6 +36,6 @@ class LoginLog extends AbstractModel
      */
     public function _construct()
     {
-        $this->_init('Mageplaza\Security\Model\ResourceModel\LoginLog');
+        $this->_init(ResourceModel\LoginLog::class);
     }
 }

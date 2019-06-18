@@ -21,15 +21,17 @@
 
 namespace Mageplaza\Security\Plugin;
 
+use Magento\Backend\App\ConfigInterface;
 use Magento\Backend\Model\UrlInterface;
 use Magento\Framework\App\Area;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\MailException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Mail\Template\TransportBuilder;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\User\Model\ResourceModel\User;
 use Mageplaza\Security\Helper\Data;
 use Psr\Log\LoggerInterface;
-use Magento\Backend\App\ConfigInterface;
 
 /**
  * Class LockUser
@@ -38,22 +40,22 @@ use Magento\Backend\App\ConfigInterface;
 class LockUser
 {
     /**
-     * @var \Magento\Framework\Mail\Template\TransportBuilder
+     * @var TransportBuilder
      */
     protected $_transportBuilder;
 
     /**
-     * @var \Magento\Store\Model\StoreManagerInterface
+     * @var StoreManagerInterface
      */
     protected $_storeManager;
 
     /**
-     * @var \Psr\Log\LoggerInterface
+     * @var LoggerInterface
      */
     protected $_logger;
 
     /**
-     * @var \Magento\Backend\Model\UrlInterface
+     * @var UrlInterface
      */
     protected $_backendUrl;
 
@@ -69,6 +71,7 @@ class LockUser
 
     /**
      * LockUser constructor.
+     *
      * @param ConfigInterface $backendConfig
      * @param UrlInterface $backendUrl
      * @param LoggerInterface $logger
@@ -76,22 +79,20 @@ class LockUser
      * @param TransportBuilder $transportBuilder
      * @param Data $helper
      */
-    public function __construct
-    (
+    public function __construct(
         ConfigInterface $backendConfig,
         UrlInterface $backendUrl,
         LoggerInterface $logger,
         StoreManagerInterface $storeManager,
         TransportBuilder $transportBuilder,
         Data $helper
-    )
-    {
-        $this->_backendConfig    = $backendConfig;
-        $this->_backendUrl       = $backendUrl;
-        $this->_logger           = $logger;
-        $this->_storeManager     = $storeManager;
+    ) {
+        $this->_backendConfig = $backendConfig;
+        $this->_backendUrl = $backendUrl;
+        $this->_logger = $logger;
+        $this->_storeManager = $storeManager;
         $this->_transportBuilder = $transportBuilder;
-        $this->_helper           = $helper;
+        $this->_helper = $helper;
     }
 
     /**
@@ -99,27 +100,31 @@ class LockUser
      * @param $user
      * @param $setLockExpires
      * @param $setFirstFailure
+     *
+     * @throws LocalizedException
+     * @throws NoSuchEntityException
      */
     public function beforeUpdateFailure(User $userModel, $user, $setLockExpires, $setFirstFailure)
     {
         if ($this->_helper->isEnabled()
             && $this->_helper->getConfigBruteForce('lock_user')
             && $this->_helper->getConfigBruteForce('enabled')
+            && !empty($this->_helper->getConfigGeneral('email'))
         ) {
             $maxFailures = $this->_backendConfig->getValue('admin/security/lockout_failures');
-            if ($setLockExpires && (((int)$user->getFailuresNum() + 1) == $maxFailures)) {
+            if ($setLockExpires && (((int) $user->getFailuresNum() + 1) === $maxFailures)) {
                 //send mail if user is locked
                 $storeUrl = parse_url($this->_backendUrl->getBaseUrl(), PHP_URL_HOST);
-                $sendTo   = explode(',', $this->_helper->getConfigGeneral('email'));
-                $sendTo   = array_map('trim', $sendTo);
+                $sendTo = explode(',', $this->_helper->getConfigGeneral('email'));
+                $sendTo = array_map('trim', $sendTo);
+                $store = $this->_storeManager->getStore();
                 try {
-                    $store        = $this->_storeManager->getStore();
                     $templateVars = [
-                        'logo_url'  => 'https://www.mageplaza.com/media/mageplaza-security-email.png',
-                        'logo_alt'  => 'Mageplaza',
-                        'store_url' => $storeUrl,
-                        'user_name' => $user->getUserName(),
-                        'viewLogUrl'   => $this->_backendUrl->getUrl('mpsecurity/loginlog/'),
+                        'logo_url'   => 'https://www.mageplaza.com/media/mageplaza-security-email.png',
+                        'logo_alt'   => 'Mageplaza',
+                        'store_url'  => $storeUrl,
+                        'user_name'  => $user->getUserName(),
+                        'viewLogUrl' => $this->_backendUrl->getUrl('mpsecurity/loginlog/'),
                     ];
 
                     $this->_transportBuilder
@@ -140,4 +145,3 @@ class LockUser
         }
     }
 }
-
