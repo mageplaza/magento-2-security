@@ -1,13 +1,13 @@
-# Magento 2 Security Suite FREE by Mageplaza
+# Magento 2 Security extension FREE
 
 Security issues for Magento have left a big question mark in the community of online stores. This problem is specially cared when Magento-based stores which own critical information and huge transactional volume can easily become ideal prey for blackhat hackers to attack. To help online stores prevent brutal break-ins, Mageplaza has developed the Security extension.
 
-**Magento 2 Security extension** gives store owners the ability to detect the IP addresses that are intentionally attacking their store at any given time. Therefore, they have timely measures to prevent this issue such as blocking those IP addresses or sending warning emails to store owners.
+**Magento 2 Security extension by Magpelaza** gives store owners the ability to detect the IP addresses that are intentionally attacking their store at any given time. Therefore, they have timely measures to prevent this issue such as blocking those IP addresses or sending warning emails to store owners.
 
 [![Latest Stable Version](https://poser.pugx.org/mageplaza/module-security/v/stable)](https://packagist.org/packages/mageplaza/module-security)
 [![Total Downloads](https://poser.pugx.org/mageplaza/module-security/downloads)](https://packagist.org/packages/mageplaza/module-security)
 
-## 1. Documentation
+## 1. Security Documentation
 
 
 - [Installation guide](https://www.mageplaza.com/install-magento-2-extension/)
@@ -27,7 +27,7 @@ Security issues for Magento have left a big question mark in the community of on
 A: Read solution: https://github.com/mageplaza/module-core/issues/3
 
 
-## 3. How to install Security Extension
+## 3. How to install Magento 2 Security Extension
 
 ### Install via composer (recommend)
 
@@ -39,7 +39,7 @@ php bin/magento setup:upgrade
 php bin/magento setup:static-content:deploy
 ```
 
-## 4. Contribute to this module
+## 4. Contribute to Security module
 
 Feel free to **Fork** and contrinute to this module and create a pull request so we will merge your changes to `master` branch.
 
@@ -47,7 +47,7 @@ Thanks [the contributors](https://github.com/mageplaza/magento-2-security/graphs
 
 --------
 
-## 5. Introduction
+## 5. Security Suite Introduction
 It’s a minor unnoticed fact that Magento 2 doesn’t limit any number of login attempts for vague reasons behind, why this potential danger has not been considered seriously? Displaying frontend, customer knowledge, sale figures and precious transaction database are recorded in the backend thoroughly. For that reason, it’s obvious logic that hackers will try their hard to impact brutal damages to your login in the backend. Consequently, your website can be bullied continuously by many computers at the same time, by any Badguy™ groups silently, in such vulnerable time you don’t notice.
 
 Mageplaza Security extension comes up with various choices to let you have any idea how to massive protect your store firmly. You will be right the second such nonsense endeavors is entering your internal backend.
@@ -62,7 +62,7 @@ In the backend configuration, there is a field called `Maximum number of failed 
 When you enable the module, 5 is the default number of allowed unsuccessful attempts in a 10-minute session If you have no idea how you should set up for the guarding system, you can take advantage of this default settings quickly.
 
 ### Automatic warning emails
-In Magento 2, admins have no idea when the security wall was being reached. To remedy this passive situation, this module is well integrated with the email engine. The exact helpful point in this function is, all recorded failed logins will be sent over to your email address automatically. 
+In Magento 2, admins have no idea when the security wall was being reached. To remedy this passive situation, Mageplaza Security module is well integrated with the email engine. The exact helpful point in this function is, all recorded failed logins will be sent over to your email address automatically. 
 
 In the warning email, you can check out details in the abusive IP address as well as his login time. 
 
@@ -76,7 +76,7 @@ Holding the reserved meaning, Whitelist field is for entering allowed IP address
 ### Login Logs
 In case you’re running a store which is managed by several administrators, this tab will be definitely an ideal interface to summary all taken place under logged details. For each of a particular login, you can figure out its ID, Time, User name, IP, Browser Agent, Url and Status (Failed or Successful).
 
-### Checklist
+### Security Checklist
 Another additional function sticked on this module is the security checklist in the backend. The checklist technique will scan your internal gears generally and give some outlines that can be deemed to be a possible security issue. From this trait you can have timely solution to remedy the problem thanks to this convenient suggestions.
 
 ### Full feature list
@@ -96,25 +96,25 @@ Another additional function sticked on this module is the security checklist in 
 * File changed reports
 
 
-## 6. User Guide
-### How to use
+## 6. Security User Guide
+### How to use Security extension
 You can review login records from the dashboard when entering the backend. The log displays the newest 5 logins and you can click on the login name to view the details.
 
-![i6](https://i.imgur.com/X4qv87Y.png)
+![How to use Magento 2 Security extension](https://i.imgur.com/X4qv87Y.png)
 
-### How to configure
+### How to configure Security Suite
 After logging in Magento backend, go to ``System > Security``. We will provide detail guides to these bellow configuration
 * Login Log
 * Checklist
 * Configuration
 
-![i1](https://i.imgur.com/3QOf9MJ.png)
+![How to configure Magento 2 Security Suite](https://i.imgur.com/3QOf9MJ.png)
 
-#### I. Configuration
-##### 1.1. Brute Force Protection configuration.
+#### I. Security Suite Configuration
+##### 1.1. Brute Force Protection Configuration.
 Follow ``Mageplaza > Security > Configuration > General > Brute Force Protection``
 
-![i2](https://i.imgur.com/bQfkFMl.png)
+![Magento 2 Brute Force Protection](https://i.imgur.com/bQfkFMl.png)
 
 * In the **Enable** field: Choose “Yes” to turn the module on.
 * In the **Send warning emails to** field: 
@@ -134,11 +134,11 @@ Follow ``Mageplaza > Security > Configuration > General > Brute Force Protection
 
 Here’s an example of a warning emails:
 
-![i7](https://i.imgur.com/Up4mBKw.png)
+![Magento 2 Security Configuration](https://i.imgur.com/Up4mBKw.png)
 
-##### 1.2. Blacklist/Whitelist IPs
+##### 1.2. Blacklist/Whitelist IPs Configuration.
 
-![i3](https://i.imgur.com/CI5lmut.jpg)
+![Magento 2 Blacklist and Whitelist IPs](https://i.imgur.com/CI5lmut.jpg)
 
 * In the **Blacklist(s)** field:
   *  All IP addresses filled in this section will be blocked whenever accessing the admin login page.
@@ -163,10 +163,10 @@ Here’s an example of a warning emails:
 Blacklist(s) has higher priority than Whitelist(s) which means if a IP address is in the Blacklist, it will be blocked even it's in the Whitelist as well. So please make sure that you've added your IP address in the Whitelist only. 
 ```
 
-#### II. Checklist
+#### II. Security Checklist Configuration.
 Checklist is a bunch of outlines pointing out which factor(s) can be the possible vulnarablity for your stores. Go to ``System > Security > Checklist``
 
-![i6](https://i.imgur.com/bat11jh.png)
+![Magento 2 Security Checklist](https://i.imgur.com/bat11jh.png)
 
 * In the **Check admin's username** box: Check the name of the admin account, if the default name is too obvious to guess or popular to name, the message will alert the store owner.
 * In the **Check captcha** box
@@ -181,22 +181,22 @@ Checklist is a bunch of outlines pointing out which factor(s) can be the possibl
 For possible low-key factors that are not good for your security, they will be marked a red X. We'd highly recommend you should upgrade Security module to Professional edition to learn the detail way how to fix it throughoutly. 
 ```
 
-#### III. Login Log
+#### III. Login Log Configuration.
 From the admin panel, make your way to ``Mageplaza > Security > Login Log``. All logins and login attempts will be recorded here.
 
-![i4](https://i.imgur.com/AogyfB4.png)
+![magento 2 secure login](https://i.imgur.com/AogyfB4.png)
 
 Click ``View`` to see login details. Here’s an example:
 
-![i5](https://i.imgur.com/1iYlCm1.png)
+![magento 2 Login Log](https://i.imgur.com/1iYlCm1.png)
 
 Once an admin account has exceeded the allowed login attempts (which is configured at ``Store> Settings> Configuration> Advanced> Maximum Login Failures to Lockout Account``), there will be a mail notification to the store owner that this account has been lock up. Store owner should review this case again to reset safety settings.
 
-![i7](https://i.imgur.com/Lz7ppS8.png)
+![magento 2 Login Logs](https://i.imgur.com/Lz7ppS8.png)
 
 Also, store owners can check the last login of a specific administratore. You can follow ``System > Permissions > All Users``
 
-![i8](https://i.imgur.com/f7a0SkZ.png)
+![magento 2 security Login Log](https://i.imgur.com/f7a0SkZ.png)
 
 * The **Last login** column records the newest recent login attempt of an admin.
 * The **IP Address** column records the IP address corresponding to the newest recent login attempt of an admin. Clicking on an IP address, it will redirect to the [Traceip](http://www.traceip.net/) page.
@@ -218,3 +218,18 @@ bin/magento security:reset whitelist
 bin/magento cache:flush
 ```
 * If you run the command ``bin/magento security:reset``, both **Blacklist(s)** and **Whitelist(s)** will be reset.
+
+### People also search:
+- magento 2 security
+- magento 2 whitelist ip
+- magento 2 security extension
+- magento 2 block ip address
+- magento 2 admin action log
+- magento 2 admin logs
+- magento 2 security features
+- magento 2 check if admin is logged in
+- magento 2 security extension free
+- magento 2 secure login
+- magento 2 blacklist vs whitelist security
+- magento 2 security check
+- magento 2 security suite
