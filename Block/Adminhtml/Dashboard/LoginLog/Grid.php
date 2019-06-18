@@ -23,8 +23,12 @@ namespace Mageplaza\Security\Block\Adminhtml\Dashboard\LoginLog;
 
 use Magento\Backend\Block\Template\Context;
 use Magento\Backend\Helper\Data as BackendData;
-use Mageplaza\Security\Model\ResourceModel\LoginLog\CollectionFactory;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Phrase;
+use Mageplaza\Security\Block\Widget\Grid\Column\Renderer\Status;
+use Mageplaza\Security\Block\Widget\Grid\Column\Renderer\Time;
 use Mageplaza\Security\Helper\Data;
+use Mageplaza\Security\Model\ResourceModel\LoginLog\CollectionFactory;
 
 /**
  * Class Grid
@@ -62,8 +66,7 @@ class Grid extends \Magento\Backend\Block\Dashboard\Grid
         CollectionFactory $collectionFactory,
         Data $helperData,
         array $data = []
-    )
-    {
+    ) {
         $this->_collectionFactory = $collectionFactory;
         $this->_helperData = $helperData;
 
@@ -107,26 +110,26 @@ class Grid extends \Magento\Backend\Block\Dashboard\Grid
     protected function _prepareColumns()
     {
         $this->addColumn('search-query', [
-            'header' => __('User Name'),
+            'header'   => __('User Name'),
             'sortable' => false,
-            'index' => 'user_name',
-            'default' => __('User Name')
+            'index'    => 'user_name',
+            'default'  => __('User Name')
         ]);
 
         $this->addColumn('num-result', [
-            'header' => __('Status'),
-            'type' => 'bool',
-            'renderer' => \Mageplaza\Security\Block\Widget\Grid\Column\Renderer\Status::class,
+            'header'   => __('Status'),
+            'type'     => 'bool',
+            'renderer' => Status::class,
             'sortable' => false,
-            'index' => 'status'
+            'index'    => 'status'
         ]);
 
         $this->addColumn('popularity', [
-            'header' => __('Time'),
+            'header'   => __('Time'),
             'sortable' => false,
-            'renderer' => \Mageplaza\Security\Block\Widget\Grid\Column\Renderer\Time::class,
-            'type' => 'datetime',
-            'index' => 'time'
+            'renderer' => Time::class,
+            'type'     => 'datetime',
+            'index'    => 'time'
         ]);
 
         $this->setFilterVisibility(false);
@@ -152,7 +155,7 @@ class Grid extends \Magento\Backend\Block\Dashboard\Grid
     }
 
     /**
-     * @return \Magento\Framework\Phrase
+     * @return Phrase
      */
     public function getTitle()
     {
@@ -169,7 +172,7 @@ class Grid extends \Magento\Backend\Block\Dashboard\Grid
 
     /**
      * @return mixed
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws LocalizedException
      */
     public function getContentHtml()
     {

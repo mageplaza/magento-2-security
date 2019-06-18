@@ -23,6 +23,7 @@ namespace Mageplaza\Security\Controller\Adminhtml\Checklist;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
+use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
 
 /**
@@ -52,12 +53,12 @@ class Index extends Action
     }
 
     /**
-     * @return \Magento\Framework\View\Result\Page
+     * @return Page
      */
     public function execute()
     {
         $resultPage = $this->resultPageFactory->create();
-        $resultPage->getConfig()->getTitle()->prepend((__('Security Checklist')));
+        $resultPage->getConfig()->getTitle()->prepend(__('Security Checklist'));
 
         return $resultPage;
     }

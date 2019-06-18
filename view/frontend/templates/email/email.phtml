@@ -18,18 +18,20 @@
  * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
+
+$logs = $block->getLogs();
 ?>
-<?php if ($block->getLogs()) : ?>
-    <?php foreach ($block->getLogs() as $log) : ?>
+<?php if ($logs) : ?>
+    <?php foreach ($logs as $log) : ?>
         <tr>
             <td style="border-collapse: collapse; border: 1px solid #ccc;">
-                <span style="margin: 10px"><?php echo $log['user_name']; ?></span>
+                <span style="margin: 10px"><?= $log['user_name']; ?></span>
             </td>
             <td style="border-collapse: collapse; border: 1px solid #ccc;">
-                <span style="margin: 10px"><?php echo $log['ip']; ?></span>
+                <span style="margin: 10px"><?= $log['ip']; ?></span>
             </td>
             <td style="border-collapse: collapse; border: 1px solid #ccc;">
-                <span style="margin: 10px"><?php echo $log['time']; ?></span>
+                <span style="margin: 10px"><?= $log['time']; ?></span>
             </td>
         </tr>
     <?php endforeach; ?>

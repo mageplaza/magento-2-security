@@ -111,10 +111,14 @@ class Login
     {
         if ($this->_helper->isEnabled() && ($login->getRequest()->getModuleName() !== 'mpsecurity')) {
             $this->_backendSession->setRefererUrl($this->_redirect->getRefererUrl());
-            $this->_backendSession->setBrowserAgent($this->_helper->getBrowser($this->_header->getHttpUserAgent()) . '--' . $this->_header->getHttpUserAgent());
+            $this->_backendSession->setBrowserAgent(
+                $this->_helper->getBrowser(
+                    $this->_header->getHttpUserAgent()
+                ) . '--' . $this->_header->getHttpUserAgent()
+            );
             $this->_backendSession->setUrl($this->_urlInterface->getCurrentUrl());
 
-            $clientIps = array_filter(array_map('trim',explode(',',$this->_request->getClientIp())));
+            $clientIps = array_filter(array_map('trim', explode(',', $this->_request->getClientIp())));
 
             //check Black List
             $isBlackList = false;
@@ -122,13 +126,13 @@ class Login
             if ($blackList) {
                 $blackList = explode(',', $blackList);
                 foreach ($blackList as $item) {
-                    foreach ($clientIps as $clientIp){
+                    foreach ($clientIps as $clientIp) {
                         if ($this->_helper->checkIp($clientIp, $item)) {
                             $isBlackList = true;
                             break;
                         }
                     }
-                    if($isBlackList === true){
+                    if ($isBlackList === true) {
                         break;
                     }
                 }
@@ -149,7 +153,7 @@ class Login
                             break;
                         }
                     }
-                    if($isWhiteList === true){
+                    if ($isWhiteList === true) {
                         break;
                     }
                 }

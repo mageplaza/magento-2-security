@@ -23,7 +23,9 @@ namespace Mageplaza\Security\Controller\Adminhtml\LoginLog;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
+use Magento\Framework\Controller\Result\Redirect;
 use Magento\Framework\Registry;
+use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
 use Mageplaza\Security\Model\LoginLogFactory;
 
@@ -34,12 +36,12 @@ use Mageplaza\Security\Model\LoginLogFactory;
 class Edit extends Action
 {
     /**
-     * @var \Magento\Framework\View\Result\PageFactory
+     * @var PageFactory
      */
     protected $resultPageFactory;
 
     /**
-     * @var \Magento\Framework\Registry
+     * @var Registry
      */
     protected $registry;
 
@@ -70,7 +72,7 @@ class Edit extends Action
     }
 
     /**
-     * @return \Magento\Backend\Model\View\Result\Page|\Magento\Framework\Controller\Result\Redirect
+     * @return \Magento\Backend\Model\View\Result\Page|Redirect
      * |\Magento\Framework\View\Result\Page
      */
     public function execute()
@@ -85,7 +87,7 @@ class Edit extends Action
 
         $this->registry->register('mageplaza_security_loginlog', $log);
 
-        /** @var \Magento\Backend\Model\View\Result\Page|\Magento\Framework\View\Result\Page $resultPage */
+        /** @var \Magento\Backend\Model\View\Result\Page|Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
         $resultPage->getConfig()->getTitle()->set(__('Login record details'));
         $resultPage->getConfig()->getTitle()->prepend(__('Login record details'));
@@ -100,7 +102,7 @@ class Edit extends Action
      */
     protected function initLog($register = false)
     {
-        $logId = (int)$this->getRequest()->getParam('id');
+        $logId = (int) $this->getRequest()->getParam('id');
         $log = $this->_logFactory->create();
 
         if ($logId) {

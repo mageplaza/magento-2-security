@@ -32,17 +32,17 @@ use Sinergi\BrowserDetector\UserAgent;
  */
 class Data extends AbstractData
 {
-    const CONFIG_MODULE_PATH = 'security';
-    const XML_PATH_BRUTE_FORCE = 'brute_force';
+    const CONFIG_MODULE_PATH        = 'security';
+    const XML_PATH_BRUTE_FORCE      = 'brute_force';
     const XML_PATH_BLACK_WHITE_LIST = 'black_white_list';
 
     /**
-     * @var \Sinergi\BrowserDetector\Browser
+     * @var Browser
      */
     protected $browserLib;
 
     /**
-     * @var \Sinergi\BrowserDetector\Os
+     * @var Os
      */
     protected $osLib;
 
@@ -58,7 +58,7 @@ class Data extends AbstractData
     {
         $code = ($code !== '') ? '/' . $code : '';
 
-        return $this->getConfigValue(self::CONFIG_MODULE_PATH . '/' . self::XML_PATH_BRUTE_FORCE . $code, $storeId);
+        return $this->getModuleConfig(self::XML_PATH_BRUTE_FORCE . $code, $storeId);
     }
 
     /**
@@ -73,7 +73,7 @@ class Data extends AbstractData
     {
         $code = ($code !== '') ? '/' . $code : '';
 
-        return $this->getConfigValue(self::CONFIG_MODULE_PATH . '/' . self::XML_PATH_BLACK_WHITE_LIST . $code, $storeId);
+        return $this->getModuleConfig(self::XML_PATH_BLACK_WHITE_LIST . $code, $storeId);
     }
 
     /**
@@ -118,14 +118,14 @@ class Data extends AbstractData
 
         for ($i = 0; $i < 4; $i++) {
             if ($ip1Arr[$i] < $ip2Arr[$i]) {
-                return ($op == -1);
+                return ($op === -1);
             }
             if ($ip1Arr[$i] > $ip2Arr[$i]) {
-                return ($op == 1);
+                return ($op === 1);
             }
         }
 
-        return ($op == 0);
+        return ($op === 0);
     }
 
     /***
@@ -142,9 +142,9 @@ class Data extends AbstractData
 
         if ($full) {
             return [
-                'browser' => $browser->getName(),
-                'browser_version' => $browser->getVersion(),
-                'plat_form' => $os->getName(),
+                'browser'           => $browser->getName(),
+                'browser_version'   => $browser->getVersion(),
+                'plat_form'         => $os->getName(),
                 'plat_form_version' => $os->getVersion()
             ];
         }

@@ -76,7 +76,10 @@ class ErrorProcessor extends Processor
 
         $html = '';
         $baseTemplate = $this->_getTemplatePath('page.phtml');
-        $contentTemplate = $this->_resolver->getTemplateFileName('report.phtml', ['module' => 'Mageplaza_Security', 'area' => FrontNameResolver::AREA_CODE]);
+        $contentTemplate = $this->_resolver->getTemplateFileName(
+            'report.phtml',
+            ['module' => 'Mageplaza_Security', 'area' => FrontNameResolver::AREA_CODE]
+        );
         if ($baseTemplate && $contentTemplate) {
             ob_start();
             require_once $baseTemplate;

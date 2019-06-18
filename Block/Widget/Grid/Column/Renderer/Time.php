@@ -21,7 +21,10 @@
 
 namespace Mageplaza\Security\Block\Widget\Grid\Column\Renderer;
 
+use DateTime;
+use Exception;
 use Magento\Backend\Block\Widget\Grid\Column\Renderer\AbstractRenderer;
+use Magento\Framework\DataObject;
 
 /**
  * Class Time
@@ -32,14 +35,14 @@ class Time extends AbstractRenderer
     /**
      * Renders grid column
      *
-     * @param \Magento\Framework\DataObject $row
+     * @param DataObject $row
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
-    public function render(\Magento\Framework\DataObject $row)
+    public function render(DataObject $row)
     {
-        return $this->time_elapsed_string($row->getData($this->getColumn()->getIndex()));
+        return $this->timeElapsedString($row->getData($this->getColumn()->getIndex()));
     }
 
     /**
@@ -49,12 +52,12 @@ class Time extends AbstractRenderer
      * @param bool $full
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
-    function time_elapsed_string($datetime, $full = false)
+    protected function timeElapsedString($datetime, $full = false)
     {
-        $now = new \DateTime();
-        $ago = new \DateTime($datetime);
+        $now = new DateTime();
+        $ago = new DateTime($datetime);
         $diff = $now->diff($ago);
 
         $diff->w = floor($diff->d / 7);
@@ -81,6 +84,6 @@ class Time extends AbstractRenderer
             $string = array_slice($string, 0, 1);
         }
 
-        return $string ? implode(', ', $string) . ' ago' : 'just now';
+        return $string ? __('%1 ago', implode(', ', $string)) : __('just now');
     }
 }

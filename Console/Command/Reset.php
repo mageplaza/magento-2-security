@@ -21,7 +21,10 @@
 
 namespace Mageplaza\Security\Console\Command;
 
+use Exception;
+use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Config\Storage\Writer;
+use Magento\Store\Model\Store;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -98,7 +101,7 @@ class Reset extends Command
                     $list .= ($list ? ', ' : '') . ucfirst($key);
                 }
                 $output->writeln('<info>' . $list . ' Reset Successfully!</info>');
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $output->writeln("<error>{$e->getMessage()}</error>");
             }
 
@@ -110,7 +113,7 @@ class Reset extends Command
                 try {
                     $this->reset('white_list');
                     $output->writeln('<info>' . ucfirst($item) . ' Reset Successfully!</info>');
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                     $output->writeln("<error>{$e->getMessage()}</error>");
                 }
             } else {
@@ -129,8 +132,8 @@ class Reset extends Command
         $this->_writer->save(
             $path,
             '',
-            \Magento\Framework\App\Config\ScopeConfigInterface::SCOPE_TYPE_DEFAULT,
-            \Magento\Store\Model\Store::DEFAULT_STORE_ID
+            ScopeConfigInterface::SCOPE_TYPE_DEFAULT,
+            Store::DEFAULT_STORE_ID
         );
     }
 }

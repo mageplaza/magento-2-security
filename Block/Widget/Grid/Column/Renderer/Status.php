@@ -22,6 +22,8 @@
 namespace Mageplaza\Security\Block\Widget\Grid\Column\Renderer;
 
 use Magento\Backend\Block\Widget\Grid\Column\Renderer\AbstractRenderer;
+use Magento\Framework\DataObject;
+use Mageplaza\Security\Model\Config\Source\LoginLog\Status as LogStatus;
 
 /**
  * Class Status
@@ -32,16 +34,16 @@ class Status extends AbstractRenderer
     /**
      * Renders grid column
      *
-     * @param   \Magento\Framework\DataObject $row
+     * @param DataObject $row
      *
      * @return  string
      */
-    public function render(\Magento\Framework\DataObject $row)
+    public function render(DataObject $row)
     {
-        if ($row->getData($this->getColumn()->getIndex()) == \Mageplaza\Security\Model\Config\Source\LoginLog\Status::STATUS_FAIL) {
+        if ($row->getData($this->getColumn()->getIndex()) === LogStatus::STATUS_FAIL) {
             return '<div class="grid-severity-minor">' . __('Failed') . '</div>';
-        } else {
-            return '<div class="grid-severity-notice">' . __('Success') . '</div>';
         }
+
+        return '<div class="grid-severity-notice">' . __('Success') . '</div>';
     }
 }

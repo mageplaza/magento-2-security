@@ -23,6 +23,7 @@ namespace Mageplaza\Security\Block\Widget\Grid\Column\Renderer;
 
 use Magento\Backend\Block\Context;
 use Magento\Backend\Block\Widget\Grid\Column\Renderer\AbstractRenderer;
+use Magento\Framework\DataObject;
 use Mageplaza\Security\Model\LoginLogFactory;
 
 /**
@@ -39,7 +40,7 @@ class LastTimeLogin extends AbstractRenderer
     /**
      * LastTimeLogin constructor.
      *
-     * @param \Mageplaza\Security\Model\LoginLogFactory $logFactory
+     * @param LoginLogFactory $logFactory
      * @param Context $context
      * @param array $data
      */
@@ -56,11 +57,11 @@ class LastTimeLogin extends AbstractRenderer
     /**
      * Renders grid column
      *
-     * @param   \Magento\Framework\DataObject $row
+     * @param DataObject $row
      *
      * @return  string
      */
-    public function render(\Magento\Framework\DataObject $row)
+    public function render(DataObject $row)
     {
         $userName = $row->getData('username');
         $lastLog = $this->_logFactory->create()->getCollection()

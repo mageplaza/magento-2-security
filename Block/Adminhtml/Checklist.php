@@ -116,9 +116,7 @@ class Checklist extends Template
      */
     public function checkFrontendCaptcha()
     {
-        $customerCaptcha = $this->_helper->getConfigValue('customer/captcha/enable');
-
-        return $customerCaptcha;
+        return $this->_helper->getConfigValue('customer/captcha/enable');
     }
 
     /**
@@ -126,9 +124,7 @@ class Checklist extends Template
      */
     public function checkBackendCaptcha()
     {
-        $adminCaptcha = $this->_helper->getConfigValue('admin/captcha/enable');
-
-        return $adminCaptcha;
+        return $this->_helper->getConfigValue('admin/captcha/enable');
     }
 
     /**
@@ -166,7 +162,7 @@ class Checklist extends Template
      */
     public function getDatabasePrefix()
     {
-        return (string)$this->_deploymentConfig->get(ConfigOptionsListConstants::CONFIG_PATH_DB_PREFIX);
+        return (string) $this->_deploymentConfig->get(ConfigOptionsListConstants::CONFIG_PATH_DB_PREFIX);
     }
 
     /**

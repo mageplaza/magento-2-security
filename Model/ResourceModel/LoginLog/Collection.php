@@ -22,6 +22,7 @@
 namespace Mageplaza\Security\Model\ResourceModel\LoginLog;
 
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
+use Mageplaza\Security\Model\ResourceModel\LoginLog;
 
 /**
  * Class Collection
@@ -36,6 +37,6 @@ class Collection extends AbstractCollection
      */
     public function _construct()
     {
-        $this->_init('Mageplaza\Security\Model\LoginLog', 'Mageplaza\Security\Model\ResourceModel\LoginLog');
+        $this->_init(\Mageplaza\Security\Model\LoginLog::class, LoginLog::class);
     }
 }

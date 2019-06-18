@@ -21,15 +21,15 @@
 ?>
 
 <h1>
-    <?php echo $this->errorCode ? $this->errorCode . ' - ' : '' ?>
-    <?php echo $this->pageTitle ?>
+    <?= $this->errorCode ? $this->errorCode . ' - ' : '' ?>
+    <?= $this->pageTitle ?>
 </h1>
 <?php if ('' == $this->_config->action) : ?>
-    <p><em><?php echo __('Exception printing is disabled by default for security reasons.') ?></em></p>
+    <p><em><?= __('Exception printing is disabled by default for security reasons.') ?></em></p>
 <?php elseif ($this->reportData) : ?>
     <div class="trace-container">
         <div class="trace">
-            <pre><?php echo $this->reportData ?><br/>
+            <pre><?= $this->reportData ?><br/>
 Please read the following materials to resolve the problem:
  - User Guide http://docs.mageplaza.com/security/
  - FAQs https://www.mageplaza.com/faqs/

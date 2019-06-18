@@ -22,6 +22,7 @@
 namespace Mageplaza\Security\Observer;
 
 use Magento\Backend\Model\Session;
+use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\HTTP\PhpEnvironment\Request;
 use Mageplaza\Security\Helper\Data;
@@ -75,9 +76,9 @@ class LoginSuccess implements ObserverInterface
     }
 
     /**
-     * @param \Magento\Framework\Event\Observer $observer
+     * @param Observer $observer
      */
-    public function execute(\Magento\Framework\Event\Observer $observer)
+    public function execute(Observer $observer)
     {
         if ($this->_helperData->isEnabled()) {
             $loginLog = [

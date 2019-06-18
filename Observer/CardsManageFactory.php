@@ -21,11 +21,11 @@
 
 namespace Mageplaza\Security\Observer;
 
+use Magento\Framework\AuthorizationInterface;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
-use Mageplaza\Security\Helper\Data;
 use Mageplaza\Security\Block\Adminhtml\Dashboard\LoginLog\Grid;
-use Magento\Framework\AuthorizationInterface;
+use Mageplaza\Security\Helper\Data;
 
 /**
  * Class CardsManageFactory
