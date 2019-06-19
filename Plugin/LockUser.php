@@ -112,7 +112,7 @@ class LockUser
             && !empty($this->_helper->getConfigGeneral('email'))
         ) {
             $maxFailures = $this->_backendConfig->getValue('admin/security/lockout_failures');
-            if ($setLockExpires && (((int) $user->getFailuresNum() + 1) === $maxFailures)) {
+            if ($setLockExpires && (($user->getFailuresNum() + 1) === (int) $maxFailures)) {
                 //send mail if user is locked
                 $storeUrl = parse_url($this->_backendUrl->getBaseUrl(), PHP_URL_HOST);
                 $sendTo = explode(',', $this->_helper->getConfigGeneral('email'));
