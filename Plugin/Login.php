@@ -112,9 +112,8 @@ class Login
         if ($this->_helper->isEnabled() && ($login->getRequest()->getModuleName() !== 'mpsecurity')) {
             $this->_backendSession->setRefererUrl($this->_redirect->getRefererUrl());
             $this->_backendSession->setBrowserAgent(
-                $this->_helper->getBrowser(
-                    $this->_header->getHttpUserAgent()
-                ) . '--' . $this->_header->getHttpUserAgent()
+                $this->_helper->getBrowser($this->_header->getHttpUserAgent())
+                . '--' . $this->_header->getHttpUserAgent()
             );
             $this->_backendSession->setUrl($this->_urlInterface->getCurrentUrl());
 
