@@ -27,6 +27,7 @@ use Magento\Framework\Controller\Result\Redirect;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
+use Mageplaza\Security\Model\LoginLog;
 use Mageplaza\Security\Model\LoginLogFactory;
 
 /**
@@ -98,7 +99,7 @@ class Edit extends Action
     /**
      * @param bool $register
      *
-     * @return $this|bool|null
+     * @return bool|LoginLog
      */
     protected function initLog($register = false)
     {

@@ -157,6 +157,7 @@ class Data extends AbstractData
      */
     public function isReports()
     {
-        return $this->getConfigValue('mageplaza_reports/general/enabled');
+        return $this->isModuleOutputEnabled('Mageplaza_Reports')
+               && $this->getConfigValue('mageplaza_reports/general/enabled');
     }
 }

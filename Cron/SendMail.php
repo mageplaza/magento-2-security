@@ -32,6 +32,7 @@ use Magento\Store\Model\StoreManagerInterface;
 use Mageplaza\Security\Helper\Data;
 use Mageplaza\Security\Model\Config\Source\LoginLog\Status;
 use Mageplaza\Security\Model\LoginLogFactory;
+use Mageplaza\Security\Model\ResourceModel\LoginLog\Collection;
 use Mageplaza\Security\Model\ResourceModel\LoginLog\CollectionFactory;
 use Psr\Log\LoggerInterface;
 
@@ -129,6 +130,8 @@ class SendMail
             $warningLog = $logCollection->getFirstItem();
             $warningTime = $warningLog->getTime();
             $availableTime = $this->getAvailableTime($warningTime, $failedTime);
+
+            /** @var Collection $logMailCollection */
             $logMailCollection = $this->logCollectionFactory->create()
                 ->addFieldToFilter('status', Status::STATUS_FAIL)
                 ->addFieldToFilter('time', ['gteq' => $availableTime])
