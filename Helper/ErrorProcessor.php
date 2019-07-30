@@ -74,22 +74,30 @@ class ErrorProcessor extends Processor
         $this->reportData = $reportData;
         $this->errorCode = $errorCode;
 
-        $html = '';
-        $baseTemplate = $this->_getTemplatePath('page.phtml');
-        $contentTemplate = $this->_resolver->getTemplateFileName(
-            'report.phtml',
-            ['module' => 'Mageplaza_Security', 'area' => FrontNameResolver::AREA_CODE]
-        );
-        if ($baseTemplate && $contentTemplate) {
-            ob_start();
-            require_once $baseTemplate;
-            $html = ob_get_clean();
-        }
+        $html = $this->_renderPage('security_report');
 
         $this->_response->setHttpResponseCode(401);
         $this->_response->setBody($html);
         $this->_response->sendResponse();
 
         return null;
+    }
+
+    /**
+     * Find template path
+     *
+     * @param string $template
+     * @return string
+     */
+    protected function _getTemplatePath($template)
+    {
+        if($template === 'security_report'){
+            return $this->_resolver->getTemplateFileName(
+                'report.phtml',
+                ['module' => 'Mageplaza_Security', 'area' => FrontNameResolver::AREA_CODE]
+            );
+        }
+
+        return parent::_getTemplatePath($template);
     }
 }
