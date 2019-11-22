@@ -173,8 +173,10 @@ class SendMail
                             'store' => $store->getId()
                         ])
                         ->setTemplateVars($templateVars)
-                        ->setFrom('general')
-                        ->addTo($sendTo);
+                        ->setFrom('general');
+                    foreach ($sendTo as $to) {
+                        $this->transportBuilder->addTo($to);
+                    }
                     $transport = $this->transportBuilder->getTransport();
                     $transport->sendMessage();
                     $logFactory = $this->logFactory->create();

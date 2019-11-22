@@ -134,8 +134,10 @@ class LockUser
                             'store' => $store->getId()
                         ])
                         ->setTemplateVars($templateVars)
-                        ->setFrom('general')
-                        ->addTo($sendTo);
+                        ->setFrom('general');
+                    foreach ($sendTo as $to) {
+                        $this->_transportBuilder->addTo($to);
+                    }
                     $transport = $this->_transportBuilder->getTransport();
                     $transport->sendMessage();
                 } catch (MailException $e) {
