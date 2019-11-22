@@ -29,8 +29,9 @@ define([
         },
         getLabel: function (record) {
             var label = this._super(record);
+
             if (label !== '') {
-                if (record.status == 1) {
+                if (Number(record.status) === 1) {
                     label = '<span class="grid-severity-notice"><span>' + label + '</span></span>';
                 } else {
                     label = '<span class="grid-severity-minor"><span>' + label + '</span></span>';

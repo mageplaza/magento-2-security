@@ -69,6 +69,7 @@ class Ip extends AbstractRenderer
             ->addFieldToFilter('status', 1)
             ->getLastItem();
 
-        return '<a href="http://www.traceip.net/?query=' . $lastLog->getIp() . '" target="_blank">' . $lastLog->getIp() . '</a>';
+        return '<a href="http://www.traceip.net/?query=' . $lastLog->getIp() . '" target="_blank">'
+            . $lastLog->getIp() . '</a>';
     }
 }

@@ -91,7 +91,7 @@ class ErrorProcessor extends Processor
      */
     protected function _getTemplatePath($template)
     {
-        if($template === 'security_report'){
+        if ($template === 'security_report') {
             return $this->_resolver->getTemplateFileName(
                 'report.phtml',
                 ['module' => 'Mageplaza_Security', 'area' => FrontNameResolver::AREA_CODE]

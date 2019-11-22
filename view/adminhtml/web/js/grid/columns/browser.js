@@ -29,6 +29,7 @@ define([
         },
         getLabel: function (record) {
             var label = this._super(record);
+
             if (label !== '') {
                 label = label.split('--');
                 label = label[0];
