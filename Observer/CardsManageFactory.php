@@ -53,7 +53,7 @@ class CardsManageFactory implements ObserverInterface
         Data $data,
         AuthorizationInterface $authorization
     ) {
-        $this->_helperData = $data;
+        $this->_helperData    = $data;
         $this->_authorization = $authorization;
     }
 

@@ -73,7 +73,7 @@ class Form extends Generic
                 'enctype' => 'multipart/form-data'
             ]
         ]);
-        $log = $this->_coreRegistry->registry('mageplaza_security_loginlog');
+        $log  = $this->_coreRegistry->registry('mageplaza_security_loginlog');
 
         /** @var \Magento\Framework\Data\Form $form */
         $form->setHtmlIdPrefix('log_');
@@ -122,10 +122,10 @@ class Form extends Generic
             'legend' => __('Browser Information'),
             'class'  => 'fieldset-wide'
         ]);
-        $userAgent = $log->getBrowserAgent();
-        $userAgent = explode('--', $userAgent);
-        $userAgent = $userAgent[1];
-        $browser = $this->_helper->getBrowser($userAgent, 1);
+        $userAgent       = $log->getBrowserAgent();
+        $userAgent       = explode('--', $userAgent);
+        $userAgent       = $userAgent[1];
+        $browser         = $this->_helper->getBrowser($userAgent, 1);
 
         $browserFieldset->addField('browser', 'label', [
             'label' => __('Brower'),

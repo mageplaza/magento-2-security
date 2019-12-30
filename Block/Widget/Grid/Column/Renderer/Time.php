@@ -56,8 +56,8 @@ class Time extends AbstractRenderer
      */
     protected function timeElapsedString($datetime, $full = false)
     {
-        $now = new DateTime();
-        $ago = new DateTime($datetime);
+        $now  = new DateTime();
+        $ago  = new DateTime($datetime);
         $diff = $now->diff($ago);
 
         $diff->w = floor($diff->d / 7);

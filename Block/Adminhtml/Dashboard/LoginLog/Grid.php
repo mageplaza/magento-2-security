@@ -68,7 +68,7 @@ class Grid extends \Magento\Backend\Block\Dashboard\Grid
         array $data = []
     ) {
         $this->_collectionFactory = $collectionFactory;
-        $this->_helperData = $helperData;
+        $this->_helperData        = $helperData;
 
         parent::__construct($context, $backendHelper, $data);
     }

@@ -87,12 +87,12 @@ class LockUser
         TransportBuilder $transportBuilder,
         Data $helper
     ) {
-        $this->_backendConfig = $backendConfig;
-        $this->_backendUrl = $backendUrl;
-        $this->_logger = $logger;
-        $this->_storeManager = $storeManager;
+        $this->_backendConfig    = $backendConfig;
+        $this->_backendUrl       = $backendUrl;
+        $this->_logger           = $logger;
+        $this->_storeManager     = $storeManager;
         $this->_transportBuilder = $transportBuilder;
-        $this->_helper = $helper;
+        $this->_helper           = $helper;
     }
 
     /**
@@ -115,9 +115,9 @@ class LockUser
             if ($setLockExpires && (($user->getFailuresNum() + 1) === (int) $maxFailures)) {
                 //send mail if user is locked
                 $storeUrl = parse_url($this->_backendUrl->getBaseUrl(), PHP_URL_HOST);
-                $sendTo = explode(',', $this->_helper->getConfigGeneral('email'));
-                $sendTo = array_map('trim', $sendTo);
-                $store = $this->_storeManager->getStore();
+                $sendTo   = explode(',', $this->_helper->getConfigGeneral('email'));
+                $sendTo   = array_map('trim', $sendTo);
+                $store    = $this->_storeManager->getStore();
                 try {
                     $templateVars = [
                         'logo_url'   => 'https://www.mageplaza.com/media/mageplaza-security-email.png',

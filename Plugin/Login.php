@@ -92,13 +92,13 @@ class Login
         Request $request,
         ErrorProcessor $errorHelper
     ) {
-        $this->_helper = $helper;
-        $this->_redirect = $redirect;
+        $this->_helper         = $helper;
+        $this->_redirect       = $redirect;
         $this->_backendSession = $session;
-        $this->_header = $header;
-        $this->_urlInterface = $urlInterface;
-        $this->_request = $request;
-        $this->errorHelper = $errorHelper;
+        $this->_header         = $header;
+        $this->_urlInterface   = $urlInterface;
+        $this->_request        = $request;
+        $this->errorHelper     = $errorHelper;
     }
 
     /**
@@ -121,7 +121,7 @@ class Login
 
             //check Black List
             $isBlackList = false;
-            $blackList = $this->_helper->getConfigBlackWhiteList('black_list');
+            $blackList   = $this->_helper->getConfigBlackWhiteList('black_list');
             if ($blackList) {
                 $blackList = explode(',', $blackList);
                 foreach ($blackList as $item) {
@@ -142,7 +142,7 @@ class Login
 
             //check White List
             $isWhiteList = false;
-            $whiteList = $this->_helper->getConfigBlackWhiteList('white_list');
+            $whiteList   = $this->_helper->getConfigBlackWhiteList('white_list');
             if ($whiteList) {
                 $whiteList = explode(',', $whiteList);
                 foreach ($whiteList as $item) {
