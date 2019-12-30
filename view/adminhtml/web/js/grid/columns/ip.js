@@ -29,6 +29,7 @@ define([
         },
         getLabel: function (record) {
             var label = this._super(record);
+
             if (label !== '') {
                 label = '<a href="http://www.traceip.net/?query=' + label + '" target="_blank">' + label + '</a>';
             }

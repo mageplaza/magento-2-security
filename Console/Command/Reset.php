@@ -111,7 +111,8 @@ class Reset extends Command
         foreach ($requestedTypes as $item) {
             if (isset($this->pathsReset[$item])) {
                 try {
-                    $this->reset('white_list');
+                    $path = $this->pathsReset[$item];
+                    $this->reset($path);
                     $output->writeln('<info>' . ucfirst($item) . ' Reset Successfully!</info>');
                 } catch (Exception $e) {
                     $output->writeln("<error>{$e->getMessage()}</error>");

@@ -84,9 +84,9 @@ class Checklist extends Template
         Context $context,
         array $data = []
     ) {
-        $this->_metadata = $metadata;
-        $this->_helper = $helper;
-        $this->_userFactory = $userFactory;
+        $this->_metadata         = $metadata;
+        $this->_helper           = $helper;
+        $this->_userFactory      = $userFactory;
         $this->_deploymentConfig = $deploymentConfig;
 
         parent::__construct($context, $data);
@@ -98,7 +98,7 @@ class Checklist extends Template
     public function checkAdminUserName()
     {
         $userCollection = $this->_userFactory->create()->getCollection();
-        $unSecureNames = [];
+        $unSecureNames  = [];
         foreach ($userCollection as $user) {
             if (in_array($user->getUserName(), $this->commonNames)) {
                 $unSecureNames[] = [
@@ -132,8 +132,8 @@ class Checklist extends Template
      */
     public function checkLatestVersion()
     {
-        $releases = file_get_contents('https://raw.githubusercontent.com/mageplaza/magento-versions/master/releases/releases.json');
-        $arr = json_decode($releases);
+        $releases   = file_get_contents('https://raw.githubusercontent.com/mageplaza/magento-versions/master/releases/releases.json');
+        $arr        = json_decode($releases);
         $versionArr = [];
         foreach ($arr as $ver => $item) {
             list($major, $minor, $patch) = explode('.', $ver);

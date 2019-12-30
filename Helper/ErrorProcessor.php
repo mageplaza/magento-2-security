@@ -70,9 +70,9 @@ class ErrorProcessor extends Processor
      */
     public function processSecurityReport($errorCode = '', $reportData = '', $title = '')
     {
-        $this->pageTitle = $title ?: __('You don\'t have permission to access this page');
+        $this->pageTitle  = $title ?: __('You don\'t have permission to access this page');
         $this->reportData = $reportData;
-        $this->errorCode = $errorCode;
+        $this->errorCode  = $errorCode;
 
         $html = $this->_renderPage('security_report');
 
@@ -87,11 +87,12 @@ class ErrorProcessor extends Processor
      * Find template path
      *
      * @param string $template
+     *
      * @return string
      */
     protected function _getTemplatePath($template)
     {
-        if($template === 'security_report'){
+        if ($template === 'security_report') {
             return $this->_resolver->getTemplateFileName(
                 'report.phtml',
                 ['module' => 'Mageplaza_Security', 'area' => FrontNameResolver::AREA_CODE]

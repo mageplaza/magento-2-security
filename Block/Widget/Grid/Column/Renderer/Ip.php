@@ -64,11 +64,12 @@ class Ip extends AbstractRenderer
     public function render(DataObject $row)
     {
         $userName = $row->getData('username');
-        $lastLog = $this->_logFactory->create()->getCollection()
+        $lastLog  = $this->_logFactory->create()->getCollection()
             ->addFieldToFilter('user_name', $userName)
             ->addFieldToFilter('status', 1)
             ->getLastItem();
 
-        return '<a href="http://www.traceip.net/?query=' . $lastLog->getIp() . '" target="_blank">' . $lastLog->getIp() . '</a>';
+        return '<a href="http://www.traceip.net/?query=' . $lastLog->getIp() . '" target="_blank">'
+            . $lastLog->getIp() . '</a>';
     }
 }

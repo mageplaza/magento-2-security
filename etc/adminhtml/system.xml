@@ -49,12 +49,14 @@
                 </field>
                 <field id="failed_count" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Maximum number of failed login attempts</label>
+                    <validate>validate-number validate-not-negative-number validate-zero-or-greater</validate>
                     <depends>
                         <field id="enabled">1</field>
                     </depends>
                 </field>
                 <field id="failed_time" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Allowed duration</label>
+                    <validate>validate-number validate-not-negative-number validate-zero-or-greater</validate>
                     <comment>Within this period of time (minutes), the number of failed login attempts is not allowed to exceed</comment>
                     <depends>
                         <field id="enabled">1</field>
