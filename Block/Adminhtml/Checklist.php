@@ -136,14 +136,14 @@ class Checklist extends Template
         $arr        = json_decode($releases);
         $versionArr = [];
         foreach ($arr as $ver => $item) {
-            list($major, $minor, $patch) = explode('.', $ver);
+            [$major, $minor, $patch] = explode('.', $ver);
             if ($major == 2) {
                 $versionArr[$major . '.' . $minor][] = $ver;
             }
         }
 
         $currentVersion = $this->_metadata->getVersion();
-        list($currentMajor, $currentMinor, $currentPatch) = explode('.', $currentVersion);
+        [$currentMajor, $currentMinor, $currentPatch] = explode('.', $currentVersion);
         $latestVer = $currentVersion;
         foreach ($versionArr[$currentMajor . '.' . $currentMinor] as $version) {
             if (version_compare($latestVer, $version, '<')) {
