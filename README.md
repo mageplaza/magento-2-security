@@ -7,6 +7,8 @@ Security issues for Magento have left a big question mark in the community of on
 [![Latest Stable Version](https://poser.pugx.org/mageplaza/module-security/v/stable)](https://packagist.org/packages/mageplaza/module-security)
 [![Total Downloads](https://poser.pugx.org/mageplaza/module-security/downloads)](https://packagist.org/packages/mageplaza/module-security)
 
+**IMPORTANT NOTE:** This version of Mageplaza Security extension on Github is free as a contribution to the Magento community from Mageplaza. This package does not include the technical support. Should you need technical support for this extension, you will have to buy a license from Mageplaza. [Click here to buy](https://www.mageplaza.com/magento-2-security/).
+
 ## 1. Security Documentation
 
 
