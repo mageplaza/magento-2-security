@@ -27,4 +27,13 @@
     <type name="\Magento\User\Model\ResourceModel\User">
         <plugin name="mp_security_lock_user" type="Mageplaza\Security\Plugin\LockUser"/>
     </type>
+    <type name="Magento\Ui\Model\Export\MetadataProvider">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="mageplaza_security_loginlog_listing" xsi:type="array">
+                    <item name="created_at" xsi:type="string">time</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
 </config>
