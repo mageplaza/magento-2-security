@@ -24,9 +24,9 @@
     <?= $this->errorCode ? $this->errorCode . ' - ' : '' ?>
     <?= $this->pageTitle ?>
 </h1>
-<?php if ($this->_config->action == '') : ?>
+<?php if ($this->_config->action == ''): ?>
     <p><em><?= __('Exception printing is disabled by default for security reasons.') ?></em></p>
-<?php elseif ($this->reportData) : ?>
+<?php elseif ($this->reportData): ?>
     <div class="trace-container">
         <div class="trace">
             <pre><?= $this->reportData ?><br/>

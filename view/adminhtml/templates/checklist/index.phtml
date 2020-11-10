@@ -30,8 +30,8 @@ $unSecureNames = $block->checkAdminUserName();
         <p><?= __('Hackers can guest username easily. Click on an user to change username.') ?></p>
     </div>
     <div class="err-nof">
-        <?php if (!empty($unSecureNames)) : ?>
-            <?php foreach ($unSecureNames as $unSecureName) : ?>
+        <?php if (!empty($unSecureNames)): ?>
+            <?php foreach ($unSecureNames as $unSecureName): ?>
                 <div class="err-nof-line">
                     <i class="fa fa-remove"></i>
                     <span><?= __('Username: "%1" is not secure.', $unSecureName['username']) ?></span>
@@ -39,7 +39,7 @@ $unSecureNames = $block->checkAdminUserName();
                        class="fix-it"><?= __('Fix it') ?></a>
                 </div>
             <?php endforeach; ?>
-        <?php else : ?>
+        <?php else: ?>
             <i class="fa fa-check"></i>
             <span><?= __('All users are adequate for security purposes') ?></span>
         <?php endif; ?>
@@ -51,17 +51,17 @@ $unSecureNames = $block->checkAdminUserName();
     </div>
     <div class="err-nof">
         <p>
-            <?php if (!$block->checkFrontendCaptcha()) : ?>
+            <?php if (!$block->checkFrontendCaptcha()): ?>
                 <i class="fa fa-remove"></i>
                 <span><?= __("Frontend captcha is not enabled. Hackers may carry out brute-force attacks on your customers' accounts") ?></span>
                 <a href="<?= $block->getFrontendCaptchaFixitUrl() ?>"
                    class="fix-it"><?= __('Fix it') ?></a>
-            <?php else : ?>
+            <?php else: ?>
                 <i class="fa fa-check"></i>
                 <span><?= __('Frontend captcha is enabled.') ?></span>
             <?php endif; ?>
         </p>
-        <?php if (!$block->checkBackendCaptcha()) : ?>
+        <?php if (!$block->checkBackendCaptcha()): ?>
             <div class="err-nof-line">
                 <p>
                     <i class="fa fa-remove"></i>
@@ -70,7 +70,7 @@ $unSecureNames = $block->checkAdminUserName();
                        class="fix-it"><?= __('Fix it') ?></a>
                 </p>
             </div>
-        <?php else : ?>
+        <?php else: ?>
             <p>
                 <i class="fa fa-check"></i>
                 <span><?= __('Backend captcha is enabled.') ?></span>
@@ -87,7 +87,7 @@ $isLatest = $version['latestVer'] == $version['currentVersion'];
         <strong><?= __('Check Magento Version:') ?></strong>
     </div>
     <div class="err-nof">
-        <?php if (!$isLatest) : ?>
+        <?php if (!$isLatest): ?>
             <div class="err-nof-line">
                 <i class="fa fa-remove"></i>
                 <span>
@@ -96,7 +96,7 @@ $isLatest = $version['latestVer'] == $version['currentVersion'];
                        class="fix-it"><?= __('Upgrade') ?></a>
                 </span>
             </div>
-        <?php else : ?>
+        <?php else: ?>
             <i class="fa fa-check"></i>
             <span><?= __('Your store is running on the latest version.') ?></span>
         <?php endif; ?>
@@ -108,10 +108,10 @@ $isLatest = $version['latestVer'] == $version['currentVersion'];
         <strong><?= __('Check database prefix:') ?></strong>
     </div>
     <div class="err-nof">
-        <?php if ($dbPrefix) : ?>
+        <?php if ($dbPrefix): ?>
             <i class="fa fa-check"></i>
             <span><?= __("Your store's database is good.") ?></span>
-        <?php else : ?>
+        <?php else: ?>
             <div class="err-nof-line">
                 <i class="fa fa-remove"></i>
                 <span>
@@ -124,7 +124,7 @@ $isLatest = $version['latestVer'] == $version['currentVersion'];
     </div>
 </div>
 <script>
-    <?php if (!$block->hasProPackage()) : ?>
+    <?php if (!$block->hasProPackage()): ?>
     require([
         'jquery'
     ], function ($) {

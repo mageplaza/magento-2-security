@@ -21,8 +21,8 @@
 
 $logs = $block->getLogs();
 ?>
-<?php if ($logs) : ?>
-    <?php foreach ($logs as $log) : ?>
+<?php if ($logs): ?>
+    <?php foreach ($logs as $log): ?>
         <tr>
             <td style="border-collapse: collapse; border: 1px solid #ccc;">
                 <span style="margin: 10px"><?= $log['user_name']; ?></span>
