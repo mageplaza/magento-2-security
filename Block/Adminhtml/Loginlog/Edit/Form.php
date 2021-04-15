@@ -87,10 +87,11 @@ class Form extends Generic
             'name'  => 'id',
             'label' => __('ID'),
         ]);
-        $fieldset->addField('time', 'label', [
+        $fieldset->addField('times', 'label', [
             'name'  => 'time',
             'label' => __('Time'),
             'title' => __('Time'),
+            'value' => $this->_helper->convertToLocaleTime($log->getTime())
         ]);
         $fieldset->addField('user_name', 'label', [
             'name'  => 'user_name',
