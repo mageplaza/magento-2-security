@@ -21,6 +21,13 @@
 
 namespace Mageplaza\Security\Helper;
 
+use DateTime;
+use DateTimeZone;
+use Exception;
+use Magento\Framework\App\Helper\Context;
+use Magento\Framework\ObjectManagerInterface;
+use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
+use Magento\Store\Model\StoreManagerInterface;
 use Mageplaza\Core\Helper\AbstractData;
 use Sinergi\BrowserDetector\Browser;
 use Sinergi\BrowserDetector\Os;
@@ -45,6 +52,30 @@ class Data extends AbstractData
      * @var Os
      */
     protected $osLib;
+
+    /**
+     * @var TimezoneInterface
+     */
+    protected $timezone;
+
+    /**
+     * Data constructor.
+     *
+     * @param Context $context
+     * @param ObjectManagerInterface $objectManager
+     * @param StoreManagerInterface $storeManager
+     * @param TimezoneInterface $timezone
+     */
+    public function __construct(
+        Context $context,
+        ObjectManagerInterface $objectManager,
+        StoreManagerInterface $storeManager,
+        TimezoneInterface $timezone
+    ) {
+        $this->timezone     = $timezone;
+
+        parent::__construct($context, $objectManager, $storeManager);
+    }
 
     /**
      * Get Brute Force Config
@@ -159,5 +190,24 @@ class Data extends AbstractData
     {
         return $this->isModuleOutputEnabled('Mageplaza_Reports')
             && $this->getConfigValue('mageplaza_reports/general/enabled');
+    }
+
+    /**
+     * @param string $time
+     * @param string $format
+     *
+     * @return string
+     */
+    public function convertToLocaleTime($time, $format = 'Y-m-d H:i:s')
+    {
+        try {
+            $localTime   = new DateTime($time, new DateTimeZone('UTC'));
+            $localTime->setTimezone(new DateTimeZone($this->timezone->getConfigTimezone()));
+            $currentTime = $localTime->format($format);
+        } catch (Exception $e) {
+            $currentTime = '';
+        }
+
+        return $currentTime;
     }
 }

@@ -21,8 +21,8 @@
 
 $numColumns = count($block->getColumns());
 ?>
-<?php if ($block->getCollection()): ?>
-    <?php if ($block->isReports()): ?>
+<?php if ($block->getCollection()) : ?>
+    <?php if ($block->isReports()) : ?>
         <style>
             #container > #mp-login-log {
                 display: none;
@@ -34,34 +34,34 @@ $numColumns = count($block->getColumns());
         </style>
     <?php endif; ?>
     <div class="dashboard-item" id="mp-login-log">
-        <div class="dashboard-item-title"><?= __('Login Log') ?></div>
+        <div class="dashboard-item-title"><?= $block->escapeHtml(__('Login Log')) ?></div>
         <div class="dashboard-item-content">
-            <?php if ($block->getCollection()->getSize() > 0): ?>
-                <table class="admin__table-primary dashboard-data" id="<?= $block->getId() ?>_table">
+            <?php if ($block->getCollection()->getSize() > 0) : ?>
+                <table class="admin__table-primary dashboard-data" id="<?= $block->escapeHtmlAttr($block->getId()) ?>_table">
                     <?php
                     /* This part is commented to remove all <col> tags from the code. */
                     /* foreach ($block->getColumns() as $_column): ?>
                     <col <?= $_column->getHtmlProperty() ?> />
                     <?php endforeach; */ ?>
-                    <?php if ($block->getHeadersVisibility() || $block->getFilterVisibility()): ?>
+                    <?php if ($block->getHeadersVisibility() || $block->getFilterVisibility()) : ?>
                         <thead>
-                        <?php if ($block->getHeadersVisibility()): ?>
+                        <?php if ($block->getHeadersVisibility()) : ?>
                             <tr>
-                                <?php foreach ($block->getColumns() as $_column): ?>
+                                <?php foreach ($block->getColumns() as $_column) : ?>
                                     <?= $_column->getHeaderHtml() ?>
                                 <?php endforeach; ?>
                             </tr>
                         <?php endif; ?>
                         </thead>
                     <?php endif; ?>
-                    <?php if (!$block->getIsCollapsed()): ?>
+                    <?php if (!$block->getIsCollapsed()) : ?>
                         <tbody>
-                        <?php foreach ($block->getCollection() as $_index => $_item): ?>
-                            <tr title="<?= $block->getRowUrl($_item) ?>">
+                        <?php foreach ($block->getCollection() as $_index => $_item) : ?>
+                            <tr title="<?= $block->escapeHtmlAttr($block->getRowUrl($_item)) ?>">
                                 <?php $i = 0;
-                                foreach ($block->getColumns() as $_column): ?>
-                                    <td class="<?= $_column->getCssProperty() ?> <?= ++$i === $numColumns ? 'last' : '' ?>">
-                                        <?= ($_column->getRowField($_item) != '') ? $_column->getRowField($_item) : '&nbsp;' ?>
+                                foreach ($block->getColumns() as $_column) : ?>
+                                    <td class="<?= $block->escapeHtmlAttr($_column->getCssProperty()) ?> <?= ++$i === $numColumns ? 'last' : '' ?>">
+                                        <?= ($_column->getRowField($_item) != '') ? $block->escapeHtml($_column->getRowField($_item)) : '&nbsp;' ?>
                                     </td>
                                 <?php endforeach; ?>
                             </tr>
@@ -69,8 +69,8 @@ $numColumns = count($block->getColumns());
                         </tbody>
                     <?php endif; ?>
                 </table>
-            <?php else: ?>
-                <div class="<?= $block->getEmptyTextClass() ?>"><?= $block->getEmptyText() ?></div>
+            <?php else : ?>
+                <div class="<?= $block->escapeHtmlAttr($block->getEmptyTextClass()) ?>"><?= $block->escapeHtml($block->getEmptyText()) ?></div>
             <?php endif; ?>
         </div>
     </div>
@@ -83,15 +83,15 @@ $numColumns = count($block->getColumns());
             })
         });
     </script>
-    <?php if ($block->canDisplayContainer()): ?>
+    <?php if ($block->canDisplayContainer()) : ?>
         <script>
             var deps = [];
 
-            <?php if ($block->getDependencyJsObject()): ?>
+            <?php if ($block->getDependencyJsObject()) : ?>
             deps.push('uiRegistry');
             <?php endif; ?>
 
-            <?php if (strpos($block->getRowClickCallback(), 'order.') !== false): ?>
+            <?php if (strpos($block->getRowClickCallback(), 'order.') !== false) : ?>
             deps.push('Magento_Sales/order/create/form');
             <?php endif; ?>
 
@@ -100,35 +100,35 @@ $numColumns = count($block->getColumns());
             require(deps, function (<?=($block->getDependencyJsObject() ? 'registry' : '') ?>) {
                 <?php //TODO: getJsObjectName and getRowClickCallback has unexpected behavior. Should be removed ?>
 
-                <?php if ($block->getDependencyJsObject()): ?>
-                registry.get('<?= $block->getDependencyJsObject() ?>', function (<?= $block->getDependencyJsObject() ?>) {
+                <?php if ($block->getDependencyJsObject()) : ?>
+                registry.get('<?= /** noEscape */ $block->getDependencyJsObject() ?>', function (<?= /** noEscape */ $block->getDependencyJsObject() ?>) {
                 <?php endif; ?>
 
-                    <?= $block->getJsObjectName() ?> = new varienGrid('<?= $block->getId() ?>', '<?= $block->getGridUrl() ?>', '<?= $block->getVarNamePage() ?>', '<?= $block->getVarNameSort() ?>', '<?= $block->getVarNameDir() ?>', '<?= $block->getVarNameFilter() ?>');
-                    <?= $block->getJsObjectName() ?>.
-                    useAjax = '<?= $block->getUseAjax() ?>';
-                    <?php if ($block->getRowClickCallback()): ?>
-                        <?= $block->getJsObjectName() ?>.
-                    rowClickCallback = <?= $block->getRowClickCallback() ?>;
+                    <?= /** noEscape */ $block->getJsObjectName() ?> = new varienGrid('<?= /** noEscape */ $block->getId() ?>', '<?= /** noEscape */ $block->getGridUrl() ?>', '<?= /** noEscape */ $block->getVarNamePage() ?>', '<?= /** noEscape */ $block->getVarNameSort() ?>', '<?= /** noEscape */ $block->getVarNameDir() ?>', '<?= /** noEscape */ $block->getVarNameFilter() ?>');
+                    <?= /** noEscape */ $block->getJsObjectName() ?>.
+                    useAjax = '<?= /** noEscape */ $block->getUseAjax() ?>';
+                    <?php if ($block->getRowClickCallback()) : ?>
+                        <?= /** noEscape */ $block->getJsObjectName() ?>.
+                    rowClickCallback = <?= /** noEscape */ $block->getRowClickCallback() ?>;
                     <?php endif; ?>
-                    <?php if ($block->getCheckboxCheckCallback()): ?>
-                        <?= $block->getJsObjectName() ?>.
-                    checkboxCheckCallback = <?= $block->getCheckboxCheckCallback() ?>;
+                    <?php if ($block->getCheckboxCheckCallback()) : ?>
+                        <?= /** noEscape */ $block->getJsObjectName() ?>.
+                    checkboxCheckCallback = <?= /** noEscape */ $block->getCheckboxCheckCallback() ?>;
                     <?php endif; ?>
-                    <?php if ($block->getRowInitCallback()): ?>
-                        <?= $block->getJsObjectName() ?>.
-                    initRowCallback = <?= $block->getRowInitCallback() ?>;
-                        <?= $block->getJsObjectName() ?>.
+                    <?php if ($block->getRowInitCallback()) : ?>
+                        <?= /** noEscape */ $block->getJsObjectName() ?>.
+                    initRowCallback = <?= /** noEscape */ $block->getRowInitCallback() ?>;
+                        <?= /** noEscape */ $block->getJsObjectName() ?>.
                     rows.each(function (row) {
-                        <?= $block->getRowInitCallback() ?>(<?= $block->getJsObjectName() ?>, row
+                        <?= /** noEscape */ $block->getRowInitCallback() ?>(<?= /** noEscape */ $block->getJsObjectName() ?>, row
                     )
                     });
                     <?php endif; ?>
-                    <?php if ($block->getMassactionBlock()->isAvailable()): ?>
-                        <?= $block->getMassactionBlock()->getJavaScript() ?>
+                    <?php if ($block->getMassactionBlock()->isAvailable()) : ?>
+                        <?= /** noEscape */ $block->getMassactionBlock()->getJavaScript() ?>
                     <?php endif ?>
 
-                    <?php if ($block->getDependencyJsObject()): ?>
+                    <?php if ($block->getDependencyJsObject()) : ?>
                 });
                     <?php endif; ?>
             });

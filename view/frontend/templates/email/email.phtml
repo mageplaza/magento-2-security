@@ -21,17 +21,17 @@
 
 $logs = $block->getLogs();
 ?>
-<?php if ($logs): ?>
-    <?php foreach ($logs as $log): ?>
+<?php if ($logs) : ?>
+    <?php foreach ($logs as $log) : ?>
         <tr>
             <td style="border-collapse: collapse; border: 1px solid #ccc;">
-                <span style="margin: 10px"><?= $log['user_name']; ?></span>
+                <span style="margin: 10px"><?= $block->escapeHtml($log['user_name']) ?></span>
             </td>
             <td style="border-collapse: collapse; border: 1px solid #ccc;">
-                <span style="margin: 10px"><?= $log['ip']; ?></span>
+                <span style="margin: 10px"><?= $block->escapeHtml($log['ip']) ?></span>
             </td>
             <td style="border-collapse: collapse; border: 1px solid #ccc;">
-                <span style="margin: 10px"><?= $log['time']; ?></span>
+                <span style="margin: 10px"><?= $block->escapeHtml($log['time']) ?></span>
             </td>
         </tr>
     <?php endforeach; ?>
