@@ -27,6 +27,14 @@
             <item name="deps" xsi:type="string">mageplaza_security_loginlog_listing.mageplaza_security_loginlog_listing_data_source</item>
         </item>
         <item name="spinner" xsi:type="string">mageplaza_security_loginlog_columns</item>
+        <item name="buttons" xsi:type="array">
+            <item name="clear" xsi:type="array">
+                <item name="name" xsi:type="string">clear</item>
+                <item name="label" xsi:type="string" translate="true">Clear All</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">*/*/clear</item>
+            </item>
+        </item>
     </argument>
     <dataSource name="mageplaza_security_login_log_listing_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
@@ -55,6 +63,26 @@
         <columnsControls name="columns_controls"/>
         <exportButton name="export_button"/>
         <filters name="listing_filters"/>
+        <massaction name="listing_massaction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/tree-massactions</item>
+                </item>
+            </argument>
+            <action name="delete">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">delete</item>
+                        <item name="label" xsi:type="string" translate="true">Delete</item>
+                        <item name="url" xsi:type="url" path="mpsecurity/loginlog/massDelete"/>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Delete Logs</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure you wan't to delete selected Logs?</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+        </massaction>
         <paging name="listing_paging"/>
     </listingToolbar>
     <columns name="mageplaza_security_loginlog_columns">
@@ -78,7 +106,6 @@
                     <item name="resizeEnabled" xsi:type="boolean">false</item>
                     <item name="resizeDefaultWidth" xsi:type="string">55</item>
                     <item name="indexField" xsi:type="string">id</item>
-                    <item name="visible" xsi:type="boolean">false</item>
                 </item>
             </argument>
         </selectionsColumn>
