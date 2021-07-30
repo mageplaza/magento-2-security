@@ -21,23 +21,28 @@
 
 namespace Mageplaza\Security\Controller\Adminhtml\LoginLog;
 
-use Magento\Framework\View\Result\Page;
+use Magento\Framework\App\ResponseInterface;
 use Mageplaza\Security\Controller\Adminhtml\AbstractLog;
 
 /**
- * Class Index
+ * Class Clear
  * @package Mageplaza\Security\Controller\Adminhtml\LoginLog
  */
-class Index extends AbstractLog
+class Clear extends AbstractLog
 {
     /**
-     * @return Page
+     * @return ResponseInterface
      */
     public function execute()
     {
-        $resultPage = $this->resultPageFactory->create();
-        $resultPage->getConfig()->getTitle()->prepend(__('Login Log'));
+        $collection = $this->collectionFactory->create();
 
-        return $resultPage;
+        $count = $collection->getSize();
+
+        $collection->getConnection()->truncateTable($collection->getMainTable());
+
+        $this->messageManager->addSuccessMessage(__('A total of %1 record(s) have been deleted.', $count));
+
+        return $this->_redirect('*/*/');
     }
 }

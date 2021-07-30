@@ -14,30 +14,38 @@
  * version in the future.
  *
  * @category    Mageplaza
- * @package     Mageplaza_Security
+ * @package     Mageplaza_GdprPro
  * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Security\Controller\Adminhtml\LoginLog;
 
-use Magento\Framework\View\Result\Page;
+use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\ResultInterface;
+use Magento\Framework\Exception\LocalizedException;
+use Mageplaza\Security\Model\ResourceModel\LoginLog\Collection;
 use Mageplaza\Security\Controller\Adminhtml\AbstractLog;
 
 /**
- * Class Index
+ * Class MassDelete
  * @package Mageplaza\Security\Controller\Adminhtml\LoginLog
  */
-class Index extends AbstractLog
+class MassDelete extends AbstractLog
 {
     /**
-     * @return Page
+     * @return ResponseInterface|ResultInterface
+     * @throws LocalizedException
      */
     public function execute()
     {
-        $resultPage = $this->resultPageFactory->create();
-        $resultPage->getConfig()->getTitle()->prepend(__('Login Log'));
+        /** @var Collection $collection */
+        $collection = $this->filter->getCollection($this->collectionFactory->create());
 
-        return $resultPage;
+        $count = $this->deleteLoginLogs($collection);
+
+        $this->messageManager->addSuccessMessage(__('A total of %1 record(s) have been deleted.', $count));
+
+        return $this->_redirect('*/*/');
     }
 }

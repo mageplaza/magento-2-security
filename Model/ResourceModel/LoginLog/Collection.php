@@ -22,6 +22,7 @@
 namespace Mageplaza\Security\Model\ResourceModel\LoginLog;
 
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
+use Mageplaza\Security\Model\LoginLog as LoginLogModel;
 use Mageplaza\Security\Model\ResourceModel\LoginLog;
 
 /**
@@ -31,12 +32,17 @@ use Mageplaza\Security\Model\ResourceModel\LoginLog;
 class Collection extends AbstractCollection
 {
     /**
+     * @var string
+     */
+    protected $_idFieldName = 'id';
+
+    /**
      * Initialize resource collection
      *
      * @return void
      */
     public function _construct()
     {
-        $this->_init(\Mageplaza\Security\Model\LoginLog::class, LoginLog::class);
+        $this->_init(LoginLogModel::class, LoginLog::class);
     }
 }
