@@ -23,6 +23,7 @@ namespace Mageplaza\Security\Block\Adminhtml\Loginlog\Edit;
 
 use Magento\Backend\Block\Template\Context;
 use Magento\Backend\Block\Widget\Form\Generic;
+use Magento\Framework\Data\Form as FormData;
 use Magento\Framework\Data\FormFactory;
 use Magento\Framework\Registry;
 use Mageplaza\Security\Helper\Data;
@@ -64,7 +65,7 @@ class Form extends Generic
      */
     protected function _prepareForm()
     {
-        /** @var \Magento\Framework\Data\Form $form */
+        /** @var FormData $form */
         $form = $this->_formFactory->create([
             'data' => [
                 'id'      => 'edit_form',
@@ -75,7 +76,7 @@ class Form extends Generic
         ]);
         $log  = $this->_coreRegistry->registry('mageplaza_security_loginlog');
 
-        /** @var \Magento\Framework\Data\Form $form */
+        /** @var FormData $form */
         $form->setHtmlIdPrefix('log_');
         $form->setFieldNameSuffix('log');
 
@@ -87,10 +88,11 @@ class Form extends Generic
             'name'  => 'id',
             'label' => __('ID'),
         ]);
-        $fieldset->addField('time', 'label', [
+        $fieldset->addField('times', 'label', [
             'name'  => 'time',
             'label' => __('Time'),
             'title' => __('Time'),
+            'value' => $this->_helper->convertToLocaleTime($log->getTime())
         ]);
         $fieldset->addField('user_name', 'label', [
             'name'  => 'user_name',

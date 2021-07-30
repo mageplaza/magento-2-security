@@ -21,26 +21,26 @@
 
 namespace Mageplaza\Security\Controller\Adminhtml\LoginLog;
 
-use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\Result\Redirect;
+use Magento\Framework\Controller\ResultInterface;
+use \Magento\Framework\App\ResponseInterface as AppResponseInterface;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Result\Page;
+use Magento\Backend\Model\View\Result\Page as ResultPage;
 use Magento\Framework\View\Result\PageFactory;
+use Magento\Ui\Component\MassAction\Filter;
+use Mageplaza\Security\Controller\Adminhtml\AbstractLog;
 use Mageplaza\Security\Model\LoginLog;
 use Mageplaza\Security\Model\LoginLogFactory;
+use Mageplaza\Security\Model\ResourceModel\LoginLog\CollectionFactory;
 
 /**
  * Class Edit
  * @package Mageplaza\Security\Controller\Adminhtml\LoginLog
  */
-class Edit extends Action
+class Edit extends AbstractLog
 {
-    /**
-     * @var PageFactory
-     */
-    protected $resultPageFactory;
-
     /**
      * @var Registry
      */
@@ -55,26 +55,28 @@ class Edit extends Action
      * Edit constructor.
      *
      * @param Context $context
-     * @param Registry $registry
-     * @param LoginLogFactory $logFactory
      * @param PageFactory $resultPageFactory
+     * @param Filter $filter
+     * @param CollectionFactory $collectionFactory
+     * @param LoginLogFactory $_logFactory
+     * @param Registry $registry
      */
     public function __construct(
         Context $context,
-        Registry $registry,
-        LoginLogFactory $logFactory,
-        PageFactory $resultPageFactory
+        PageFactory $resultPageFactory,
+        Filter $filter,
+        CollectionFactory $collectionFactory,
+        LoginLogFactory $_logFactory,
+        Registry $registry
     ) {
-        $this->resultPageFactory = $resultPageFactory;
-        $this->registry          = $registry;
-        $this->_logFactory       = $logFactory;
+        $this->_logFactory = $_logFactory;
+        $this->registry    = $registry;
 
-        parent::__construct($context);
+        parent::__construct($context, $resultPageFactory, $filter, $collectionFactory);
     }
 
     /**
-     * @return \Magento\Backend\Model\View\Result\Page|Redirect
-     * |\Magento\Framework\View\Result\Page
+     * @return ResultPage|AppResponseInterface|Redirect|ResultInterface|Page
      */
     public function execute()
     {
@@ -88,7 +90,7 @@ class Edit extends Action
 
         $this->registry->register('mageplaza_security_loginlog', $log);
 
-        /** @var \Magento\Backend\Model\View\Result\Page|Page $resultPage */
+        /** @var ResultPage|Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
         $resultPage->getConfig()->getTitle()->set(__('Login record details'));
         $resultPage->getConfig()->getTitle()->prepend(__('Login record details'));

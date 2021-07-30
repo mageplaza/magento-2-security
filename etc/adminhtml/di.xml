@@ -27,4 +27,7 @@
     <type name="\Magento\User\Model\ResourceModel\User">
         <plugin name="mp_security_lock_user" type="Mageplaza\Security\Plugin\LockUser"/>
     </type>
+    <type name="Magento\Ui\Model\Export\MetadataProvider">
+        <plugin name="mp_security_export_csv" type="Mageplaza\Security\Plugin\Adminhtml\ExportCsv"/>
+    </type>
 </config>
