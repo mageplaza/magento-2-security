@@ -31,7 +31,7 @@ define([
             var label = this._super(record);
 
             if (label !== '') {
-                label = '<a href="http://www.traceip.net/?query=' + label + '" target="_blank">' + label + '</a>';
+                label = '<a href="https://www.iplocation.net/ip-lookup/?query=' + label + '" target="_blank">' + label + '</a>';
             }
 
             return label;

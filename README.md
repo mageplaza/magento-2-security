@@ -201,7 +201,7 @@ Also, store owners can check the last login of a specific administratore. You ca
 ![magento 2 security Login Log](https://i.imgur.com/f7a0SkZ.png)
 
 * The **Last login** column records the newest recent login attempt of an admin.
-* The **IP Address** column records the IP address corresponding to the newest recent login attempt of an admin. Clicking on an IP address, it will redirect to the [Traceip](http://www.traceip.net/) page.
+* The **IP Address** column records the IP address corresponding to the newest recent login attempt of an admin. Clicking on an IP address, it will redirect to the [IP Location](https://www.iplocation.net/) page.
 
 #### Reset Command line
 
