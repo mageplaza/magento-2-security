@@ -1,6 +1,6 @@
 # Magento 2 Security extension FREE
 
-Security issues for Magento have left a big question mark in the community of online stores. This problem is specially cared when Magento-based stores which own critical information and huge transactional volume can easily become ideal prey for blackhat hackers to attack. To help online stores prevent brutal break-ins, Mageplaza has developed the Security extension for Magento 2 stores.
+Security issues for Magento have left a big question mark in the community of online stores. This problem is specially cared when Magento-based stores which own critical information and huge transactional volume can easily become ideal prey for blackhat hackers to attack. To help online stores prevent brutal break-ins, Mageplaza has developed the Security extension.
 
 **Magento 2 Security extension by Magpelaza** gives store owners the ability to detect the IP addresses that are intentionally attacking their store at any given time. Therefore, they have timely measures to prevent this issue such as blocking those IP addresses or sending warning emails to store owners.
 
@@ -14,7 +14,7 @@ Security issues for Magento have left a big question mark in the community of on
 
 - [Installation guide](https://www.mageplaza.com/install-magento-2-extension/)
 - [User Guide](https://docs.mageplaza.com/security/index.html)
-- [Download Magento 2 Security from Live site](https://www.mageplaza.com/magento-2-security/)
+- [Download from our Live site](https://www.mageplaza.com/magento-2-security/)
 - [Get Free Support](https://github.com/mageplaza/magento-2-security/issues)
 - Get premium support from Mageplaza: [Purchase Support package](https://www.mageplaza.com/magento-2-extension-support-package/)
 - [Contribute on Github](https://github.com/mageplaza/magento-2-security/)
@@ -49,10 +49,10 @@ Thanks [the contributors](https://github.com/mageplaza/magento-2-security/graphs
 
 --------
 
-## 5. Magento 2 Security Suite Introduction
+## 5. Security Suite Introduction
 It’s a minor unnoticed fact that Magento 2 doesn’t limit any number of login attempts for vague reasons behind, why this potential danger has not been considered seriously? Displaying frontend, customer knowledge, sale figures and precious transaction database are recorded in the backend thoroughly. For that reason, it’s obvious logic that hackers will try their hard to impact brutal damages to your login in the backend. Consequently, your website can be bullied continuously by many computers at the same time, by any Badguy™ groups silently, in such vulnerable time you don’t notice.
 
-Magento 2 Security extension comes up with various choices to let you have any idea how to massive protect your store firmly. You will be right the second such nonsense endeavors is entering your internal backend.
+Mageplaza Security extension comes up with various choices to let you have any idea how to massive protect your store firmly. You will be right the second such nonsense endeavors is entering your internal backend.
 
 At the level of a free module, you can explore some fundamental yet indispensable configurations within this lightweight size that you should consider installing it to your store as soon as possible.
  
@@ -64,7 +64,7 @@ In the backend configuration, there is a field called `Maximum number of failed 
 When you enable the module, 5 is the default number of allowed unsuccessful attempts in a 10-minute session If you have no idea how you should set up for the guarding system, you can take advantage of this default settings quickly.
 
 ### Automatic warning emails
-In Magento 2, admins have no idea when the security wall was being reached. To remedy this passive situation, Magento 2 Security module is well integrated with the email engine. The exact helpful point in this function is, all recorded failed logins will be sent over to your email address automatically. 
+In Magento 2, admins have no idea when the security wall was being reached. To remedy this passive situation, Mageplaza Security module is well integrated with the email engine. The exact helpful point in this function is, all recorded failed logins will be sent over to your email address automatically. 
 
 In the warning email, you can check out details in the abusive IP address as well as his login time. 
 
@@ -82,7 +82,7 @@ In case you’re running a store which is managed by several administrators, thi
 Another additional function sticked on this module is the security checklist in the backend. The checklist technique will scan your internal gears generally and give some outlines that can be deemed to be a possible security issue. From this trait you can have timely solution to remedy the problem thanks to this convenient suggestions.
 
 ### Full feature list
-* Able to enable/disable Magento 2 Security module
+* Able to enable/disable Security module
 * Automatic warning email
 * Restrict the number of failed login attempts
 * Restrict the time session of failed login attempts
@@ -98,13 +98,13 @@ Another additional function sticked on this module is the security checklist in 
 * File changed reports
 
 
-## 6. Magneto 2 Security User Guide
-### How to use Magneto 2 Security extension
+## 6. Security User Guide
+### How to use Security extension
 You can review login records from the dashboard when entering the backend. The log displays the newest 5 logins and you can click on the login name to view the details.
 
 ![How to use Magento 2 Security extension](https://i.imgur.com/X4qv87Y.png)
 
-### How to configure Magneto 2 Security Suite
+### How to configure Security Suite
 After logging in Magento backend, go to ``System > Security``. We will provide detail guides to these bellow configuration
 * Login Log
 * Checklist
@@ -124,11 +124,11 @@ Follow ``Mageplaza > Security > Configuration > General > Brute Force Protection
   * You can fill multiple emails separated with commas ``,``
 * In the **Maximum number of failed login attempts** field:
   * Enter an allowable number of failed logins.
-  * Default number of maximum failed login attempts is ``5`` when you enable Magento 2 Security module.
+  * Default number of maximum failed login attempts is ``5`` when you enable Security module.
   * If you leave it blank or enter 0, after a failed login happens, an email will be sent.
 * In the **Allowed Duration** field:
   * Enter the number of minute(s) which presents the length of a session. During this session, If the **Maximum number of failed login attempts** is reached, warning emails will be sent.
-  * Default number of allowed duration is ``10`` minutes when you enable Magento 2 Security module.
+  * Default number of allowed duration is ``10`` minutes when you enable Security module.
   * If you leave the field blank or enter 0, no warning emails will be sent even if the maximum number of acceptable logins is reached.
 * In the **Email Template** field: 
   * Choose the template for the warning email.
@@ -201,7 +201,7 @@ Also, store owners can check the last login of a specific administratore. You ca
 ![magento 2 security Login Log](https://i.imgur.com/f7a0SkZ.png)
 
 * The **Last login** column records the newest recent login attempt of an admin.
-* The **IP Address** column records the IP address corresponding to the newest recent login attempt of an admin. Clicking on an IP address, it will redirect to the [Traceip](http://www.traceip.net/) page.
+* The **IP Address** column records the IP address corresponding to the newest recent login attempt of an admin. Clicking on an IP address, it will redirect to the [IP Location](https://www.iplocation.net/) page.
 
 #### Reset Command line
 
@@ -220,20 +220,6 @@ bin/magento security:reset whitelist
 bin/magento cache:flush
 ```
 * If you run the command ``bin/magento security:reset``, both **Blacklist(s)** and **Whitelist(s)** will be reset.
-
-**Explore more extensions**
-- [Magento 2 Reward Points](https://marketplace.magento.com/mageplaza-module-reward-points.html)
-- [Magento 2 One Step Checkout](https://marketplace.magento.com/mageplaza-magento-2-one-step-checkout-extension.html)
-- [Magento 2 Layered Navigation](https://marketplace.magento.com/mageplaza-layered-navigation-m2.html)
-- [Magento 2 Affiliate extension](https://marketplace.magento.com/mageplaza-module-affiliate.html)
-- [Magento 2 Image Optimizer](https://marketplace.magento.com/mageplaza-module-image-optimizer.html)
-
-**Free Magento 2 extension on Github**
-- [Magento 2 GDPR](https://github.com/mageplaza/magento-2-gdpr)
-- [Magento 2 SEO extension](https://github.com/mageplaza/magento-2-seo)
-- [Magento 2 Social Login](https://github.com/mageplaza/magento-2-social-login)
-- [Magento 2 Reports extension](https://github.com/mageplaza/magento-2-reports)
-- [Magento 2 Blog extension](https://github.com/mageplaza/magento-2-blog)
 
 ### People also search:
 - magento 2 security
