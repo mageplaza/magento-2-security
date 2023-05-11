@@ -30,6 +30,8 @@ use Mageplaza\Security\Controller\Adminhtml\AbstractLog;
  */
 class Index extends AbstractLog
 {
+    protected $_publicActions = ['view', 'index'];
+
     /**
      * @return Page
      */

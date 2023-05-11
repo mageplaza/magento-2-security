@@ -160,7 +160,7 @@ class SendMail
                         'logs'         => $logArr,
                         'failed_count' => $failedCount,
                         'failed_time'  => $failedTime,
-                        'viewLogUrl'   => $this->backendUrl->getUrl('mpsecurity/loginlog/'),
+                        'viewLogUrl'   => $this->backendUrl->getRouteUrl('mpsecurity/loginlog/index/'),
                         'logo_url'     => 'https://www.mageplaza.com/media/mageplaza-security-email.png',
                         'logo_alt'     => 'Mageplaza',
                         'store_url'    => $storeUrl
