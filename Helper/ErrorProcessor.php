@@ -23,10 +23,9 @@ namespace Mageplaza\Security\Helper;
 
 use Magento\Backend\App\Area\FrontNameResolver;
 use Magento\Framework\App\Response\Http;
-use Magento\Framework\Error\Processor;
+use Magento\Framework\Filesystem\DirectoryList;
 use Magento\Framework\View\Element\Template\File\Resolver;
-
-require_once BP . '/pub/errors/processor.php';
+use Mageplaza\Security\Errors\Processor;
 
 /**
  * Class ErrorProcessor
@@ -45,18 +44,25 @@ class ErrorProcessor extends Processor
     protected $errorCode;
 
     /**
+     * @var DirectoryList
+     */
+    protected $_dir;
+
+    /**
      * ErrorProcessor constructor.
-     *
      * @param Http $response
+     * @param DirectoryList $dir
      * @param Resolver $resolver
      */
     public function __construct(
         Http $response,
+        DirectoryList $dir,
         Resolver $resolver
     ) {
         $this->_resolver = $resolver;
+        $this->_dir      = $dir;
 
-        parent::__construct($response);
+        parent::__construct($response, $dir);
     }
 
     /**
