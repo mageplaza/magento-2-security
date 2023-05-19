@@ -18,6 +18,7 @@ Platform,Platform
 "%1 ago","%1 ago"
 "just now","just now"
 "Security Checklist","Security Checklist"
+"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
 "Login record details","Login record details"
 "This log no longer exists.","This log no longer exists."
 "You don't have permission to access this page","You don't have permission to access this page"
@@ -74,6 +75,10 @@ Whitelist(s),Whitelist(s)
 "Enter IP(s) which is allowed to access website. Only login attempts from these IPs are granted. Separated with add (,). eg : 123.123.0.*, 10.22.*.*. Make sure you add your IP address first.","Enter IP(s) which is allowed to access website. Only login attempts from these IPs are granted. Separated with add (,). eg : 123.123.0.*, 10.22.*.*. Make sure you add your IP address first."
 "Last Login","Last Login"
 "IP Address","IP Address"
+"Clear All","Clear All"
+Delete,Delete
+"Delete Logs","Delete Logs"
+"Are you sure you wan't to delete selected Logs?","Are you sure you wan't to delete selected Logs?"
 "Browser Agent","Browser Agent"
 "Referer Url","Referer Url"
 View,View

@@ -124,7 +124,7 @@ class LockUser
                         'logo_alt'   => 'Mageplaza',
                         'store_url'  => $storeUrl,
                         'user_name'  => $user->getUserName(),
-                        'viewLogUrl' => $this->_backendUrl->getUrl('mpsecurity/loginlog/'),
+                        'viewLogUrl' => $this->_backendUrl->getRouteUrl('mpsecurity/loginlog/index/'),
                     ];
 
                     $this->_transportBuilder

@@ -2,7 +2,7 @@
 
 Security issues for Magento have left a big question mark in the community of online stores. This problem is specially cared when Magento-based stores which own critical information and huge transactional volume can easily become ideal prey for blackhat hackers to attack. To help online stores prevent brutal break-ins, Mageplaza has developed the Security extension.
 
-**Magento 2 Security extension by Magpelaza** gives store owners the ability to detect the IP addresses that are intentionally attacking their store at any given time. Therefore, they have timely measures to prevent this issue such as blocking those IP addresses or sending warning emails to store owners.
+**Magento 2 Security extension by Mageplaza** gives store owners the ability to detect the IP addresses that are intentionally attacking their store at any given time. Therefore, they have timely measures to prevent this issue such as blocking those IP addresses or sending warning emails to store owners.
 
 [![Latest Stable Version](https://poser.pugx.org/mageplaza/module-security/v/stable)](https://packagist.org/packages/mageplaza/module-security)
 [![Total Downloads](https://poser.pugx.org/mageplaza/module-security/downloads)](https://packagist.org/packages/mageplaza/module-security)

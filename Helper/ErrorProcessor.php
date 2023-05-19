@@ -70,8 +70,10 @@ class ErrorProcessor extends Processor
      */
     public function processSecurityReport($errorCode = '', $reportData = '', $title = '')
     {
+        $this->pageTitle = $title ?: __('You don\'t have permission to access this page');
         $this->pageTitle  = $title ?: __('You don\'t have permission to access this page');
         $this->reportData = $reportData;
+        $this->errorCode = $errorCode;
         $this->errorCode  = $errorCode;
 
         $html = $this->_renderPage('security_report');

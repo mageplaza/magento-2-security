@@ -1,0 +1,19 @@
+{
+    "mageplaza_security_login_log": {
+        "column": {
+            "id": true,
+            "time": true,
+            "user_name": true,
+            "ip": true,
+            "browser_agent": true,
+            "url": true,
+            "referer": true,
+            "status": true,
+            "is_sent_mail": true,
+            "is_warning": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

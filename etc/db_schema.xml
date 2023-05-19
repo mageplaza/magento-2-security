@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+  <table name="mageplaza_security_login_log" resource="default" engine="innodb" comment="Mageplaza Security Login Log Table">
+    <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Login Log"/>
+    <column xsi:type="timestamp" name="time" on_update="false" nullable="true" comment="Time"/>
+    <column xsi:type="text" name="user_name" nullable="true" comment="User Name"/>
+    <column xsi:type="text" name="ip" nullable="true" comment="IP address"/>
+    <column xsi:type="text" name="browser_agent" nullable="true" comment="Browser Agent"/>
+    <column xsi:type="text" name="url" nullable="true" comment="URL"/>
+    <column xsi:type="text" name="referer" nullable="true" comment="Referer"/>
+    <column xsi:type="boolean" name="status" nullable="true" comment="Status"/>
+    <column xsi:type="boolean" name="is_sent_mail" nullable="true" comment="Is sent mail"/>
+    <column xsi:type="boolean" name="is_warning" nullable="true" comment="Is Warning"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="id"/>
+    </constraint>
+  </table>
+</schema>
