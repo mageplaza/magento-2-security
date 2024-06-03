@@ -24,6 +24,7 @@
     <default>
         <security>
             <module>
+                <user_guide>magento/security</user_guide>
                 <type>1</type>
             </module>
             <general>
