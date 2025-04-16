@@ -236,9 +236,9 @@ class Processor
         LoggerInterface $logger,
         LayoutInterface $layout,
         File $file,
-        Json $serializer = null,
-        Escaper $escaper = null,
-        DocumentRoot $documentRoot = null
+        ?Json $serializer = null,
+        ?Escaper $escaper = null,
+        ?DocumentRoot $documentRoot = null
     ) {
         $this->_response        = $response;
         $this->request          = $request;
@@ -866,7 +866,7 @@ class Processor
      *
      * @return void
      */
-    protected function _setSkin($value, \stdClass $config = null)
+    protected function _setSkin($value, ?\stdClass $config = null)
     {
         if (preg_match('/^[a-z0-9_]+$/i', $value) && is_dir($this->_errorDir . $value)) {
             if (!$config) {
