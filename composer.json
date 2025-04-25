@@ -2,10 +2,9 @@
   "name": "mageplaza/module-security",
   "description": "Mageplaza Security Extension",
   "require": {
-    "mageplaza/module-core": "^1.5.3",
+    "mageplaza/module-core": "^1.5.13",
     "mageplaza/module-google-recaptcha": "^4.0.3",
-    "mageplaza/module-two-factor-authentication": "^4.0.4",
-    "sinergi/browser-detector": "*"
+    "mageplaza/module-two-factor-authentication": "^4.0.4"
   },
   "type": "magento2-module",
   "version": "4.0.5",
