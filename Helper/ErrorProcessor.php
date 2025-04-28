@@ -68,9 +68,9 @@ class ErrorProcessor extends Processor
         LoggerInterface $logger,
         LayoutInterface $layout,
         File $file,
-        Json $serializer = null,
-        Escaper $escaper = null,
-        DocumentRoot $documentRoot = null
+        ?Json $serializer = null,
+        ?Escaper $escaper = null,
+        ?DocumentRoot $documentRoot = null
     ) {
         parent::__construct(
             $response,

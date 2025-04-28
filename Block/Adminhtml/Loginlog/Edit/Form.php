@@ -123,31 +123,38 @@ class Form extends Generic
             'legend' => __('Browser Information'),
             'class'  => 'fieldset-wide'
         ]);
-        $userAgent       = $log->getBrowserAgent();
-        $userAgent       = explode('--', $userAgent);
-        $userAgent       = $userAgent[1];
-        $browser         = $this->_helper->getBrowser($userAgent, 1);
 
-        $browserFieldset->addField('browser', 'label', [
-            'label' => __('Brower'),
-            'title' => __('Brower'),
-            'value' => $browser['browser']
-        ]);
-        $browserFieldset->addField('browser_version', 'label', [
-            'label' => __('Brower Version'),
-            'title' => __('Brower Version'),
-            'value' => $browser['browser_version']
-        ]);
-        $browserFieldset->addField('plat_form', 'label', [
-            'label' => __('Platform'),
-            'title' => __('Platform'),
-            'value' => $browser['plat_form']
-        ]);
-        $browserFieldset->addField('plat_form_version', 'label', [
-            'label' => __('Platform Version'),
-            'title' => __('Platform Version'),
-            'value' => $browser['plat_form_version']
-        ]);
+        if ($userAgent = $log->getBrowserAgent()) {
+            $userAgent = explode('--', $userAgent);
+            $userAgent = $userAgent[1];
+            $browser   = $this->_helper->getBrowser($userAgent, 1);
+            $browserFieldset->addField('browser', 'label', [
+                'label' => __('Browser'),
+                'title' => __('Browser'),
+                'value' => $browser['browser']
+            ]);
+            $browserFieldset->addField('browser_version', 'label', [
+                'label' => __('Browser Version'),
+                'title' => __('Browser Version'),
+                'value' => $browser['browser_version']
+            ]);
+            $browserFieldset->addField('plat_form', 'label', [
+                'label' => __('Platform'),
+                'title' => __('Platform'),
+                'value' => $browser['plat_form']
+            ]);
+            $browserFieldset->addField('plat_form_version', 'label', [
+                'label' => __('Platform Version'),
+                'title' => __('Platform Version'),
+                'value' => $browser['plat_form_version']
+            ]);
+        } else {
+            $browserFieldset->addField('browser', 'label', [
+                'label' => __('Browser'),
+                'title' => __('Browser'),
+                'value' => __('N/A')
+            ]);
+        }
 
         $form->addValues($log->getData());
         $form->setUseContainer(true);

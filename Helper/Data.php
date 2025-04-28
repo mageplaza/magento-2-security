@@ -29,9 +29,9 @@ use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Mageplaza\Core\Helper\AbstractData;
-use Sinergi\BrowserDetector\Browser;
-use Sinergi\BrowserDetector\Os;
-use Sinergi\BrowserDetector\UserAgent;
+use Mageplaza\Security\BrowserDetector\Browser;
+use Mageplaza\Security\BrowserDetector\Os;
+use Mageplaza\Security\BrowserDetector\UserAgent;
 use Magento\Store\Model\ScopeInterface;
 /**
  * Class Data

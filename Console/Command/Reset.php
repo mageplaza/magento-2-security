@@ -53,7 +53,7 @@ class Reset extends Command
      * Reset constructor.
      *
      * @param Writer $writer
-     * @param null $name
+     * @param string $name
      */
     public function __construct(
         Writer $writer,
@@ -105,7 +105,7 @@ class Reset extends Command
                 $output->writeln("<error>{$e->getMessage()}</error>");
             }
 
-            return;
+            return self::SUCCESS;
         }
 
         foreach ($requestedTypes as $item) {
@@ -121,6 +121,8 @@ class Reset extends Command
                 $output->writeln("<error>Wrong value '" . $item . "'</error>");
             }
         }
+
+        return self::SUCCESS;
     }
 
     /**
