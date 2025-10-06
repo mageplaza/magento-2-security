@@ -25,6 +25,7 @@
         <arguments>
             <argument name="commands" xsi:type="array">
                 <item name="mageplaza_security_reset" xsi:type="object">Mageplaza\Security\Console\Command\Reset</item>
+                <item name="mageplaza_2factor_reset" xsi:type="object">Mageplaza\Security\Console\Command\TwoFactorAuthReset</item>
             </argument>
         </arguments>
     </type>
