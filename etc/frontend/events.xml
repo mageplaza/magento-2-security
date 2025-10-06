@@ -22,16 +22,6 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
     <event name="controller_action_predispatch">
-        <observer name="mp_twofactorauth_admin_action_predispatch" instance="Mageplaza\Security\Observer\Google\ControllerActionPredispatch"/>
-    </event>
-    <event name="mageplaza_tfa_backend_auth_user_login_success">
-        <observer name="mp_twofactorauth_login_success" instance="Mageplaza\Security\Observer\Google\UserLoginSuccess"/>
-    </event>
-    <!--Google Recaptcha-->
-    <event name="controller_action_predispatch_adminhtml_auth_forgotpassword">
-        <observer name="msp_recaptcha" instance="Mageplaza\Security\Observer\Adminhtml\Forgot"/>
-    </event>
-    <event name="admin_user_authenticate_before">
-        <observer name="mageplaza_recaptcha" instance="Mageplaza\Security\Observer\Adminhtml\Login"/>
+        <observer name="mageplaza_captcha_frontend" instance="Mageplaza\Security\Observer\Captcha"/>
     </event>
 </config>

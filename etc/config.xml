@@ -46,6 +46,20 @@
                     <whitelist_ip></whitelist_ip>
                 </general>
             </mptwofactorauth>
+            <googlerecaptcha>
+                <backend>
+                    <enabled>0</enabled>
+                    <size>normal</size>
+                    <theme>light</theme>
+                </backend>
+                <frontend>
+                    <enabled>0</enabled>
+                    <type>invisible</type>
+                    <forms>body.customer-account-create #form-validate.form-create-account</forms>
+                    <position>bottomleft</position>
+                    <theme>light</theme>
+                </frontend>
+            </googlerecaptcha>
         </security>
     </default>
 </config>

@@ -33,6 +33,12 @@ N/A,N/A
 Register,Register
 "%1 ago","%1 ago"
 "just now","just now"
+"Disable backend captcha","Disable backend captcha"
+"The captcha is disable for your admin website.","The captcha is disable for your admin website."
+"The captcha backend has been successfully disabled. Please run the flush cache command again","The captcha backend has been successfully disabled. Please run the flush cache command again"
+"Enable backend captcha","Enable backend captcha"
+"The captcha is enabled for your admin website.","The captcha is enabled for your admin website."
+"The captcha backend has been successfully enabled. Please run the flush cache command again","The captcha backend has been successfully enabled. Please run the flush cache command again"
 "User ""%1"" does not exist","User ""%1"" does not exist"
 "Security Checklist","Security Checklist"
 "All other open sessions for this account were terminated.","All other open sessions for this account were terminated."
@@ -49,7 +55,101 @@ Register,Register
 "An error occurred while saving account.","An error occurred while saving account."
 "Unable to send email: %1","Unable to send email: %1"
 "You don't have permission to access this page","You don't have permission to access this page"
+"The response parameter is missing.","The response parameter is missing."
+"The request is invalid or malformed.","The request is invalid or malformed."
 "You did not sign in correctly or your account is temporarily disabled.","You did not sign in correctly or your account is temporarily disabled."
+"Admin Login","Admin Login"
+"Admin Forgot Password","Admin Forgot Password"
+Login,Login
+"Create User","Create User"
+"Forgot Password","Forgot Password"
+"Contact Us","Contact Us"
+"Edit Account","Edit Account"
+"Product Review","Product Review"
+"Social Login Popup","Social Login Popup"
+"Age Verification","Age Verification"
+"-- Auto Detected --","-- Auto Detected --"
+Arabic,Arabic
+Afrikaans,Afrikaans
+Amharic,Amharic
+Armenian,Armenian
+Azerbaijani,Azerbaijani
+Basque,Basque
+Bengali,Bengali
+Bulgarian,Bulgarian
+Catalan,Catalan
+"Chinese (Hong Kong)","Chinese (Hong Kong)"
+"Chinese (Simplified)","Chinese (Simplified)"
+"Chinese (Traditional)","Chinese (Traditional)"
+Croatian,Croatian
+Czech,Czech
+Danish,Danish
+Dutch,Dutch
+"English (UK)","English (UK)"
+"English (US)","English (US)"
+Estonian,Estonian
+Filipino,Filipino
+Finnish,Finnish
+French,French
+"French (Canadian)","French (Canadian)"
+Galician,Galician
+Georgian,Georgian
+"German (Austria)","German (Austria)"
+"German (Switzerland)","German (Switzerland)"
+Greek,Greek
+Gujarati,Gujarati
+Hebrew,Hebrew
+Hindi,Hindi
+Hungarain,Hungarain
+Icelandic,Icelandic
+Indonesian,Indonesian
+Italian,Italian
+Japanese,Japanese
+Kannada,Kannada
+Korean,Korean
+Laothian,Laothian
+Latvian,Latvian
+Lithuanian,Lithuanian
+Malay,Malay
+Malayalam,Malayalam
+Marathi,Marathi
+Mongolian,Mongolian
+Norwegian,Norwegian
+Persian,Persian
+Polish,Polish
+Portuguese,Portuguese
+"Portuguese (Brazil)","Portuguese (Brazil)"
+"Portuguese (Portugal)","Portuguese (Portugal)"
+Romanian,Romanian
+Russian,Russian
+Serbian,Serbian
+Sinhalese,Sinhalese
+Slovak,Slovak
+Slovenian,Slovenian
+Spanish,Spanish
+"Spanish (Latin America)","Spanish (Latin America)"
+"Swahili        ","Swahili      "
+Swedish,Swedish
+Tamil,Tamil
+Telugu,Telugu
+Thai,Thai
+Turkish,Turkish
+Ukrainian,Ukrainian
+Urdu,Urdu
+Vietnamese,Vietnamese
+Zulu,Zulu
+"Bottom Right","Bottom Right"
+"Bottom Left","Bottom Left"
+Inline,Inline
+Visible,Visible
+Invisible,Invisible
+Compact,Compact
+Normal,Normal
+Dark,Dark
+Light,Light
+message,message
+"Missing required parameters recaptcha!","Missing required parameters recaptcha!"
+"Missing Url in ""Form Post Paths"" configuration field!","Missing Url in ""Form Post Paths"" configuration field!"
 "Forced 2FA is enabled, so please register the 2FA authentication.","Forced 2FA is enabled, so please register the 2FA authentication."
 "Two-Factor Authentication","Two-Factor Authentication"
 "Trusted Devices","Trusted Devices"
@@ -97,6 +197,7 @@ User,User
 here,here
 "Review login logs","Review login logs"
 "Invalid Code","Invalid Code"
+"You need select captcha","You need select captcha"
 General,General
 Enable,Enable
 "Send warning emails to","Send warning emails to"
@@ -126,6 +227,34 @@ Whitelist(s),Whitelist(s)
 "Trusted Time","Trusted Time"
 "Set trusted time by days.","Set trusted time by days."
 "Enter IP(s) which is allowed to sign in without 2FA. Separated with commas. Eg: 123.123.0.*,10.22.*.*","Enter IP(s) which is allowed to sign in without 2FA. Separated with commas. Eg: 123.123.0.*,10.22.*.*"
+"This extension is fully compatible with <a href=""https://www.mageplaza.com/magento-2-one-step-checkout-extension/"" target=""_blank"">One Step Checkout</a>. <br>
+                    1. Increase 25% conversion rate with <a href=""https://www.mageplaza.com/magento-2-layered-navigation-extension/"" target=""_blank"">Layered Navigation</a><br>
+                    2. Magento stores see upwards of 30% revenue 💰 with AVADA. <a href=""https://go.avada.io/mageplaza"">Learn more</a>","This extension is fully compatible with <a href=""https://www.mageplaza.com/magento-2-one-step-checkout-extension/"" target=""_blank"">One Step Checkout</a>. <br>
+                    1. Increase 25% conversion rate with <a href=""https://www.mageplaza.com/magento-2-layered-navigation-extension/"" target=""_blank"">Layered Navigation</a><br>
+                    2. Magento stores see upwards of 30% revenue 💰 with AVADA. <a href=""https://go.avada.io/mageplaza"">Learn more</a>"
+"Google API Key","Google API Key"
+"Create app <a href=""https://www.google.com/recaptcha/admin"" target=""_blank"">here</a>.","Create app <a href=""https://www.google.com/recaptcha/admin"" target=""_blank"">here</a>."
+"Google API Secret Key","Google API Secret Key"
+"Language Code","Language Code"
+"Backend Configuration","Backend Configuration"
+Forms,Forms
+Size,Size
+Theme,Theme
+"Frontend Configuration","Frontend Configuration"
+"Recaptcha Type","Recaptcha Type"
+"Badge Position","Badge Position"
+"Custom Form Position","Custom Form Position"
+"Form Post Paths","Form Post Paths"
+"For Example: newsletter/subscriber/new/  <br><br>Compatible with Mageplaza SocialLogin: <br>
+                        customer/ajax/login/<br>
+                        sociallogin/popup/create/<br>
+                        sociallogin/popup/forgot/<br>
+                        <br> Each Url Post must be separated by a new line","For Example: newsletter/subscriber/new/  <br><br>Compatible with Mageplaza SocialLogin: <br>
+                        customer/ajax/login/<br>
+                        sociallogin/popup/create/<br>
+                        sociallogin/popup/forgot/<br>
+                        <br> Each Url Post must be separated by a new line"
+"CSS Selectors","CSS Selectors"
 "Last Login","Last Login"
 "IP Address","IP Address"
 "Clear All","Clear All"
