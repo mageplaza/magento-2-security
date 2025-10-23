@@ -22,12 +22,12 @@
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
-        <section id="security" translate="label" type="text" sortOrder="96" showInDefault="1" showInWebsite="0" showInStore="0">
+        <section id="security" translate="label" type="text" sortOrder="96" showInDefault="1" showInWebsite="1" showInStore="1">
             <class>separator-top</class>
             <label>Security</label>
             <tab>mageplaza</tab>
             <resource>Mageplaza_Security::configuration</resource>
-            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
                 <label>General</label>
                 <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Enable</label>
@@ -41,7 +41,7 @@
                     </depends>
                 </field>
             </group>
-            <group id="brute_force" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="brute_force" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
                 <label>Brute Force Protection</label>
                 <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Enable</label>
@@ -79,7 +79,7 @@
                     </depends>
                 </field>
             </group>
-            <group id="black_white_list" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="black_white_list" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
                 <label>Blacklist/Whitelist IPs</label>
                 <field id="black_list" translate="label comment" type="textarea" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Blacklist(s)</label>
