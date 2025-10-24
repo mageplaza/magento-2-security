@@ -3,7 +3,6 @@
   "description": "Mageplaza Security Extension",
   "require": {
     "mageplaza/module-core": "^1.5.13",
-    "mageplaza/module-two-factor-authentication": "^4.0.4",
     "sinergi/browser-detector": "*",
     "sonata-project/google-authenticator": "^2.3.0",
     "google/recaptcha": "^1.2"
