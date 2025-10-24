@@ -130,6 +130,12 @@ class AuthPost extends Action
                     return $this->_getRedirect($this->_backendUrl->getStartupPageUrl());
                 } else {
                     $this->_storageSession->setData(HelperData::MP_GOOGLE_AUTH, false);
+
+                    $this->_eventManager->dispatch(
+                        'mageplaza_tfa_backend_auth_user_login_failed',
+                        ['user_name' => $user->getUserName(), 'mp_is_trusted' => $isTrusted]
+                    );
+
                     $this->messageManager->addErrorMessage(__('Invalid key.'));
 
                     return $this->_getRedirect('mpsecurity/google/authindex');

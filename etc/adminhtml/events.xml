@@ -27,6 +27,9 @@
     <event name="mageplaza_tfa_backend_auth_user_login_success">
         <observer name="mp_twofactorauth_login_success" instance="Mageplaza\Security\Observer\Google\UserLoginSuccess"/>
     </event>
+    <event name="mageplaza_tfa_backend_auth_user_login_failed">
+        <observer name="mp_twofactorauth_login_failed" instance="Mageplaza\Security\Observer\Google\UserLoginFailed"/>
+    </event>
     <!--Google Recaptcha-->
     <event name="controller_action_predispatch_adminhtml_auth_forgotpassword">
         <observer name="msp_recaptcha" instance="Mageplaza\Security\Observer\Adminhtml\Forgot"/>

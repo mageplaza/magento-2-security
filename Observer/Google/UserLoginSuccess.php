@@ -22,12 +22,16 @@
 namespace Mageplaza\Security\Observer\Google;
 
 use Exception;
+use Magento\Backend\Model\Session;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\HTTP\PhpEnvironment\Request;
 use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\Stdlib\DateTime\DateTime;
-use Mageplaza\Security\Helper\TwoFactorAuthData as Data;
+use Mageplaza\Security\Helper\Data;
+use Mageplaza\Security\Helper\TwoFactorAuthData;
+use Mageplaza\Security\Model\Config\Source\LoginLog\Status;
+use Mageplaza\Security\Model\LoginLogFactory;
 use Mageplaza\Security\Model\TrustedFactory;
 
 /**
@@ -52,14 +56,29 @@ class UserLoginSuccess implements ObserverInterface
     protected $_trustedFactory;
 
     /**
-     * @var Data
+     * @var TwoFactorAuthData
      */
     protected $helper;
+
+    /**
+     * @var Data
+     */
+    protected $helperData;
 
     /**
      * @var Request
      */
     protected $request;
+
+    /**
+     * @var Session
+     */
+    protected $_backendSession;
+
+    /**
+     * @var LoginLogFactory
+     */
+    protected $_loginLogFactory;
 
     /**
      * UserLoginSuccess constructor.
@@ -68,20 +87,29 @@ class UserLoginSuccess implements ObserverInterface
      * @param ManagerInterface $messageManager
      * @param TrustedFactory $trustedFactory
      * @param Request $request
-     * @param Data $helper
+     * @param TwoFactorAuthData $helper
+     * @param Data $helperData
+     * @param Session $_backendSession
+     * @param LoginLogFactory $loginLogFactory
      */
     public function __construct(
         DateTime $dateTime,
         ManagerInterface $messageManager,
         TrustedFactory $trustedFactory,
         Request $request,
-        Data $helper
+        TwoFactorAuthData $helper,
+        Data $helperData,
+        Session $_backendSession,
+        LoginLogFactory $loginLogFactory
     ) {
         $this->_dateTime       = $dateTime;
         $this->_messageManager = $messageManager;
         $this->_trustedFactory = $trustedFactory;
         $this->helper          = $helper;
         $this->request         = $request;
+        $this->helperData      = $helperData;
+        $this->_backendSession = $_backendSession;
+        $this->_loginLogFactory = $loginLogFactory;
     }
 
     /**
@@ -89,6 +117,19 @@ class UserLoginSuccess implements ObserverInterface
      */
     public function execute(Observer $observer)
     {
+        if ($this->helperData->isEnabled()) {
+            $loginLog = [
+                'time'          => time(),
+                'user_name'     => $observer->getUser()->getUserName(),
+                'ip'            => $this->request->getClientIp(),
+                'browser_agent' => $this->_backendSession->getBrowserAgent(),
+                'url'           => $this->_backendSession->getUrl(),
+                'referer'       => $this->_backendSession->getRefererUrl(),
+                'status'        => Status::STATUS_SUCCESS
+            ];
+            $this->_loginLogFactory->create()->addData($loginLog)->save();
+        }
+
         $user      = $observer->getEvent()->getUser();
         $isTrusted = $observer->getEvent()->getMpIsTrusted();
         if ($user && $isTrusted) {

@@ -223,15 +223,29 @@ class Auth extends \Magento\Backend\Model\Auth
                 self::throwException(__('You did not sign in correctly or your account is temporarily disabled.'));
             }
         } catch (PluginAuthenticationException $e) {
+            $user = $this->getCredentialStorage()->getId() ? $this->getCredentialStorage() : null;
+
+            $data = ['user_name' => $username, 'exception' => $e];
+
+            if ($user) {
+                $data['user'] = $user;
+            }
             $this->_eventManager->dispatch(
                 'backend_auth_user_login_failed',
-                ['user_name' => $username, 'exception' => $e]
+                $data
             );
             throw $e;
         } catch (LocalizedException $e) {
+            $user = $this->getCredentialStorage()->getId() ? $this->getCredentialStorage() : null;
+            $data = ['user_name' => $username, 'exception' => $e];
+
+            if ($user) {
+                $data['user'] = $user;
+            }
+
             $this->_eventManager->dispatch(
                 'backend_auth_user_login_failed',
-                ['user_name' => $username, 'exception' => $e]
+                $data
             );
             self::throwException(__('You did not sign in correctly or your account is temporarily disabled.'));
         }
