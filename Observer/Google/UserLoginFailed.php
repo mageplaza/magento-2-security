@@ -19,7 +19,7 @@
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
 
-namespace Mageplaza\Security\Observer;
+namespace Mageplaza\Security\Observer\Google;
 
 use Magento\Backend\Model\Session;
 use Magento\Framework\Event\Observer;
@@ -32,9 +32,9 @@ use Mageplaza\Security\Model\ResourceModel\LoginLog\CollectionFactory;
 
 /**
  * Class LoginFailed
- * @package Mageplaza\Security\Observer
+ * @package Mageplaza\Security\Observer\Google
  */
-class LoginFailed implements ObserverInterface
+class UserLoginFailed implements ObserverInterface
 {
     /**
      * @var Request
@@ -90,11 +90,6 @@ class LoginFailed implements ObserverInterface
     public function execute(Observer $observer)
     {
         if (!$this->_helperData->isEnabled()) {
-            return;
-        }
-
-        $user = $observer->getUser();
-        if ($user && $user->getMpTfaStatus()) {
             return;
         }
 

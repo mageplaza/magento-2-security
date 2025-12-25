@@ -25,6 +25,9 @@
         <arguments>
             <argument name="commands" xsi:type="array">
                 <item name="mageplaza_security_reset" xsi:type="object">Mageplaza\Security\Console\Command\Reset</item>
+                <item name="mageplaza_2factor_reset" xsi:type="object">Mageplaza\Security\Console\Command\TwoFactorAuthReset</item>
+                <item name="mpgooglerecaptcha_enable" xsi:type="object">Mageplaza\Security\Console\Adminhtml\Command\Enable</item>
+                <item name="mpgooglerecaptcha_disable" xsi:type="object">Mageplaza\Security\Console\Adminhtml\Command\Disable</item>
             </argument>
         </arguments>
     </type>

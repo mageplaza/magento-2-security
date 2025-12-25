@@ -22,12 +22,12 @@
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
-        <section id="security" translate="label" type="text" sortOrder="96" showInDefault="1" showInWebsite="0" showInStore="0">
+        <section id="security" translate="label" type="text" sortOrder="96" showInDefault="1" showInWebsite="1" showInStore="1">
             <class>separator-top</class>
             <label>Security</label>
             <tab>mageplaza</tab>
             <resource>Mageplaza_Security::configuration</resource>
-            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
                 <label>General</label>
                 <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Enable</label>
@@ -41,7 +41,7 @@
                     </depends>
                 </field>
             </group>
-            <group id="brute_force" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="brute_force" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
                 <label>Brute Force Protection</label>
                 <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Enable</label>
@@ -79,7 +79,7 @@
                     </depends>
                 </field>
             </group>
-            <group id="black_white_list" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="black_white_list" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
                 <label>Blacklist/Whitelist IPs</label>
                 <field id="black_list" translate="label comment" type="textarea" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Blacklist(s)</label>
@@ -89,6 +89,173 @@
                     <label>Whitelist(s)</label>
                     <comment>Enter IP(s) which is allowed to access website. Only login attempts from these IPs are granted. Separated with add (,). eg : 123.123.0.*, 10.22.*.*. Make sure you add your IP address first.</comment>
                 </field>
+            </group>
+            <group id="mptwofactorauth" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Two-Factor Authentication</label>
+                <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>General</label>
+                    <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment><![CDATA[Select <b>Yes</b> to enable this module.<br />
+                        1. It helps to reduce abandonment cart with <a href="https://www.mageplaza.com/magento-2-one-step-checkout-extension/" target="_blank">One Step Checkout</a>. <br />
+                        2. Magento stores see upwards of 30% revenue 💰 with AVADA. <a href="https://go.avada.io/mageplaza">Learn more</a>]]></comment>
+                    </field>
+                    <field id="force_2fa" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Force to Use 2FA</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment><![CDATA[If <b>Yes</b>, all admin accounts are required to register 2FA.]]></comment>
+                    </field>
+                    <field id="trust_device" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Enable Trusted Device</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment><![CDATA[Trusted device will not be required second-factor authentication within specific trusted time.]]></comment>
+                    </field>
+                    <field id="trust_time" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Trusted Time</label>
+                        <validate>validate-greater-than-zero validate-digits</validate>
+                        <comment><![CDATA[Set trusted time by days.]]></comment>
+                        <depends>
+                            <field id="trust_device">1</field>
+                        </depends>
+                    </field>
+                    <field id="whitelist_ip" translate="label comment" type="textarea" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Whitelist(s)</label>
+                        <comment><![CDATA[Enter IP(s) which is allowed to sign in without 2FA. Separated with commas. Eg: 123.123.0.*,10.22.*.*]]></comment>
+                    </field>
+                </group>
+            </group>
+            <group id="googlerecaptcha" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Google Recaptcha</label>
+                <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>General</label>
+                    <field id="enabled" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment><![CDATA[This extension is fully compatible with <a href="https://www.mageplaza.com/magento-2-one-step-checkout-extension/" target="_blank">One Step Checkout</a>. <br>
+                    1. Increase 25% conversion rate with <a href="https://www.mageplaza.com/magento-2-layered-navigation-extension/" target="_blank">Layered Navigation</a><br>
+                    2. Magento stores see upwards of 30% revenue 💰 with AVADA. <a href="https://go.avada.io/mageplaza">Learn more</a>]]></comment>
+                    </field>
+                    <group id="invisible" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Invisible</label>
+                        <field id="api_key" translate="label comment" type="obscure" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Google API Key</label>
+                            <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                            <comment><![CDATA[Create app <a href="https://www.google.com/recaptcha/admin" target="_blank">here</a>.]]></comment>
+                        </field>
+                        <field id="api_secret" translate="label comment" type="obscure" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Google API Secret Key</label>
+                            <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        </field>
+                    </group>
+                    <group id="visible" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Visible</label>
+                        <field id="api_key" translate="label comment" type="obscure" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Google API Key</label>
+                            <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                            <comment><![CDATA[Create app <a href="https://www.google.com/recaptcha/admin" target="_blank">here</a>.]]></comment>
+                        </field>
+                        <field id="api_secret" translate="label comment" type="obscure" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Google API Secret Key</label>
+                            <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        </field>
+                    </group>
+                    <field id="language" translate="label comment" sortOrder="3" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Language Code</label>
+                        <source_model>Mageplaza\Security\Model\Config\Source\Language</source_model>
+                    </field>
+                </group>
+                <group id="backend" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Backend Configuration</label>
+                    <field id="enabled" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="forms" translate="label comment" type="multiselect" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Forms</label>
+                        <source_model>Mageplaza\Security\Model\Config\Source\Forms</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="size" translate="label comment" sortOrder="4" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Size</label>
+                        <source_model>Mageplaza\Security\Model\Config\Source\Size</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="theme" translate="label comment" sortOrder="5" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Theme</label>
+                        <source_model>Mageplaza\Security\Model\Config\Source\Theme</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                </group>
+                <group id="frontend" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Frontend Configuration</label>
+                    <field id="enabled" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="type" translate="label comment" sortOrder="3" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Recaptcha Type</label>
+                        <source_model>Mageplaza\Security\Model\Config\Source\RecaptchaType</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="position" translate="label comment" sortOrder="5" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Badge Position</label>
+                        <source_model>Mageplaza\Security\Model\Config\Source\Position</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="type">invisible</field>
+                        </depends>
+                    </field>
+                    <field id="size" translate="label comment" sortOrder="4" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Size</label>
+                        <source_model>Mageplaza\Security\Model\Config\Source\Size</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="type">visible</field>
+                        </depends>
+                    </field>
+                    <field id="theme" translate="label comment" sortOrder="6" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Theme</label>
+                        <source_model>Mageplaza\Security\Model\Config\Source\Theme</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="forms" translate="label comment" type="multiselect" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Forms</label>
+                        <source_model>Mageplaza\Security\Model\Config\Source\Frontend\Forms</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <group id="custom" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Custom Form Position</label>
+                        <field id="paths" translate="label comment" type="textarea" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Form Post Paths</label>
+                            <comment><![CDATA[ For Example: newsletter/subscriber/new/  <br><br>Compatible with Mageplaza SocialLogin: <br>
+                        customer/ajax/login/<br>
+                        sociallogin/popup/create/<br>
+                        sociallogin/popup/forgot/<br>
+                        <br> Each Url Post must be separated by a new line]]></comment>
+                        </field>
+                        <field id="css" translate="label" type="textarea" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>CSS Selectors</label>
+                            <comment><![CDATA[ For Example: #newsletter-validate-detail <br><br> Compatible with Mageplaza SocialLogin: <br>#social-form-login<br>
+                        #social-form-create<br>#social-form-password-forget <br><br> Compatible with Mageplaza OSC: <br>.onestepcheckout-index-index .block-content .form.form-login<br><br> Each CSS Selector must be separated by a new line]]></comment>
+                        </field>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </group>
+                </group>
             </group>
         </section>
     </system>

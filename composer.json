@@ -3,11 +3,12 @@
   "description": "Mageplaza Security Extension",
   "require": {
     "mageplaza/module-core": "^1.5.13",
-    "mageplaza/module-google-recaptcha": "^4.0.3",
-    "mageplaza/module-two-factor-authentication": "^4.0.4"
+    "sinergi/browser-detector": "*",
+    "sonata-project/google-authenticator": "^2.3.0",
+    "google/recaptcha": "^1.2"
   },
   "type": "magento2-module",
-  "version": "4.0.6",
+  "version": "4.1.0",
   "license": "proprietary",
   "authors": [
     {
