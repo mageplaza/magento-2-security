@@ -8,7 +8,7 @@
     "google/recaptcha": "^1.2"
   },
   "type": "magento2-module",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "license": "proprietary",
   "authors": [
     {
